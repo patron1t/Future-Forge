@@ -36,8 +36,8 @@ export default function AuthPage() {
 
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <img src={logo} alt="Logo" className="mx-auto mb-4 h-16 w-auto" />
-          <h1 className="font-heading text-2xl font-bold tracking-tight">Welcome to Career Plug AI</h1>
+          <img src={logo} alt="Logo" className="mx-auto mb-4 h-20 w-auto" />
+          <h1 className="font-heading text-2xl font-bold tracking-tight">Welcome</h1>
           <p className="text-muted-foreground">Your future starts here.</p>
         </div>
 

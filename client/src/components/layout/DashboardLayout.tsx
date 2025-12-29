@@ -56,7 +56,6 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
           <Link href="/">
             <a className="flex items-center gap-2">
               <img src={logo} alt="Career Plug AI" className="h-8 w-auto" />
-              <span className="font-heading text-lg font-bold text-primary">Career Plug</span>
             </a>
           </Link>
           <button 

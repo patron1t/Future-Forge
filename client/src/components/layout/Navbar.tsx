@@ -13,9 +13,6 @@ export function Navbar() {
         <Link href="/">
           <a className="flex items-center gap-2">
             <img src={logo} alt="Career Plug AI" className="h-10 w-auto" />
-            <span className="hidden font-heading text-xl font-bold tracking-tight text-primary md:inline-block">
-              Career Plug AI
-            </span>
           </a>
         </Link>
 

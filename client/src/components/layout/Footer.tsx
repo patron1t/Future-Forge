@@ -9,9 +9,6 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <img src={logo} alt="Career Plug AI" className="h-8 w-auto" />
-              <span className="font-heading text-lg font-bold text-primary">
-                Career Plug AI
-              </span>
             </div>
             <p className="text-sm text-muted-foreground max-w-xs">
               Smart Careers. Strong Identities. Creating the billionaires of tomorrow through personalized, AI-driven guidance.
