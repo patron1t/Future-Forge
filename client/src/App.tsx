@@ -8,6 +8,7 @@ import Home from "@/pages/home";
 import StudentDashboard from "@/pages/student-dashboard";
 import ProfessionalsPage from "@/pages/professionals";
 import ProfessionalDashboard from "@/pages/professional-dashboard";
+import CounselorDashboard from "@/pages/counselor-dashboard";
 import WellnessPage from "@/pages/wellness";
 import DigitalFootprintPage from "@/pages/digital-footprint";
 import AuthPage from "@/pages/auth";
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
       <Route path="/professional-dashboard" component={ProfessionalDashboard} />
+      <Route path="/counselor-dashboard" component={CounselorDashboard} />
       <Route path="/wellness" component={WellnessPage} />
       <Route path="/digital-footprint" component={DigitalFootprintPage} />
       <Route path="/auth" component={AuthPage} />

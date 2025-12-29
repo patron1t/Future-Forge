@@ -12,12 +12,12 @@ export default function ProfessionalsPage() {
       {/* Hero */}
       <section className="bg-primary/5 py-20 md:py-32">
         <div className="container px-4 text-center">
-          <Badge className="mb-4" variant="secondary">For Employers & Scouts</Badge>
+          <Badge className="mb-4" variant="secondary">For Employers, Scouts & Counselors</Badge>
           <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             Find the <span className="text-primary">Billionaires of Tomorrow</span> Before Anyone Else
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
-            Access a curated pool of high-potential students mapped by our AI based on their actual strengths, projects, and digital footprint.
+            Access a curated pool of high-potential students mapped by our AI based on their actual strengths, projects, and digital footprint. Counselors get free access.
           </p>
           <div className="flex justify-center gap-4">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
@@ -71,11 +71,11 @@ export default function ProfessionalsPage() {
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight">Access Plans</h2>
             <p className="mt-4 text-muted-foreground">
-              Choose the right plan for your organization.
+              Choose the right plan for your organization. <span className="font-semibold text-primary">School counselors have free access.</span>
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+          <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
             <Card>
               <CardHeader>
                 <CardTitle>Scout Access</CardTitle>
@@ -123,6 +123,34 @@ export default function ProfessionalsPage() {
                   </li>
                 </ul>
                 <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90">Contact Sales</Button>
+              </CardContent>
+            </Card>
+
+            <Card className="border-accent/30 bg-accent/5">
+              <CardHeader>
+                <CardTitle className="flex justify-between">
+                  Counselor Access
+                  <Badge variant="secondary" className="bg-accent text-accent-foreground">Free</Badge>
+                </CardTitle>
+                <CardDescription>For school counselors and educators.</CardDescription>
+                <div className="mt-4 text-4xl font-bold">Free<span className="text-lg font-normal text-muted-foreground">Always</span></div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>View student profiles</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Track student progress</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Direct messaging</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Wellness monitoring</span>
+                  </li>
+                </ul>
+                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Create Free Account</Button>
               </CardContent>
             </Card>
           </div>

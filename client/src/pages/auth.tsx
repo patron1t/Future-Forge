@@ -13,12 +13,14 @@ export default function AuthPage() {
   const searchParams = new URLSearchParams(window.location.search);
   const defaultTab = searchParams.get("signup") ? "signup" : "login";
   
-  const [role, setRole] = useState<"student" | "professional">("student");
+  const [role, setRole] = useState<"student" | "professional" | "counselor">("student");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (role === "student") {
       setLocation("/student-dashboard");
+    } else if (role === "counselor") {
+      setLocation("/counselor-dashboard");
     } else {
       setLocation("/professional-dashboard");
     }
@@ -80,7 +82,7 @@ export default function AuthPage() {
               </CardHeader>
               <form onSubmit={handleLogin}>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-3 gap-4">
                      <button
                         type="button" 
                         onClick={() => setRole("student")}
@@ -88,7 +90,7 @@ export default function AuthPage() {
                           role === "student" ? "border-primary bg-primary/5 ring-1 ring-primary" : "hover:bg-muted"
                         }`}
                      >
-                       <div className="font-semibold">Student</div>
+                       <div className="font-semibold text-sm">Student</div>
                        <div className="text-xs text-muted-foreground">Grade 8-12</div>
                      </button>
                      <button
@@ -98,8 +100,18 @@ export default function AuthPage() {
                           role === "professional" ? "border-primary bg-primary/5 ring-1 ring-primary" : "hover:bg-muted"
                         }`}
                      >
-                       <div className="font-semibold">Professional</div>
-                       <div className="text-xs text-muted-foreground">Scout / Employer</div>
+                       <div className="font-semibold text-sm">Scout / Employer</div>
+                       <div className="text-xs text-muted-foreground">Paid Access</div>
+                     </button>
+                     <button
+                        type="button" 
+                        onClick={() => setRole("counselor")}
+                        className={`rounded-lg border p-4 text-center transition-all ${
+                          role === "counselor" ? "border-accent bg-accent/5 ring-1 ring-accent" : "hover:bg-muted"
+                        }`}
+                     >
+                       <div className="font-semibold text-sm">Counselor</div>
+                       <div className="text-xs text-muted-foreground">Free Access</div>
                      </button>
                   </div>
                   
