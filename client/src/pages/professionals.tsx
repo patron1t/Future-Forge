@@ -76,6 +76,34 @@ export default function ProfessionalsPage() {
           </div>
 
           <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-3">
+            <Card className="border-accent/30 bg-accent/5">
+              <CardHeader>
+                <CardTitle className="flex justify-between">
+                  Counselor Access
+                  <Badge variant="secondary" className="bg-accent text-accent-foreground">Free</Badge>
+                </CardTitle>
+                <CardDescription>For school counselors and educators.</CardDescription>
+                <div className="mt-4 text-4xl font-bold">Free<span className="text-lg font-normal text-muted-foreground">Always</span></div>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>View student profiles</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Track student progress</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Direct messaging</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Wellness monitoring</span>
+                  </li>
+                </ul>
+                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Create Free Account</Button>
+              </CardContent>
+            </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle>Scout Access</CardTitle>
@@ -123,34 +151,6 @@ export default function ProfessionalsPage() {
                   </li>
                 </ul>
                 <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90">Contact Sales</Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-accent/30 bg-accent/5">
-              <CardHeader>
-                <CardTitle className="flex justify-between">
-                  Counselor Access
-                  <Badge variant="secondary" className="bg-accent text-accent-foreground">Free</Badge>
-                </CardTitle>
-                <CardDescription>For school counselors and educators.</CardDescription>
-                <div className="mt-4 text-4xl font-bold">Free<span className="text-lg font-normal text-muted-foreground">Always</span></div>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3">
-                  <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-accent-foreground" /> <span>View student profiles</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Track student progress</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Direct messaging</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="h-4 w-4 text-accent-foreground" /> <span>Wellness monitoring</span>
-                  </li>
-                </ul>
-                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Create Free Account</Button>
               </CardContent>
             </Card>
           </div>
