@@ -14,7 +14,7 @@ export default function ProfessionalsPage() {
         <div className="container px-4 text-center">
           <Badge className="mb-4" variant="secondary">For Employers, Scouts & Counselors</Badge>
           <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Find the <span className="text-primary">Billionaires of Tomorrow</span> Before Anyone Else
+            Access <span className="text-primary">Top Talent</span> Before Competitors
           </h1>
           <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
             Access a curated pool of high-potential students mapped by our AI based on their actual strengths, projects, and digital footprint. Counselors get free access.
