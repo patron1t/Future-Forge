@@ -3,9 +3,22 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Check, Search, BarChart3, Users, Building } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
 
 export default function ProfessionalsPage() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('scroll') === 'pricing') {
+      const element = document.getElementById('plans-section');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-background font-sans">
       <Navbar />

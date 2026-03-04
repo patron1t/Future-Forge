@@ -41,7 +41,7 @@ export function Hero() {
                 I'm a Student
               </Button>
             </Link>
-            <Link href="/professionals">
+            <Link href="/professionals?scroll=pricing">
               <Button 
                 size="lg" 
                 variant="outline" 

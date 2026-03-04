@@ -19,14 +19,14 @@ export function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">
           <button 
-            onClick={() => document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-sm font-medium transition-colors hover:text-primary"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
           >
             About
           </button>
           <button 
             onClick={() => document.getElementById('legacy-section')?.scrollIntoView({ behavior: 'smooth' })}
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
           >
             Career Paths
           </button>
@@ -56,9 +56,9 @@ export function Navbar() {
             <button 
               onClick={() => {
                 setIsOpen(false);
-                document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-left text-sm font-medium hover:text-primary"
+              className="text-left text-sm font-medium hover:text-primary cursor-pointer"
             >
               About
             </button>
@@ -67,7 +67,7 @@ export function Navbar() {
                 setIsOpen(false);
                 document.getElementById('legacy-section')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-left text-sm font-medium hover:text-primary"
+              className="text-left text-sm font-medium hover:text-primary cursor-pointer"
             >
               Career Paths
             </button>
