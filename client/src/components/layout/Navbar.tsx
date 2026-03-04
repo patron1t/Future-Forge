@@ -18,8 +18,8 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/about"><a className="text-sm font-medium transition-colors hover:text-primary">About</a></Link>
-          <Link href="/careers"><a className="text-sm font-medium transition-colors hover:text-primary">Career Paths</a></Link>
+          <Link href="/auth"><a className="text-sm font-medium transition-colors hover:text-primary">About</a></Link>
+          <Link href="/wellness"><a className="text-sm font-medium transition-colors hover:text-primary">Career Paths</a></Link>
           <Link href="/professionals"><a className="text-sm font-medium transition-colors hover:text-primary">For Professionals</a></Link>
           <div className="flex items-center gap-2">
             <Link href="/auth">
@@ -41,8 +41,8 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden border-t p-4 space-y-4 bg-background animate-in slide-in-from-top-5">
           <div className="flex flex-col gap-4">
-            <Link href="/about"><a className="text-sm font-medium hover:text-primary">About</a></Link>
-            <Link href="/careers"><a className="text-sm font-medium hover:text-primary">Career Paths</a></Link>
+            <Link href="/auth"><a className="text-sm font-medium hover:text-primary">About</a></Link>
+            <Link href="/wellness"><a className="text-sm font-medium hover:text-primary">Career Paths</a></Link>
             <Link href="/professionals"><a className="text-sm font-medium hover:text-primary">For Professionals</a></Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Link href="/auth">

@@ -32,7 +32,7 @@ export default function Home() {
                       Create Student Account
                     </Button>
                   </Link>
-                  <Link href="/contact">
+                  <Link href="/auth?signup=true">
                     <Button size="lg" variant="outline">
                       Contact for Kiosks
                     </Button>
