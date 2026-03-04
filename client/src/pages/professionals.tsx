@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Check, Search, BarChart3, Users, Building } from "lucide-react";
+import { Link } from "wouter";
 
 export default function ProfessionalsPage() {
   return (
