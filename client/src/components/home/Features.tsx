@@ -49,7 +49,7 @@ const features = [
 
 export function Features() {
   return (
-    <section className="container px-4 py-24">
+    <section id="about-section" className="container px-4 py-24">
       <div className="mb-12 text-center">
         <h2 className="font-heading text-3xl font-bold tracking-tight sm:text-4xl">
           More Than Just Career Advice

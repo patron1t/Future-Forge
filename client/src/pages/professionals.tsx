@@ -20,10 +20,18 @@ export default function ProfessionalsPage() {
             Access a curated pool of high-potential students mapped by our AI based on their actual strengths, projects, and digital footprint. Counselors get free access.
           </p>
           <div className="flex justify-center gap-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => document.getElementById('plans-section')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Start Scouting
             </Button>
-            <Button size="lg" variant="outline">
+            <Button 
+              size="lg" 
+              variant="outline"
+              onClick={() => document.getElementById('plans-section')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               View Pricing
             </Button>
           </div>
@@ -66,7 +74,7 @@ export default function ProfessionalsPage() {
       </section>
 
       {/* Pricing / Access */}
-      <section className="border-t bg-muted/20 py-24">
+      <section id="plans-section" className="border-t bg-muted/20 py-24">
         <div className="container px-4">
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight">Access Plans</h2>
@@ -100,7 +108,9 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-accent-foreground" /> <span>Wellness monitoring</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Create Free Account</Button>
+                <Link href="/auth">
+                  <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Create Free Account</Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -122,7 +132,9 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-primary" /> <span>Direct messaging</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full">Get Started</Button>
+                <Link href="/auth">
+                  <Button className="mt-8 w-full">Get Started</Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -150,7 +162,9 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-primary" /> <span>Priority support</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90">Contact Sales</Button>
+                <Link href="/auth">
+                  <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90">Contact Sales</Button>
+                </Link>
               </CardContent>
             </Card>
           </div>

@@ -15,7 +15,7 @@ export default function Home() {
         <Features />
         
         {/* CTA Section */}
-        <section className="bg-muted/30 py-24">
+        <section id="legacy-section" className="bg-muted/30 py-24">
           <div className="container px-4">
             <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               <div className="space-y-6">
