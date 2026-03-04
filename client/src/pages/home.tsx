@@ -2,7 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { Features } from "@/components/home/Features";
-import studentsImg from "@assets/diverse_students_using_futuristic_tablet_for_career_guidance_1766991054924.png";
+import studentsImg from "@assets/generated_images/diverse_students_using_futuristic_tablet_for_career_guidance.png";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "wouter";
 import { useEffect } from "react";

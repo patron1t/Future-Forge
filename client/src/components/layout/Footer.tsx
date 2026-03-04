@@ -18,26 +18,26 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold">Platform</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/features"><a className="hover:text-primary">Features</a></Link></li>
-              <li><Link href="/careers"><a className="hover:text-primary">Career Paths</a></Link></li>
-              <li><Link href="/pricing"><a className="hover:text-primary">Pricing</a></Link></li>
+              <li><Link href="/features" className="hover:text-primary">Features</Link></li>
+              <li><Link href="/careers" className="hover:text-primary">Career Paths</Link></li>
+              <li><Link href="/pricing" className="hover:text-primary">Pricing</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-4 text-sm font-semibold">Resources</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/blog"><a className="hover:text-primary">Success Stories</a></Link></li>
-              <li><Link href="/guidance"><a className="hover:text-primary">Guidance</a></Link></li>
-              <li><Link href="/help"><a className="hover:text-primary">Help Center</a></Link></li>
+              <li><Link href="/blog" className="hover:text-primary">Success Stories</Link></li>
+              <li><Link href="/guidance" className="hover:text-primary">Guidance</Link></li>
+              <li><Link href="/help" className="hover:text-primary">Help Center</Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-4 text-sm font-semibold">Connect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/professionals"><a className="hover:text-primary">For Employers</a></Link></li>
-              <li><Link href="/professionals"><a className="hover:text-primary">For Scouts</a></Link></li>
+              <li><Link href="/professionals" className="hover:text-primary">For Employers</Link></li>
+              <li><Link href="/professionals" className="hover:text-primary">For Scouts</Link></li>
               <li><a href="mailto:masego.diale@careerplugai.co.za" className="hover:text-primary">Contact Us</a></li>
             </ul>
           </div>

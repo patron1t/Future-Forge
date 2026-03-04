@@ -27,10 +27,8 @@ export function Navbar() {
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
-        <Link href="/">
-          <a className="flex items-center gap-2">
-            <img src={logo} alt="Career Plug AI" className="h-10 w-auto" />
-          </a>
+        <Link href="/" className="flex items-center gap-2">
+          <img src={logo} alt="Career Plug AI" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
@@ -47,8 +45,8 @@ export function Navbar() {
           >
             Career Paths
           </button>
-          <Link href="/professionals">
-            <a className="text-sm font-medium transition-colors hover:text-primary">For Professionals</a>
+          <Link href="/professionals" className="text-sm font-medium transition-colors hover:text-primary">
+            For Professionals
           </Link>
           <div className="flex items-center gap-2">
             <Link href="/auth">
@@ -88,7 +86,9 @@ export function Navbar() {
             >
               Career Paths
             </button>
-            <Link href="/professionals"><a className="text-sm font-medium hover:text-primary">For Professionals</a></Link>
+            <Link href="/professionals" className="text-sm font-medium hover:text-primary">
+              For Professionals
+            </Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Link href="/auth">
                 <Button variant="ghost" className="w-full justify-start">Log In</Button>
