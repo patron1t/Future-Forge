@@ -1,11 +1,28 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location, setLocation] = useLocation();
+
+  const handleScroll = (id: string) => {
+    if (location !== "/") {
+      setLocation(`/?scroll=${id}`);
+      return;
+    }
+    
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -19,13 +36,13 @@ export function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">
           <button 
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => handleScroll("top")}
             className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
           >
             About
           </button>
           <button 
-            onClick={() => document.getElementById('legacy-section')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => handleScroll("legacy-section")}
             className="text-sm font-medium transition-colors hover:text-primary cursor-pointer"
           >
             Career Paths
@@ -56,7 +73,7 @@ export function Navbar() {
             <button 
               onClick={() => {
                 setIsOpen(false);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                handleScroll("top");
               }}
               className="text-left text-sm font-medium hover:text-primary cursor-pointer"
             >
@@ -65,7 +82,7 @@ export function Navbar() {
             <button 
               onClick={() => {
                 setIsOpen(false);
-                document.getElementById('legacy-section')?.scrollIntoView({ behavior: 'smooth' });
+                handleScroll("legacy-section");
               }}
               className="text-left text-sm font-medium hover:text-primary cursor-pointer"
             >

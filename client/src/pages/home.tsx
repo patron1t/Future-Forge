@@ -2,11 +2,29 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { Features } from "@/components/home/Features";
-import studentsImg from "@assets/generated_images/diverse_students_using_futuristic_tablet_for_career_guidance.png";
+import studentsImg from "@assets/diverse_students_using_futuristic_tablet_for_career_guidance_1766991054924.png";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
+import { useEffect } from "react";
 
 export default function Home() {
+  const [location] = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const scrollId = params.get('scroll');
+    if (scrollId) {
+      if (scrollId === 'top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(scrollId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-background font-sans">
       <Navbar />

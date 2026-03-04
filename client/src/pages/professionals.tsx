@@ -14,7 +14,7 @@ export default function ProfessionalsPage() {
     if (params.get('scroll') === 'pricing') {
       const element = document.getElementById('plans-section');
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        window.scrollTo({ top: element.offsetTop - 80, behavior: 'smooth' });
       }
     }
   }, [location]);
