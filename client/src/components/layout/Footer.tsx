@@ -37,8 +37,8 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold">Connect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/professionals"><a className="hover:text-primary">For Employers</a></Link></li>
-              <li><Link href="/scouts"><a className="hover:text-primary">For Scouts</a></Link></li>
-              <li><Link href="/contact"><a className="hover:text-primary">Contact Us</a></Link></li>
+              <li><Link href="/professionals"><a className="hover:text-primary">For Scouts</a></Link></li>
+              <li><a href="mailto:masego.diale@careerplugai.co.za" className="hover:text-primary">Contact Us</a></li>
             </ul>
           </div>
         </div>

@@ -32,11 +32,11 @@ export default function Home() {
                       Create Student Account
                     </Button>
                   </Link>
-                  <Link href="/auth?signup=true">
+                  <a href="mailto:masego.diale@careerplugai.co.za">
                     <Button size="lg" variant="outline">
                       Contact for Kiosks
                     </Button>
-                  </Link>
+                  </a>
                 </div>
               </div>
               <div className="relative aspect-video overflow-hidden rounded-2xl shadow-2xl">

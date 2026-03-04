@@ -30,7 +30,7 @@ export function Navbar() {
           >
             Career Paths
           </button>
-          <Link href="/professionals#plans-section">
+          <Link href="/professionals">
             <a className="text-sm font-medium transition-colors hover:text-primary">For Professionals</a>
           </Link>
           <div className="flex items-center gap-2">
@@ -71,7 +71,7 @@ export function Navbar() {
             >
               Career Paths
             </button>
-            <Link href="/professionals#plans-section"><a className="text-sm font-medium hover:text-primary">For Professionals</a></Link>
+            <Link href="/professionals"><a className="text-sm font-medium hover:text-primary">For Professionals</a></Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Link href="/auth">
                 <Button variant="ghost" className="w-full justify-start">Log In</Button>
