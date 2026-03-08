@@ -21,7 +21,7 @@ export function Hero() {
           <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm text-primary backdrop-blur-sm">
             <span className="flex items-center gap-1 font-medium">
               <Sparkles className="h-3.5 w-3.5 fill-current" />
-              Smart Careers. Strong Identities.
+              Smart Careers. Strong Identities
             </span>
           </div>
           
