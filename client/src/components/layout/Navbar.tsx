@@ -11,9 +11,9 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link href="/">
-          <a className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer">
             <img src={logo} alt="Career Plug AI" className="h-10 w-auto" />
-          </a>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
