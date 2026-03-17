@@ -35,7 +35,7 @@ export function Hero() {
           </p>
           
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Link href="/auth?signup=true">
+            <Link href="/auth">
               <Button size="lg" className="h-12 min-w-[160px] text-base gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20">
                 <Brain className="h-4 w-4" />
                 I'm a Student
