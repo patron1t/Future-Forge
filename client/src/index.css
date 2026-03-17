@@ -110,23 +110,23 @@
 }
 
 .dark {
-  /* Dark mode - Deep elegant dark green/black */
-  --background: 150 40% 5%;
+  /* Dark mode - Rich deep green dark mode */
+  --background: 150 60% 12%;
   --foreground: 150 10% 98%;
 
-  --card: 150 40% 8%;
+  --card: 150 55% 16%;
   --card-foreground: 150 10% 98%;
 
-  --popover: 150 40% 8%;
+  --popover: 150 55% 16%;
   --popover-foreground: 150 10% 98%;
 
-  --primary: 150 50% 45%; /* Brighter green for dark mode */
+  --primary: 150 60% 50%; /* Vibrant green for dark mode */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 150 30% 15%;
+  --secondary: 150 50% 22%;
   --secondary-foreground: 150 10% 98%;
 
-  --muted: 150 30% 15%;
+  --muted: 150 50% 22%;
   --muted-foreground: 150 20% 65%;
 
   --accent: 45 90% 60%;
