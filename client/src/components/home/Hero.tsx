@@ -5,7 +5,7 @@ import { Link } from "wouter";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-background pt-16 pb-32 md:pt-24 md:pb-48">
+    <section className="relative overflow-hidden bg-slate-900 dark:bg-slate-900 pt-16 pb-32 md:pt-24 md:pb-48">
       {/* Video Background with fallback and overlay */}
       <div className="absolute inset-0 z-0 opacity-30 dark:opacity-50">
         <video
@@ -28,18 +28,18 @@ export function Hero() {
 
       <div className="container relative z-10 px-4">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-sm text-primary backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-sm text-primary backdrop-blur-sm">
             <span className="flex items-center gap-1 font-medium">
               <Sparkles className="h-3.5 w-3.5 fill-current" />
               Smart Careers. Strong Identities
             </span>
           </div>
           
-          <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="mb-6 font-heading text-4xl font-bold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
             Creating the <span className="text-primary">Billionaires</span> of <span className="text-accent">Tomorrow</span>
           </h1>
           
-          <p className="mb-8 text-lg sm:text-xl max-w-2xl mx-auto text-foreground font-medium leading-relaxed">
+          <p className="mb-8 text-lg sm:text-xl max-w-2xl mx-auto text-gray-100 font-medium leading-relaxed">
             Career Plug AI maps out personalized paths for students (Grade 8-12) based on real strengths. 
             Whether it's STEM, Sports, or Entrepreneurship, find the path where you'll truly succeed.
           </p>
