@@ -19,7 +19,7 @@ export default function TermsPage() {
             <section>
               <h2 className="text-2xl font-bold mb-4">1. Agreement to Terms</h2>
               <p className="text-muted-foreground">
-                By accessing and using Career Plug AI ("Service"), you agree to be bound by these Terms of Service. If you do not agree to abide by the above, please do not use this Service.
+                By accessing and using Career Plug AI (Pty) Ltd ("Service"), you agree to be bound by these Terms of Service. If you do not agree to abide by the above, please do not use this Service.
               </p>
             </section>
 
