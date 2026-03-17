@@ -1,12 +1,14 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState } from "react";
+import { useTheme } from "@/hooks/useTheme";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
+  const { theme, toggleTheme } = useTheme();
 
   const isActive = (path: string) => location === path;
 
@@ -43,6 +45,18 @@ export function Navbar() {
             }`}>Sponsorship</div>
           </Link>
           <div className="flex items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-md hover:bg-secondary transition-colors"
+              data-testid="button-theme-toggle"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
+            </button>
             <Link href="/auth">
               <Button variant="ghost" size="sm">Log In</Button>
             </Link>
@@ -84,6 +98,23 @@ export function Navbar() {
               }`}>Sponsorship</div>
             </Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-2 px-4 py-2 rounded-md hover:bg-secondary transition-colors text-sm font-medium"
+                data-testid="button-theme-toggle-mobile"
+              >
+                {theme === "light" ? (
+                  <>
+                    <Moon className="h-5 w-5" />
+                    Dark Mode
+                  </>
+                ) : (
+                  <>
+                    <Sun className="h-5 w-5" />
+                    Light Mode
+                  </>
+                )}
+              </button>
               <Link href="/auth">
                 <Button variant="ghost" className="w-full justify-start">Log In</Button>
               </Link>
