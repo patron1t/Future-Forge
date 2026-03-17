@@ -205,7 +205,7 @@ export default function SponsorshipPage() {
                     <span>Listed as sponsor on website</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full" variant="outline">Learn More</Button>
+                <Button className="mt-8 w-full" variant="outline" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Learn More</Button>
               </CardContent>
             </Card>
 
@@ -241,7 +241,7 @@ export default function SponsorshipPage() {
                     <span>Access to student talent insights (non-personal)</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90">Get Started</Button>
+                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Get Started</Button>
               </CardContent>
             </Card>
 
@@ -274,7 +274,7 @@ export default function SponsorshipPage() {
                     <span>Premium talent insights & partnership benefits</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Contact Sales</Button>
+                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Contact Sales</Button>
               </CardContent>
             </Card>
           </div>
