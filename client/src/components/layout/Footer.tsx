@@ -47,8 +47,15 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t pt-8 text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} Career Plug AI. All rights reserved.
+        <div className="mt-12 border-t pt-8">
+          <div className="flex justify-center gap-6 mb-6 text-xs text-muted-foreground">
+            <Link href="/privacy"><div className="hover:text-primary cursor-pointer">Privacy Policy</div></Link>
+            <span>•</span>
+            <Link href="/terms"><div className="hover:text-primary cursor-pointer">Terms of Service</div></Link>
+          </div>
+          <div className="text-center text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} Career Plug AI. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
