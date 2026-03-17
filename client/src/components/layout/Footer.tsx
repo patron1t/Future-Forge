@@ -18,9 +18,7 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold">Platform</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/features"><div className="hover:text-primary cursor-pointer">Features</div></Link></li>
-              <li><Link href="/careers"><div className="hover:text-primary cursor-pointer">Career Paths</div></Link></li>
-              <li><Link href="/pricing"><div className="hover:text-primary cursor-pointer">Pricing</div></Link></li>
+              <li><Link href="/professionals"><div className="hover:text-primary cursor-pointer">Pricing & Plans</div></Link></li>
             </ul>
           </div>
 
