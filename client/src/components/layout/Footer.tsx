@@ -38,7 +38,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/professionals"><a className="hover:text-primary">For Employers</a></Link></li>
               <li><Link href="/scouts"><a className="hover:text-primary">For Scouts</a></Link></li>
-              <li><Link href="/contact"><a className="hover:text-primary">Contact Us</a></Link></li>
+              <li><Link href="/sponsorship"><a className="hover:text-primary">Sponsorship</a></Link></li>
             </ul>
           </div>
 
