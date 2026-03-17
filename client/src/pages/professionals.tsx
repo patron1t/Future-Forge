@@ -130,7 +130,7 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-primary" /> <span>Direct messaging</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full" onClick={() => setLocation("/auth?signup=true")}>Get Started</Button>
+                <Button className="mt-8 w-full" onClick={() => setLocation("/auth?signup=true&role=professional")}>Get Started</Button>
               </CardContent>
             </Card>
 
