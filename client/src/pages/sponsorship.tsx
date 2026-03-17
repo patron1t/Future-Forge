@@ -350,12 +350,12 @@ export default function SponsorshipPage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm text-muted-foreground mb-2">Sponsorship Inquiries</p>
-                  <a href="mailto:sponsorship@careerplugai.com" className="text-lg font-semibold text-accent hover:underline">
-                    sponsorship@careerplugai.com
+                  <a href="mailto:sponsorship@careerplugai.co.za" className="text-lg font-semibold text-accent hover:underline">
+                    sponsorship@careerplugai.co.za
                   </a>
                   <p className="text-sm text-muted-foreground pt-4">General Contact</p>
-                  <a href="mailto:info@careerplugai.com" className="text-lg font-semibold text-accent hover:underline">
-                    info@careerplugai.com
+                  <a href="mailto:info@careerplugai.co.za" className="text-lg font-semibold text-accent hover:underline">
+                    info@careerplugai.co.za
                   </a>
                 </CardContent>
               </Card>
