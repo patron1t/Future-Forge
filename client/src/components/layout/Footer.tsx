@@ -38,7 +38,9 @@ export function Footer() {
               {location !== "/professionals" && (
                 <li><Link href="/professionals"><div className="hover:text-primary cursor-pointer">For Employers & Scouts</div></Link></li>
               )}
-              <li><Link href="/sponsorship"><div className="hover:text-primary cursor-pointer">Sponsorship</div></Link></li>
+              {location !== "/sponsorship" && (
+                <li><Link href="/sponsorship"><div className="hover:text-primary cursor-pointer">Sponsorship</div></Link></li>
+              )}
             </ul>
           </div>
 
