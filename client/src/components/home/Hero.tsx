@@ -5,7 +5,10 @@ import { Link } from "wouter";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-slate-900 dark:bg-slate-900 pt-16 pb-32 md:pt-24 md:pb-48">
+    <section className="relative overflow-visible bg-slate-900 dark:bg-slate-900 pt-16 pb-32 md:pt-24 md:pb-48">
+      {/* Top fade overlay - blends with navbar */}
+      <div className="absolute top-0 left-0 right-0 h-32 z-20 bg-gradient-to-b from-background via-background/50 to-transparent pointer-events-none"></div>
+      
       {/* Video Background with fallback and overlay */}
       <div className="absolute inset-0 z-0 opacity-30 dark:opacity-50">
         <video
@@ -23,8 +26,10 @@ export function Hero() {
             className="h-full w-full object-cover"
           />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
       </div>
+      
+      {/* Bottom fade overlay - blends to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 z-10 bg-gradient-to-b from-transparent via-slate-900/50 to-background pointer-events-none"></div>
 
       <div className="container relative z-10 px-4">
         <div className="mx-auto max-w-4xl text-center">
