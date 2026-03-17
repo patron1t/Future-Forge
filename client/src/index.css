@@ -110,24 +110,24 @@
 }
 
 .dark {
-  /* Dark mode - Near black grey */
-  --background: 0 0% 6%;
-  --foreground: 0 0% 88%;
+  /* Dark mode - Comfortable dark grey */
+  --background: 0 0% 20%;
+  --foreground: 0 0% 90%;
 
-  --card: 0 0% 10%;
-  --card-foreground: 0 0% 88%;
+  --card: 0 0% 26%;
+  --card-foreground: 0 0% 90%;
 
-  --popover: 0 0% 10%;
-  --popover-foreground: 0 0% 88%;
+  --popover: 0 0% 26%;
+  --popover-foreground: 0 0% 90%;
 
-  --primary: 150 50% 50%; /* Green accent on near black */
+  --primary: 150 50% 50%; /* Green accent on dark grey */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 0 0% 18%;
-  --secondary-foreground: 0 0% 88%;
+  --secondary: 0 0% 34%;
+  --secondary-foreground: 0 0% 90%;
 
-  --muted: 0 0% 18%;
-  --muted-foreground: 0 0% 55%;
+  --muted: 0 0% 34%;
+  --muted-foreground: 0 0% 65%;
 
   --accent: 45 90% 60%;
   --accent-foreground: 150 50% 20%;
