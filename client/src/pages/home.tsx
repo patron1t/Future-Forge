@@ -27,7 +27,7 @@ export default function Home() {
                   Join thousands of students discovering their true potential.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link href="/auth">
+                  <Link href="/auth?signup=true">
                     <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                       Create Student Account
                     </Button>
