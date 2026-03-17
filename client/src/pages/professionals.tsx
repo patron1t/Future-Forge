@@ -108,7 +108,7 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-accent-foreground" /> <span>Wellness monitoring</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => setLocation("/auth?signup=true")}>Create Free Account</Button>
+                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => setLocation("/auth?signup=true&role=counselor")}>Create Free Account</Button>
               </CardContent>
             </Card>
 

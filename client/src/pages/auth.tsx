@@ -12,8 +12,9 @@ export default function AuthPage() {
   const [location, setLocation] = useLocation();
   const searchParams = new URLSearchParams(window.location.search);
   const defaultTab = searchParams.get("signup") ? "signup" : "login";
+  const defaultRole = (searchParams.get("role") || "student") as "student" | "professional" | "counselor";
   
-  const [role, setRole] = useState<"student" | "professional" | "counselor">("student");
+  const [role, setRole] = useState<"student" | "professional" | "counselor">(defaultRole);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
