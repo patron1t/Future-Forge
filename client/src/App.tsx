@@ -7,6 +7,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import StudentDashboard from "@/pages/student-dashboard";
 import ProfessionalsPage from "@/pages/professionals";
+import SponsorshipPage from "@/pages/sponsorship";
 import ProfessionalDashboard from "@/pages/professional-dashboard";
 import CounselorDashboard from "@/pages/counselor-dashboard";
 import WellnessPage from "@/pages/wellness";
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
+      <Route path="/sponsorship" component={SponsorshipPage} />
       <Route path="/professional-dashboard" component={ProfessionalDashboard} />
       <Route path="/counselor-dashboard" component={CounselorDashboard} />
       <Route path="/wellness" component={WellnessPage} />

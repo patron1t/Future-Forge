@@ -21,6 +21,7 @@ export function Navbar() {
           <Link href="/about"><a className="text-sm font-medium transition-colors hover:text-primary">About</a></Link>
           <Link href="/careers"><a className="text-sm font-medium transition-colors hover:text-primary">Career Paths</a></Link>
           <Link href="/professionals"><a className="text-sm font-medium transition-colors hover:text-primary">For Professionals</a></Link>
+          <Link href="/sponsorship"><a className="text-sm font-medium transition-colors hover:text-primary">Sponsorship</a></Link>
           <div className="flex items-center gap-2">
             <Link href="/auth">
               <Button variant="ghost" size="sm">Log In</Button>
@@ -44,6 +45,7 @@ export function Navbar() {
             <Link href="/about"><a className="text-sm font-medium hover:text-primary">About</a></Link>
             <Link href="/careers"><a className="text-sm font-medium hover:text-primary">Career Paths</a></Link>
             <Link href="/professionals"><a className="text-sm font-medium hover:text-primary">For Professionals</a></Link>
+            <Link href="/sponsorship"><a className="text-sm font-medium hover:text-primary">Sponsorship</a></Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Link href="/auth">
                 <Button variant="ghost" className="w-full justify-start">Log In</Button>
