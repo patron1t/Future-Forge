@@ -28,10 +28,10 @@ export default function ProfessionalsPage() {
             Access a curated pool of high-potential students mapped by our AI based on their actual strengths, projects, and digital footprint. Counselors get free access.
           </p>
           <div className="flex justify-center gap-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setLocation("/auth?signup=true&role=professional")}>
               Start Scouting
             </Button>
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" onClick={() => document.getElementById("access-plans")?.scrollIntoView({ behavior: "smooth" })}>
               View Pricing
             </Button>
           </div>
