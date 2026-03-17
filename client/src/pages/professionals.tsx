@@ -158,7 +158,7 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-primary" /> <span>Priority support</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setLocation("/sponsorship")}>Contact Sales</Button>
+                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setLocation("/auth?signup=true&role=professional")}>Contact Sales</Button>
               </CardContent>
             </Card>
           </div>
