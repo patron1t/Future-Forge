@@ -39,7 +39,7 @@ export function Hero() {
             Creating the <span className="text-primary">Billionaires</span> of <span className="text-accent">Tomorrow</span>
           </h1>
           
-          <p className="mb-8 text-lg text-muted-foreground sm:text-xl max-w-2xl mx-auto">
+          <p className="mb-8 text-lg sm:text-xl max-w-2xl mx-auto px-6 py-6 rounded-lg bg-black/30 dark:bg-black/40 backdrop-blur-md text-foreground font-medium leading-relaxed">
             Career Plug AI maps out personalized paths for students (Grade 8-12) based on real strengths. 
             Whether it's STEM, Sports, or Entrepreneurship, find the path where you'll truly succeed.
           </p>
