@@ -11,6 +11,7 @@ import TermsPage from "@/pages/terms";
 import StudentDashboard from "@/pages/student-dashboard";
 import ProfessionalsPage from "@/pages/professionals";
 import SponsorshipPage from "@/pages/sponsorship";
+import PlacementsPage from "@/pages/placements";
 import ProfessionalDashboard from "@/pages/professional-dashboard";
 import CounselorDashboard from "@/pages/counselor-dashboard";
 import WellnessPage from "@/pages/wellness";
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
       <Route path="/sponsorship" component={SponsorshipPage} />
+      <Route path="/placements" component={PlacementsPage} />
       <Route path="/professional-dashboard" component={ProfessionalDashboard} />
       <Route path="/counselor-dashboard" component={CounselorDashboard} />
       <Route path="/wellness" component={WellnessPage} />

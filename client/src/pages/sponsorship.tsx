@@ -4,8 +4,11 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Users, MapPin, Zap, Heart, Award, Globe, ArrowRight, Phone, Mail } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function SponsorshipPage() {
+  const [, setLocation] = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -32,7 +35,7 @@ export default function SponsorshipPage() {
             >
               Become a Sponsor
             </Button>
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" onClick={() => setLocation("/placements")}>
               See Placements
             </Button>
           </div>
