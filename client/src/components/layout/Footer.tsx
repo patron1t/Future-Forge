@@ -54,7 +54,7 @@ export function Footer() {
             <Link href="/terms"><div className="hover:text-primary cursor-pointer">Terms of Service</div></Link>
           </div>
           <div className="text-center text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Career Plug AI. All rights reserved.
+            &copy; {new Date().getFullYear()} Career Plug AI (Pty) Ltd. All rights reserved.
           </div>
         </div>
       </div>
