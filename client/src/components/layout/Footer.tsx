@@ -31,14 +31,6 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 text-sm font-semibold">Resources</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/blog"><div className="hover:text-primary cursor-pointer">Success Stories</div></Link></li>
-              <li><Link href="/guidance"><div className="hover:text-primary cursor-pointer">Guidance</div></Link></li>
-              <li><Link href="/help"><div className="hover:text-primary cursor-pointer">Help Center</div></Link></li>
-            </ul>
-          </div>
 
           <div>
             <h3 className="mb-4 text-sm font-semibold">Connect</h3>
