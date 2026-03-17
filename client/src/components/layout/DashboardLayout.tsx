@@ -49,9 +49,9 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
       >
         <div className="flex h-16 items-center border-b px-6">
           <Link href="/">
-            <a className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer">
               <img src={logo} alt="Career Plug AI" className="h-8 w-auto" />
-            </a>
+            </div>
           </Link>
           <button 
             className="ml-auto md:hidden"
