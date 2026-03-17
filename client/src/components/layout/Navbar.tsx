@@ -18,8 +18,12 @@ export function Navbar() {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/professionals"><a className="text-sm font-medium transition-colors hover:text-primary">For Professionals</a></Link>
-          <Link href="/sponsorship"><a className="text-sm font-medium transition-colors hover:text-primary">Sponsorship</a></Link>
+          <Link href="/professionals">
+            <div className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">For Professionals</div>
+          </Link>
+          <Link href="/sponsorship">
+            <div className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">Sponsorship</div>
+          </Link>
           <div className="flex items-center gap-2">
             <Link href="/auth">
               <Button variant="ghost" size="sm">Log In</Button>
@@ -40,8 +44,12 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden border-t p-4 space-y-4 bg-background animate-in slide-in-from-top-5">
           <div className="flex flex-col gap-4">
-            <Link href="/professionals"><a className="text-sm font-medium hover:text-primary">For Professionals</a></Link>
-            <Link href="/sponsorship"><a className="text-sm font-medium hover:text-primary">Sponsorship</a></Link>
+            <Link href="/professionals">
+              <div className="text-sm font-medium hover:text-primary cursor-pointer">For Professionals</div>
+            </Link>
+            <Link href="/sponsorship">
+              <div className="text-sm font-medium hover:text-primary cursor-pointer">Sponsorship</div>
+            </Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Link href="/auth">
                 <Button variant="ghost" className="w-full justify-start">Log In</Button>

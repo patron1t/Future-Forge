@@ -67,8 +67,8 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
               const isActive = location === link.href;
               return (
                 <Link key={link.href} href={link.href}>
-                  <a
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  <div
+                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
                       isActive 
                         ? "bg-primary/10 text-primary" 
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -76,7 +76,7 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
                   >
                     <link.icon className="h-4 w-4" />
                     {link.label}
-                  </a>
+                  </div>
                 </Link>
               );
             })}

@@ -18,27 +18,27 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold">Platform</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/features"><a className="hover:text-primary">Features</a></Link></li>
-              <li><Link href="/careers"><a className="hover:text-primary">Career Paths</a></Link></li>
-              <li><Link href="/pricing"><a className="hover:text-primary">Pricing</a></Link></li>
+              <li><Link href="/features"><div className="hover:text-primary cursor-pointer">Features</div></Link></li>
+              <li><Link href="/careers"><div className="hover:text-primary cursor-pointer">Career Paths</div></Link></li>
+              <li><Link href="/pricing"><div className="hover:text-primary cursor-pointer">Pricing</div></Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-4 text-sm font-semibold">Resources</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/blog"><a className="hover:text-primary">Success Stories</a></Link></li>
-              <li><Link href="/guidance"><a className="hover:text-primary">Guidance</a></Link></li>
-              <li><Link href="/help"><a className="hover:text-primary">Help Center</a></Link></li>
+              <li><Link href="/blog"><div className="hover:text-primary cursor-pointer">Success Stories</div></Link></li>
+              <li><Link href="/guidance"><div className="hover:text-primary cursor-pointer">Guidance</div></Link></li>
+              <li><Link href="/help"><div className="hover:text-primary cursor-pointer">Help Center</div></Link></li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-4 text-sm font-semibold">Connect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/professionals"><a className="hover:text-primary">For Employers</a></Link></li>
-              <li><Link href="/scouts"><a className="hover:text-primary">For Scouts</a></Link></li>
-              <li><Link href="/sponsorship"><a className="hover:text-primary">Sponsorship</a></Link></li>
+              <li><Link href="/professionals"><div className="hover:text-primary cursor-pointer">For Employers</div></Link></li>
+              <li><Link href="/scouts"><div className="hover:text-primary cursor-pointer">For Scouts</div></Link></li>
+              <li><Link href="/sponsorship"><div className="hover:text-primary cursor-pointer">Sponsorship</div></Link></li>
             </ul>
           </div>
 
