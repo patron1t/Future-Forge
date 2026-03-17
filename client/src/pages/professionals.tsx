@@ -66,7 +66,7 @@ export default function ProfessionalsPage() {
       </section>
 
       {/* Pricing / Access */}
-      <section className="border-t bg-muted/20 py-24">
+      <section id="access-plans" className="border-t bg-muted/20 py-24">
         <div className="container px-4">
           <div className="mb-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight">Access Plans</h2>

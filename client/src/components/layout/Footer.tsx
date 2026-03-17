@@ -1,7 +1,16 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 
 export function Footer() {
+  const [, setLocation] = useLocation();
+
+  const handlePricingClick = () => {
+    setLocation("/professionals");
+    setTimeout(() => {
+      document.getElementById("access-plans")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <footer className="border-t bg-muted/30">
       <div className="container px-4 py-12 md:py-16">
@@ -18,7 +27,7 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold">Platform</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/professionals"><div className="hover:text-primary cursor-pointer">Pricing & Plans</div></Link></li>
+              <li><div onClick={handlePricingClick} className="hover:text-primary cursor-pointer">Pricing & Plans</div></li>
             </ul>
           </div>
 
