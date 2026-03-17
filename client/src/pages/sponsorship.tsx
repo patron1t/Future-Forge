@@ -2,7 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Users, MapPin, Zap, Heart, Award, Globe, ArrowRight } from "lucide-react";
+import { Users, MapPin, Zap, Heart, Award, Globe, ArrowRight, Phone, Mail } from "lucide-react";
 
 export default function SponsorshipPage() {
   return (
@@ -306,6 +306,60 @@ export default function SponsorshipPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Get in Touch */}
+      <section className="py-24 bg-muted/20 border-t">
+        <div className="container px-4">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold tracking-tight mb-4">Get in Touch</h2>
+              <p className="text-lg text-muted-foreground">
+                Ready to sponsor a kiosk? Contact our sponsorship team directly to discuss your organization's goals and ideal placement locations.
+              </p>
+            </div>
+            
+            <div className="grid gap-6 md:grid-cols-2 mb-8">
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Phone className="h-5 w-5 text-primary" />
+                    <CardTitle className="text-lg">Call Us</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <p className="text-sm text-muted-foreground">Primary Line</p>
+                  <a href="tel:+27796158762" className="text-lg font-semibold text-primary hover:underline">
+                    +27 79 615 8762
+                  </a>
+                  <p className="text-sm text-muted-foreground pt-4">Alternative Line</p>
+                  <a href="tel:+27834095677" className="text-lg font-semibold text-primary hover:underline">
+                    +27 83 409 5677
+                  </a>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <div className="flex items-center gap-2 mb-2">
+                    <Mail className="h-5 w-5 text-accent" />
+                    <CardTitle className="text-lg">Email</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground mb-2">Sponsorship Inquiries</p>
+                  <a href="mailto:sponsorship@careerplugai.com" className="text-lg font-semibold text-accent hover:underline">
+                    sponsorship@careerplugai.com
+                  </a>
+                  <p className="text-sm text-muted-foreground pt-4">General Contact</p>
+                  <a href="mailto:info@careerplugai.com" className="text-lg font-semibold text-accent hover:underline">
+                    info@careerplugai.com
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </section>

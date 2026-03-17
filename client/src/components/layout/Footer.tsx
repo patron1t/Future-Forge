@@ -41,6 +41,14 @@ export function Footer() {
               <li><Link href="/contact"><a className="hover:text-primary">Contact Us</a></Link></li>
             </ul>
           </div>
+
+          <div>
+            <h3 className="mb-4 text-sm font-semibold">Contact</h3>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><a href="tel:+27796158762" className="hover:text-primary">+27 79 615 8762</a></li>
+              <li><a href="tel:+27834095677" className="hover:text-primary">+27 83 409 5677</a></li>
+            </ul>
+          </div>
         </div>
         <div className="mt-12 border-t pt-8 text-center text-xs text-muted-foreground">
           &copy; {new Date().getFullYear()} Career Plug AI. All rights reserved.
