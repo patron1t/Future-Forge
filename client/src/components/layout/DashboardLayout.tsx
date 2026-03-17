@@ -21,17 +21,12 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
 
   const studentLinks = [
     { href: "/student-dashboard", icon: LayoutDashboard, label: "Overview" },
-    { href: "/career-map", icon: Compass, label: "My Career Map" },
     { href: "/digital-footprint", icon: User, label: "Digital Footprint" },
     { href: "/wellness", icon: Heart, label: "Wellness Hub" },
-    { href: "/settings", icon: Settings, label: "Settings" },
   ];
 
   const professionalLinks = [
     { href: "/professional-dashboard", icon: LayoutDashboard, label: "Dashboard" },
-    { href: "/scout", icon: Compass, label: "Scout Talent" },
-    { href: "/jobs", icon: Briefcase, label: "Post Opportunities" },
-    { href: "/settings", icon: Settings, label: "Settings" },
   ];
 
   const links = type === "student" ? studentLinks : professionalLinks;
