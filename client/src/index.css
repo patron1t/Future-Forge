@@ -110,24 +110,24 @@
 }
 
 .dark {
-  /* Dark mode - Rich dark silver */
-  --background: 200 10% 15%;
-  --foreground: 200 5% 95%;
+  /* Dark mode - Very dark silver */
+  --background: 200 10% 9%;
+  --foreground: 200 5% 93%;
 
-  --card: 200 8% 22%;
-  --card-foreground: 200 5% 95%;
+  --card: 200 8% 14%;
+  --card-foreground: 200 5% 93%;
 
-  --popover: 200 8% 22%;
-  --popover-foreground: 200 5% 95%;
+  --popover: 200 8% 14%;
+  --popover-foreground: 200 5% 93%;
 
-  --primary: 150 50% 50%; /* Green accent on dark silver */
+  --primary: 150 50% 50%; /* Green accent on very dark silver */
   --primary-foreground: 0 0% 100%;
 
-  --secondary: 200 8% 32%;
-  --secondary-foreground: 200 5% 95%;
+  --secondary: 200 8% 22%;
+  --secondary-foreground: 200 5% 93%;
 
-  --muted: 200 8% 32%;
-  --muted-foreground: 200 5% 68%;
+  --muted: 200 8% 22%;
+  --muted-foreground: 200 5% 62%;
 
   --accent: 45 90% 60%;
   --accent-foreground: 150 50% 20%;
