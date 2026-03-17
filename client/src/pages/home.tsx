@@ -27,12 +27,12 @@ export default function Home() {
                   Join thousands of students discovering their true potential.
                 </p>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link href="/auth?signup=true">
+                  <Link href="/auth">
                     <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                       Create Student Account
                     </Button>
                   </Link>
-                  <Link href="/contact">
+                  <Link href="/sponsorship">
                     <Button size="lg" variant="outline">
                       Contact for Kiosks
                     </Button>
