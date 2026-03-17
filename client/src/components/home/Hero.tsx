@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Brain, Trophy } from "lucide-react";
 import heroBg from "@assets/generated_images/futuristic_abstract_education_background_with_connecting_nodes.png";
-import heroBgVideo from "@assets/videos/hero-bg.mp4";
 import { Link } from "wouter";
 
 export function Hero() {
@@ -16,7 +15,7 @@ export function Hero() {
           playsInline
           className="h-full w-full object-cover"
         >
-          <source src={heroBgVideo} type="video/mp4" />
+          <source src="/assets/videos/hero-bg.mp4" type="video/mp4" />
           {/* Fallback to static image */}
           <img 
             src={heroBg} 
