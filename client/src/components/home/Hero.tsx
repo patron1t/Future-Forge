@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden bg-background pt-16 pb-32 md:pt-24 md:pb-48">
       {/* Video Background with fallback and overlay */}
-      <div className="absolute inset-0 z-0 opacity-30 dark:opacity-50">
+      <div className="absolute inset-0 z-0 opacity-60 dark:opacity-50">
         <video
           autoPlay
           muted
@@ -23,7 +23,7 @@ export function Hero() {
             className="h-full w-full object-cover"
           />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/50"></div>
       </div>
 
       <div className="container relative z-10 px-4">
