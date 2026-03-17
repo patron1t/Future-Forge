@@ -4,8 +4,11 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Check, Search, BarChart3, Users, Building } from "lucide-react";
+import { useLocation } from "wouter";
 
 export default function ProfessionalsPage() {
+  const [, setLocation] = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -105,7 +108,7 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-accent-foreground" /> <span>Wellness monitoring</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90">Create Free Account</Button>
+                <Button className="mt-8 w-full bg-accent text-accent-foreground hover:bg-accent/90" onClick={() => setLocation("/auth")}>Create Free Account</Button>
               </CardContent>
             </Card>
 
@@ -127,7 +130,7 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-primary" /> <span>Direct messaging</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full">Get Started</Button>
+                <Button className="mt-8 w-full" onClick={() => setLocation("/auth?signup=true")}>Get Started</Button>
               </CardContent>
             </Card>
 
@@ -155,7 +158,7 @@ export default function ProfessionalsPage() {
                     <Check className="h-4 w-4 text-primary" /> <span>Priority support</span>
                   </li>
                 </ul>
-                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90">Contact Sales</Button>
+                <Button className="mt-8 w-full bg-primary text-primary-foreground hover:bg-primary/90" onClick={() => setLocation("/sponsorship")}>Contact Sales</Button>
               </CardContent>
             </Card>
           </div>
