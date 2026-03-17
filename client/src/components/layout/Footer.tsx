@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 
 export function Footer() {
-  const [, setLocation] = useLocation();
+  const [location, setLocation] = useLocation();
 
   const handlePricingClick = () => {
     setLocation("/professionals");
@@ -35,7 +35,9 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold">Connect</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/professionals"><div className="hover:text-primary cursor-pointer">For Employers & Scouts</div></Link></li>
+              {location !== "/professionals" && (
+                <li><Link href="/professionals"><div className="hover:text-primary cursor-pointer">For Employers & Scouts</div></Link></li>
+              )}
               <li><Link href="/sponsorship"><div className="hover:text-primary cursor-pointer">Sponsorship</div></Link></li>
             </ul>
           </div>
