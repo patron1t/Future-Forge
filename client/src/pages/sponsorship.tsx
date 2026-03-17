@@ -20,7 +20,11 @@ export default function SponsorshipPage() {
             Sponsor an interactive Career Plug AI kiosk in schools and community hubs. Give students instant access to AI-powered career guidance while building your brand and community impact.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               Become a Sponsor
             </Button>
             <Button size="lg" variant="outline">
@@ -311,7 +315,7 @@ export default function SponsorshipPage() {
       </section>
 
       {/* Get in Touch */}
-      <section className="py-24 bg-muted/20 border-t">
+      <section id="contact" className="py-24 bg-muted/20 border-t">
         <div className="container px-4">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
@@ -371,7 +375,11 @@ export default function SponsorshipPage() {
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
             Sponsor a kiosk and help shape the future of youth career development. Join organizations already investing in the next generation.
           </p>
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
+          <Button 
+            size="lg" 
+            className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          >
             Become a Sponsor <ArrowRight className="h-4 w-4" />
           </Button>
         </div>
