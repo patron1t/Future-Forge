@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 import { Menu, X } from "lucide-react";
@@ -6,6 +6,9 @@ import { useState } from "react";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [location] = useLocation();
+
+  const isActive = (path: string) => location === path;
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
@@ -19,13 +22,25 @@ export function Navbar() {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">
           <Link href="/about">
-            <div className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">About</div>
+            <div className={`text-sm font-medium transition-colors cursor-pointer ${
+              isActive("/about") 
+                ? "text-primary font-semibold border-b-2 border-primary pb-0.5" 
+                : "hover:text-primary text-foreground"
+            }`}>About</div>
           </Link>
           <Link href="/professionals">
-            <div className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">For Professionals</div>
+            <div className={`text-sm font-medium transition-colors cursor-pointer ${
+              isActive("/professionals") 
+                ? "text-primary font-semibold border-b-2 border-primary pb-0.5" 
+                : "hover:text-primary text-foreground"
+            }`}>For Professionals</div>
           </Link>
           <Link href="/sponsorship">
-            <div className="text-sm font-medium transition-colors hover:text-primary cursor-pointer">Sponsorship</div>
+            <div className={`text-sm font-medium transition-colors cursor-pointer ${
+              isActive("/sponsorship") 
+                ? "text-primary font-semibold border-b-2 border-primary pb-0.5" 
+                : "hover:text-primary text-foreground"
+            }`}>Sponsorship</div>
           </Link>
           <div className="flex items-center gap-2">
             <Link href="/auth">
@@ -48,13 +63,25 @@ export function Navbar() {
         <div className="md:hidden border-t p-4 space-y-4 bg-background animate-in slide-in-from-top-5">
           <div className="flex flex-col gap-4">
             <Link href="/about">
-              <div className="text-sm font-medium hover:text-primary cursor-pointer">About</div>
+              <div className={`text-sm font-medium cursor-pointer ${
+                isActive("/about") 
+                  ? "text-primary font-semibold" 
+                  : "hover:text-primary text-foreground"
+              }`}>About</div>
             </Link>
             <Link href="/professionals">
-              <div className="text-sm font-medium hover:text-primary cursor-pointer">For Professionals</div>
+              <div className={`text-sm font-medium cursor-pointer ${
+                isActive("/professionals") 
+                  ? "text-primary font-semibold" 
+                  : "hover:text-primary text-foreground"
+              }`}>For Professionals</div>
             </Link>
             <Link href="/sponsorship">
-              <div className="text-sm font-medium hover:text-primary cursor-pointer">Sponsorship</div>
+              <div className={`text-sm font-medium cursor-pointer ${
+                isActive("/sponsorship") 
+                  ? "text-primary font-semibold" 
+                  : "hover:text-primary text-foreground"
+              }`}>Sponsorship</div>
             </Link>
             <div className="flex flex-col gap-2 pt-4 border-t">
               <Link href="/auth">
