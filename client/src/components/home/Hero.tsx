@@ -15,7 +15,7 @@ export function Hero() {
           playsInline
           className="h-full w-full object-cover"
         >
-          <source src="/hero-bg.mp4" type="video/mp4" />
+          <source src="/career-plug-ai-showcase.mp4" type="video/mp4" />
           {/* Fallback to static image */}
           <img 
             src={heroBg} 
