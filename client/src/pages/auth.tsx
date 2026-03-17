@@ -29,9 +29,9 @@ export default function AuthPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/20 px-4 py-12">
       <Link href="/">
-        <a className="absolute left-4 top-4 flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary md:left-8 md:top-8">
+        <div className="absolute left-4 top-4 flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-primary cursor-pointer md:left-8 md:top-8">
           <ArrowLeft className="h-4 w-4" /> Back to Home
-        </a>
+        </div>
       </Link>
 
       <div className="w-full max-w-md">
