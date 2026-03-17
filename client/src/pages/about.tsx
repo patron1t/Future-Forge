@@ -1,11 +1,25 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Sparkles, Target, Users, Zap, Heart, Globe } from "lucide-react";
 
 export default function AboutPage() {
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const handleProfessionalsClick = () => {
+    setLocation("/professionals");
+    setTimeout(() => {
+      document.getElementById("access-plans")?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen bg-background font-sans">
       <Navbar />
@@ -249,11 +263,9 @@ export default function AboutPage() {
                 I'm a Student
               </Button>
             </Link>
-            <Link href="/professionals">
-              <Button size="lg" variant="outline">
-                For Employers & Scouts
-              </Button>
-            </Link>
+            <Button size="lg" variant="outline" onClick={handleProfessionalsClick}>
+              For Employers & Scouts
+            </Button>
             <Link href="/sponsorship">
               <Button size="lg" variant="outline">
                 For Organizations
