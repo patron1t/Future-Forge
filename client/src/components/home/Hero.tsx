@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Brain, Trophy } from "lucide-react";
 import heroBg from "@assets/generated_images/futuristic_abstract_education_background_with_connecting_nodes.png";
-import kioskImg from "../../assets/generated_images/students_using_career_kiosk.png";
+import kioskImg from "@assets/generated_images/students_using_career_kiosk.png";
 import { Link } from "wouter";
 
 export function Hero() {
