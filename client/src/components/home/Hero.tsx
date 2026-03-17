@@ -1,18 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, Brain, Trophy } from "lucide-react";
 import heroBg from "@assets/generated_images/futuristic_abstract_education_background_with_connecting_nodes.png";
+import heroBgVideo from "@assets/videos/hero-bg.mp4";
 import { Link } from "wouter";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden bg-background pt-16 pb-32 md:pt-24 md:pb-48">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40">
-        <img 
-          src={heroBg} 
-          alt="Abstract Background" 
+      {/* Video Background with fallback and overlay */}
+      <div className="absolute inset-0 z-0 opacity-30 dark:opacity-50">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="h-full w-full object-cover"
-        />
+        >
+          <source src={heroBgVideo} type="video/mp4" />
+          {/* Fallback to static image */}
+          <img 
+            src={heroBg} 
+            alt="Abstract Background" 
+            className="h-full w-full object-cover"
+          />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
       </div>
 
