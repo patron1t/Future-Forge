@@ -37,7 +37,9 @@ export default function AuthPage() {
 
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <img src={logo} alt="Logo" className="mx-auto mb-4 h-20 w-auto" />
+          <Link href="/">
+            <img src={logo} alt="Logo" className="mx-auto mb-4 h-20 w-auto cursor-pointer hover:opacity-80 transition-opacity" />
+          </Link>
           <h1 className="font-heading text-2xl font-bold tracking-tight">Welcome</h1>
           <p className="text-muted-foreground">Your future starts here.</p>
         </div>
