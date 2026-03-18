@@ -19,6 +19,22 @@ export function Footer() {
     }
   };
 
+  const handlePrivacyClick = () => {
+    if (location === "/privacy") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      setLocation("/privacy");
+    }
+  };
+
+  const handleTermsClick = () => {
+    if (location === "/terms") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      setLocation("/terms");
+    }
+  };
+
   return (
     <footer className="border-t bg-muted/30">
       <div className="container px-4 py-12 md:py-16">
@@ -62,9 +78,9 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t pt-8">
           <div className="flex justify-center gap-6 mb-6 text-xs text-muted-foreground">
-            <Link href="/privacy"><div className="hover:text-primary cursor-pointer">Privacy Policy</div></Link>
+            <div onClick={handlePrivacyClick} className="hover:text-primary cursor-pointer">Privacy Policy</div>
             <span>•</span>
-            <Link href="/terms"><div className="hover:text-primary cursor-pointer">Terms of Service</div></Link>
+            <div onClick={handleTermsClick} className="hover:text-primary cursor-pointer">Terms of Service</div>
           </div>
           <div className="text-center text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} Career Plug AI (Pty) Ltd. All rights reserved.
