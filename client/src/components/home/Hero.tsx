@@ -51,8 +51,12 @@ export function Hero() {
                 I'm a Student
               </Button>
             </Link>
-            <Link href="/professionals">
-              <Button size="lg" variant="outline" className="h-12 min-w-[160px] text-base gap-2 hover:bg-secondary/50">
+            <Link href="/professionals?scroll=pricing">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="h-12 min-w-[160px] text-base gap-2 hover:bg-secondary/50"
+              >
                 <Trophy className="h-4 w-4" />
                 For Scouts & Employers
               </Button>
