@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Users, MapPin, Zap, Heart, Award, Globe, ArrowRight, Phone, Mail } from "lucide-react";
 import { useLocation } from "wouter";
