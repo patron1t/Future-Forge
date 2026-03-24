@@ -225,15 +225,15 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold tracking-tight mb-12">Our Impact</h2>
           <div className="grid gap-8 md:grid-cols-3 max-w-4xl mx-auto mb-12">
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">1,000+</div>
+              <div className="text-4xl font-bold text-primary mb-2">Coming Soon</div>
               <p className="text-muted-foreground">Students mapped to career paths</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-accent mb-2">500+</div>
+              <div className="text-4xl font-bold text-accent mb-2">Coming Soon</div>
               <p className="text-muted-foreground">Opportunities connected</p>
             </div>
             <div>
-              <div className="text-4xl font-bold text-primary mb-2">50+</div>
+              <div className="text-4xl font-bold text-primary mb-2">Coming Soon</div>
               <p className="text-muted-foreground">Schools & community partners</p>
             </div>
           </div>
@@ -258,12 +258,7 @@ export default function AboutPage() {
             </Link>
             <Link href="/professionals">
               <Button size="lg" variant="outline">
-                For Employers & Scouts
-              </Button>
-            </Link>
-            <Link href="/sponsorship">
-              <Button size="lg" variant="outline">
-                For Organizations
+                For Scouts & Employers
               </Button>
             </Link>
           </div>
