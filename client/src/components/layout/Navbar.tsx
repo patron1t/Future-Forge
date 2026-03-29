@@ -38,12 +38,13 @@ export function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6">
-          <button
-            onClick={() => handleScroll("top")}
-            className="text-sm font-medium hover:text-primary"
-          >
-            Home
-          </button>
+          <Link to="/">
+            <div className={`text-sm font-medium transition-colors cursor-pointer ${
+              isActive("/") 
+                ? "text-primary font-semibold border-b-2 border-primary pb-0.5" 
+                : "hover:text-primary text-foreground"
+            }`}>Home</div>
+          </Link>
 
           <button
             onClick={() => handleScroll("legacy-section")}
@@ -125,15 +126,13 @@ export function Navbar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden border-t p-4 space-y-4 bg-background">
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              handleScroll("top");
-            }}
-            className="block text-left w-full"
-          >
-            Home
-          </button>
+          <Link to="/" onClick={() => setIsOpen(false)}>
+            <div className={`text-sm font-medium cursor-pointer ${
+              isActive("/") 
+                ? "text-primary font-semibold" 
+                : "hover:text-primary text-foreground"
+            }`}>Home</div>
+          </Link>
 
           <button
             onClick={() => {
