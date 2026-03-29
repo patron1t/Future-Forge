@@ -41,7 +41,7 @@ export function Navbar() {
           <Link to="/">
             <div className={`text-sm font-medium transition-colors cursor-pointer ${
               isActive("/") 
-                ? "text-primary font-semibold border-b-2 border-primary pb-0.5" 
+                ? "text-primary font-semibold" 
                 : "hover:text-primary text-foreground"
             }`}>Home</div>
           </Link>
