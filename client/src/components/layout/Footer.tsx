@@ -62,10 +62,9 @@ export function Footer() {
           <div>
             <h3 className="mb-4 text-sm font-semibold">Contact</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><a href="mailto:info@careerplugai.co.za" className="hover:text-primary">info@careerplugai.co.za</a></li>
               <li><a href="tel:+27796158762" className="hover:text-primary">+27 79 615 8762</a></li>
               <li><a href="tel:+27834095677" className="hover:text-primary">+27 83 409 5677</a></li>
-
-
             </ul>
           </div>
         </div>

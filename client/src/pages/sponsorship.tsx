@@ -92,6 +92,28 @@ export default function SponsorshipPage() {
           </div>
         </div>
       </section>
+
+      {/* Contact CTA */}
+      <section className="py-24 border-t" id="contact">
+        <div className="container px-4 text-center">
+          <h2 className="text-3xl font-bold tracking-tight mb-6">Ready to Make an Impact?</h2>
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Have questions about sponsorship? Want to learn more about kiosk placements or partnership opportunities? Get in touch with our team.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <a href="mailto:info@careerplugai.co.za" className="flex items-center gap-2 text-lg font-semibold text-primary hover:text-primary/80">
+              <Mail className="h-5 w-5" />
+              info@careerplugai.co.za
+            </a>
+            <span className="hidden sm:inline text-muted-foreground">•</span>
+            <a href="tel:+27796158762" className="flex items-center gap-2 text-lg font-semibold text-primary hover:text-primary/80">
+              <Phone className="h-5 w-5" />
+              +27 79 615 8762
+            </a>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
