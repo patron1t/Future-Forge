@@ -145,15 +145,27 @@ export function Navbar() {
           </button>
 
           <Link to="/about" onClick={() => setIsOpen(false)}>
-            <div>About</div>
+            <div className={`text-sm font-medium cursor-pointer ${
+              isActive("/about") 
+                ? "text-primary font-semibold" 
+                : "hover:text-primary text-foreground"
+            }`}>About</div>
           </Link>
 
           <Link to="/professionals" onClick={() => setIsOpen(false)}>
-            <div>For Professionals</div>
+            <div className={`text-sm font-medium cursor-pointer ${
+              isActive("/professionals") 
+                ? "text-primary font-semibold" 
+                : "hover:text-primary text-foreground"
+            }`}>For Professionals</div>
           </Link>
 
           <Link to="/sponsorship" onClick={() => setIsOpen(false)}>
-            <div>Sponsorship</div>
+            <div className={`text-sm font-medium cursor-pointer ${
+              isActive("/sponsorship") 
+                ? "text-primary font-semibold" 
+                : "hover:text-primary text-foreground"
+            }`}>Sponsorship</div>
           </Link>
 
           <div className="flex flex-col gap-2 pt-4 border-t">
