@@ -20,6 +20,9 @@ import AuthPage from "@/pages/auth";
 import AssessmentPage from "@/pages/assessment";
 import CareerMapPage from "@/pages/career-map";
 import OnboardingPage from "@/pages/onboarding";
+import KioskWelcomePage from "@/pages/kiosk-welcome";
+import KioskAssessmentPage from "@/pages/kiosk-assessment";
+import KioskResultsPage from "@/pages/kiosk-results";
 
 function Router() {
   return (
@@ -31,6 +34,9 @@ function Router() {
       <Route path="/onboarding" component={OnboardingPage} />
       <Route path="/assessment" component={AssessmentPage} />
       <Route path="/career-map" component={CareerMapPage} />
+      <Route path="/kiosk" component={KioskWelcomePage} />
+      <Route path="/kiosk-assessment" component={KioskAssessmentPage} />
+      <Route path="/kiosk-results" component={KioskResultsPage} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
       <Route path="/sponsorship" component={SponsorshipPage} />
