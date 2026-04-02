@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Radar, 
   RadarChart, 
@@ -10,174 +11,312 @@ import {
   PolarAngleAxis, 
   PolarRadiusAxis, 
   ResponsiveContainer,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Cell
 } from "recharts";
-import { Brain, Trophy, Activity, Target, ArrowRight, Zap } from "lucide-react";
+import { Heart, BookOpen, Building2, Users, Zap, ArrowRight, MapPin, Clock, Bookmark, MessageSquare } from "lucide-react";
 
 const strengthData = [
-  { subject: 'Analytical', A: 120, fullMark: 150 },
-  { subject: 'Creative', A: 98, fullMark: 150 },
-  { subject: 'Social', A: 86, fullMark: 150 },
-  { subject: 'Technical', A: 99, fullMark: 150 },
-  { subject: 'Leadership', A: 85, fullMark: 150 },
-  { subject: 'Athletic', A: 65, fullMark: 150 },
+  { subject: 'Entrepreneurship', A: 90, fullMark: 100 },
+  { subject: 'Leadership', A: 80, fullMark: 100 },
+  { subject: 'STEM', A: 70, fullMark: 100 },
+  { subject: 'Creativity', A: 80, fullMark: 100 },
+  { subject: 'Social Impact', A: 80, fullMark: 100 },
+  { subject: 'Sports', A: 50, fullMark: 100 },
 ];
 
-const careerMatches = [
+const careerPaths = [
   { 
-    title: "AI Ethics Specialist", 
-    match: 94, 
-    type: "Tech & Innovation",
-    color: "bg-purple-500",
-    description: "Combine your analytical skills with social awareness to guide ethical AI development."
+    title: "Tech Entrepreneur", 
+    match: 95,
+    icon: "🚀",
+    description: "Start your own tech company and build innovative solutions."
   },
   { 
-    title: "Data Journalist", 
-    match: 88, 
-    type: "Media & Tech",
-    color: "bg-blue-500",
-    description: "Use data storytelling to report on complex global issues."
+    title: "Product Manager", 
+    match: 88,
+    icon: "🎯",
+    description: "Lead product strategy at growing tech companies."
   },
   { 
-    title: "Fintech Entrepreneur", 
-    match: 82, 
-    type: "Business",
-    color: "bg-emerald-500",
-    description: "Build financial solutions using your technical background."
+    title: "Innovation Consultant", 
+    match: 85,
+    icon: "💡",
+    description: "Help organizations transform through innovation."
   },
 ];
+
+interface Opportunity {
+  id: string;
+  title: string;
+  type: "internship" | "scholarship" | "mentorship" | "competition";
+  company: string;
+  location: string;
+  duration: string;
+  match: number;
+  description: string;
+  deadline: string;
+  saved?: boolean;
+}
+
+const opportunities: Opportunity[] = [
+  {
+    id: "1",
+    title: "Product Strategy Internship",
+    type: "internship",
+    company: "TechHub Innovation Labs",
+    location: "Johannesburg, SA",
+    duration: "3 months",
+    match: 95,
+    description: "Work with our product team to develop new features and strategies. Perfect for aspiring product managers.",
+    deadline: "Apply by June 15",
+    saved: false
+  },
+  {
+    id: "2",
+    title: "Young Entrepreneur Scholarship",
+    type: "scholarship",
+    company: "Future Leaders Foundation",
+    location: "Virtual",
+    duration: "1 year",
+    match: 92,
+    description: "Fully funded mentorship and startup accelerator program for Grade 11-12 students.",
+    deadline: "Apply by May 30",
+    saved: false
+  },
+  {
+    id: "3",
+    title: "Startup Mentor - Tech & Business",
+    type: "mentorship",
+    company: "Founder Connect SA",
+    location: "Hybrid",
+    duration: "6 months",
+    match: 90,
+    description: "Get 1-on-1 mentorship from successful entrepreneurs building in SA and Africa.",
+    deadline: "Join anytime",
+    saved: false
+  },
+  {
+    id: "4",
+    title: "African Tech Leaders Summit",
+    type: "competition",
+    company: "TechCrunch Africa",
+    location: "Cape Town, SA",
+    duration: "2 days",
+    match: 88,
+    description: "Pitch competition and networking event for young innovators. Winners get funding.",
+    deadline: "Registration closes June 1",
+    saved: false
+  },
+  {
+    id: "5",
+    title: "Data Analytics Internship",
+    type: "internship",
+    company: "Data Science Corps",
+    location: "Pretoria, SA",
+    duration: "4 months",
+    match: 78,
+    description: "Learn data analysis and business intelligence while solving real-world problems.",
+    deadline: "Apply by June 22",
+    saved: false
+  },
+];
+
+const typeConfig = {
+  internship: { icon: Building2, color: "bg-blue-500/10 text-blue-600", badge: "Internship" },
+  scholarship: { icon: BookOpen, color: "bg-green-500/10 text-green-600", badge: "Scholarship" },
+  mentorship: { icon: Users, color: "bg-purple-500/10 text-purple-600", badge: "Mentorship" },
+  competition: { icon: Zap, color: "bg-orange-500/10 text-orange-600", badge: "Competition" },
+};
 
 export default function StudentDashboard() {
+  const [savedOps, setSavedOps] = useState<string[]>([]);
+  const [filterType, setFilterType] = useState<string>("all");
+
+  const toggleSave = (id: string) => {
+    setSavedOps(prev => 
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    );
+  };
+
+  const filteredOpportunities = filterType === "all" 
+    ? opportunities 
+    : opportunities.filter(op => op.type === filterType);
+
   return (
     <DashboardLayout type="student">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {/* Stats Cards */}
+      {/* Quick Stats */}
+      <div className="grid gap-4 md:grid-cols-4">
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+          <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium">Career Clarity</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">78%</div>
-            <p className="text-xs text-muted-foreground">+12% from last month</p>
-            <Progress value={78} className="mt-3 h-2" />
+            <div className="text-3xl font-bold">85%</div>
+            <p className="text-xs text-muted-foreground mt-1">From assessment</p>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Digital Badges</CardTitle>
-            <Trophy className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Opportunities</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">3 new earned this week</p>
+            <div className="text-3xl font-bold">{opportunities.length}</div>
+            <p className="text-xs text-muted-foreground mt-1">Matched to you</p>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Mental Wellness</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Saved</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-emerald-600">Great</div>
-            <p className="text-xs text-muted-foreground">Keep up the balance!</p>
+            <div className="text-3xl font-bold">{savedOps.length}</div>
+            <p className="text-xs text-muted-foreground mt-1">Bookmarked</p>
           </CardContent>
         </Card>
         <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Scout Views</CardTitle>
-            <Brain className="h-4 w-4 text-muted-foreground" />
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium">Profile Views</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">45</div>
-            <p className="text-xs text-muted-foreground">2 Universities, 3 Employers</p>
+            <div className="text-3xl font-bold">12</div>
+            <p className="text-xs text-muted-foreground mt-1">From scouts</p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-7">
-        {/* Strength Chart */}
-        <Card className="col-span-4">
+      {/* Your Strengths & Career Paths */}
+      <div className="grid gap-6 md:grid-cols-2 mt-6">
+        {/* Strength Profile */}
+        <Card>
           <CardHeader>
-            <CardTitle>AI Strength Analysis</CardTitle>
-            <CardDescription>Based on your recent assessments and project performance.</CardDescription>
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="h-5 w-5 text-accent" />
+              Your Strength Profile
+            </CardTitle>
+            <CardDescription>Based on your assessment</CardDescription>
           </CardHeader>
-          <CardContent className="h-[300px]">
+          <CardContent className="h-[280px]">
             <ResponsiveContainer width="100%" height="100%">
-              <RadarChart cx="50%" cy="50%" outerRadius="80%" data={strengthData}>
+              <RadarChart data={strengthData}>
                 <PolarGrid stroke="hsl(var(--muted-foreground))" strokeOpacity={0.2} />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} />
-                <PolarRadiusAxis angle={30} domain={[0, 150]} tick={false} axisLine={false} />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: 'hsl(var(--foreground))', fontSize: 11 }} />
+                <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
                 <Radar
-                  name="Mike"
+                  name="Strength"
                   dataKey="A"
                   stroke="hsl(var(--primary))"
                   fill="hsl(var(--primary))"
                   fillOpacity={0.3}
-                />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: 'hsl(var(--card))', borderColor: 'hsl(var(--border))', borderRadius: '8px' }}
                 />
               </RadarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
 
-        {/* AI Recommendations */}
-        <Card className="col-span-3">
+        {/* Career Paths */}
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-accent" />
-              Top AI Recommendations
+              <ArrowRight className="h-5 w-5" />
+              Your Top Career Paths
             </CardTitle>
-            <CardDescription>Paths tailored to your "Analytical" strength.</CardDescription>
+            <CardDescription>Personalized to your strengths</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            {careerMatches.map((career, i) => (
-              <div key={i} className="group relative overflow-hidden rounded-lg border p-4 transition-all hover:bg-muted/50 hover:shadow-sm">
-                <div className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-accent opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="mb-2 flex items-center justify-between">
-                  <h3 className="font-semibold">{career.title}</h3>
-                  <Badge variant="secondary" className="bg-primary/10 text-primary">{career.match}% Match</Badge>
+          <CardContent className="space-y-3">
+            {careerPaths.map((path, i) => (
+              <div key={i} className="p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">{path.icon}</span>
+                    <div>
+                      <h4 className="font-semibold text-sm">{path.title}</h4>
+                    </div>
+                  </div>
+                  <Badge className="bg-primary/10 text-primary text-xs">{path.match}%</Badge>
                 </div>
-                <p className="mb-3 text-xs text-muted-foreground">{career.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-muted-foreground">{career.type}</span>
-                  <Button variant="ghost" size="sm" className="h-8 gap-1 text-xs">
-                    Explore Path <ArrowRight className="h-3 w-3" />
-                  </Button>
-                </div>
+                <p className="text-xs text-muted-foreground">{path.description}</p>
               </div>
             ))}
           </CardContent>
         </Card>
       </div>
-      
-      {/* Daily Challenge / Hackathon Feed */}
+
+      {/* Opportunities */}
       <div className="mt-6">
-        <Card className="bg-gradient-to-r from-primary/5 to-accent/5">
+        <Card>
           <CardHeader>
-            <CardTitle>Upcoming Opportunities</CardTitle>
-            <CardDescription>Hackathons, workshops, and sports tryouts near you.</CardDescription>
+            <CardTitle className="flex items-center gap-2">
+              <Heart className="h-5 w-5 text-red-500" />
+              Opportunities Matched For You
+            </CardTitle>
+            <CardDescription>Internships, scholarships, mentorships, and competitions tailored to your strengths</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-3">
-              {[1, 2, 3].map((item) => (
-                <div key={item} className="rounded-lg border bg-background p-4 shadow-sm">
-                  <div className="mb-2 flex items-center gap-2">
-                     <Badge variant="outline">Hackathon</Badge>
-                     <span className="text-xs text-muted-foreground">In 3 days</span>
+            {/* Filter Tabs */}
+            <Tabs value={filterType} onValueChange={setFilterType} className="mb-6">
+              <TabsList className="grid w-full grid-cols-5">
+                <TabsTrigger value="all">All ({opportunities.length})</TabsTrigger>
+                <TabsTrigger value="internship">Internships</TabsTrigger>
+                <TabsTrigger value="scholarship">Scholarships</TabsTrigger>
+                <TabsTrigger value="mentorship">Mentorship</TabsTrigger>
+                <TabsTrigger value="competition">Competitions</TabsTrigger>
+              </TabsList>
+            </Tabs>
+
+            {/* Opportunities Grid */}
+            <div className="space-y-4">
+              {filteredOpportunities.map((opp) => {
+                const TypeIcon = typeConfig[opp.type].icon;
+                return (
+                  <div key={opp.id} className="rounded-lg border p-5 hover:shadow-md transition-shadow">
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex items-start gap-3 flex-1">
+                        <div className={`p-2 rounded-lg ${typeConfig[opp.type].color}`}>
+                          <TypeIcon className="h-5 w-5" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold mb-1">{opp.title}</h3>
+                          <p className="text-sm text-muted-foreground mb-2">{opp.company}</p>
+                          <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
+                            <span className="flex items-center gap-1">
+                              <MapPin className="h-3 w-3" />
+                              {opp.location}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <Clock className="h-3 w-3" />
+                              {opp.duration}
+                            </span>
+                          </div>
+                          <p className="text-sm text-foreground mb-2">{opp.description}</p>
+                          <p className="text-xs text-muted-foreground">{opp.deadline}</p>
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-end gap-2">
+                        <Badge className="bg-primary/10 text-primary">{opp.match}% Match</Badge>
+                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="flex gap-2 pt-3 border-t">
+                      <Button
+                        onClick={() => toggleSave(opp.id)}
+                        variant={savedOps.includes(opp.id) ? "default" : "outline"}
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Bookmark className="h-4 w-4" fill={savedOps.includes(opp.id) ? "currentColor" : "none"} />
+                        {savedOps.includes(opp.id) ? "Saved" : "Save"}
+                      </Button>
+                      <Button variant="outline" size="sm" className="gap-2">
+                        <MessageSquare className="h-4 w-4" />
+                        Details
+                      </Button>
+                      <Button size="sm" className="ml-auto bg-primary text-primary-foreground hover:bg-primary/90">
+                        Apply Now
+                      </Button>
+                    </div>
                   </div>
-                  <h4 className="mb-1 font-semibold">Global Innovation Challenge</h4>
-                  <p className="text-xs text-muted-foreground">Build a solution for climate change using AI.</p>
-                  <Button className="mt-4 w-full" variant="secondary" size="sm">Register</Button>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </CardContent>
         </Card>
