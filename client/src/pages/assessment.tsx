@@ -62,6 +62,11 @@ const assessmentQuestions: AssessmentQuestion[] = [
 ];
 
 export default function AssessmentPage() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const grade = searchParams.get("grade") || "Your Grade";
+  const subjectsParam = searchParams.get("subjects") || "";
+  const subjects = subjectsParam ? subjectsParam.split(",") : [];
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number | string>>({});
   const [isComplete, setIsComplete] = useState(false);
@@ -162,12 +167,18 @@ export default function AssessmentPage() {
       <div className="flex-1 px-4 py-12">
         <div className="max-w-2xl mx-auto">
           {/* Header */}
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-center space-y-3">
+            <div className="flex items-center justify-center gap-3 text-muted-foreground mb-4">
+              <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">{grade}</span>
+              {subjects.length > 0 && (
+                <span className="text-sm">{subjects.length} subject{subjects.length !== 1 ? "s" : ""} selected</span>
+              )}
+            </div>
             <h1 className="font-heading text-4xl font-bold tracking-tight mb-2">
               Discover Your Strengths
             </h1>
             <p className="text-muted-foreground">
-              Answer a few questions to uncover your real strengths and potential career paths
+              Answer a few questions to uncover your real strengths and potential career paths tailored to {grade.toLowerCase()} with your chosen subjects
             </p>
           </div>
 

@@ -23,6 +23,11 @@ interface StrengthScore {
 }
 
 export default function CareerMapPage() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const grade = searchParams.get("grade") || "Your Grade";
+  const subjectsParam = searchParams.get("subjects") || "";
+  const subjects = subjectsParam ? subjectsParam.split(",") : [];
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -75,11 +80,26 @@ export default function CareerMapPage() {
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-16 text-center space-y-3">
+            <div className="flex items-center justify-center gap-3 text-muted-foreground mb-4">
+              <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">{grade}</span>
+              {subjects.length > 0 && (
+                <div className="flex flex-wrap gap-1 justify-center">
+                  {subjects.slice(0, 2).map((s) => (
+                    <span key={s} className="px-2 py-1 rounded-full bg-muted text-xs font-medium">
+                      {s}
+                    </span>
+                  ))}
+                  {subjects.length > 2 && (
+                    <span className="px-2 py-1 text-xs text-muted-foreground">+{subjects.length - 2} more</span>
+                  )}
+                </div>
+              )}
+            </div>
             <h1 className="font-heading text-4xl font-bold tracking-tight">
               Your Personalized Career Map
             </h1>
             <p className="text-lg text-muted-foreground">
-              Based on your unique strengths, here are the career paths that match your potential
+              Based on your strengths and {grade.toLowerCase()} profile, here are the career paths that match your potential
             </p>
           </div>
 

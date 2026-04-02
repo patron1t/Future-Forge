@@ -5,9 +5,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { ArrowRight, Zap, Target, Rocket, CheckCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, Zap, Target, Rocket, CheckCircle, BookOpen } from "lucide-react";
 
-type OnboardingStep = "welcome" | "assessment-intro" | "start-assessment" | "completion";
+type OnboardingStep = "welcome" | "grade-selection" | "subject-selection" | "assessment-intro" | "start-assessment" | "completion";
 
 interface StepConfig {
   id: OnboardingStep;
@@ -17,11 +17,34 @@ interface StepConfig {
 }
 
 const steps: StepConfig[] = [
-  { id: "welcome", title: "Welcome", description: "Get started on your journey", progress: 20 },
-  { id: "assessment-intro", title: "Learn", description: "Discover how it works", progress: 40 },
-  { id: "start-assessment", title: "Assess", description: "Find your strengths", progress: 60 },
+  { id: "welcome", title: "Welcome", description: "Get started on your journey", progress: 14 },
+  { id: "grade-selection", title: "Your Grade", description: "What year are you in?", progress: 28 },
+  { id: "subject-selection", title: "Your Subjects", description: "What are you taking?", progress: 42 },
+  { id: "assessment-intro", title: "Learn", description: "Discover how it works", progress: 56 },
+  { id: "start-assessment", title: "Assess", description: "Find your strengths", progress: 70 },
   { id: "completion", title: "Complete", description: "View your career map", progress: 100 },
 ];
+
+const SASubjects = [
+  "Mathematics",
+  "Mathematical Literacy",
+  "Physical Sciences",
+  "Life Sciences",
+  "Biology",
+  "Chemistry",
+  "English",
+  "Home Language",
+  "History",
+  "Geography",
+  "Business Studies",
+  "Economics",
+  "Accounting",
+  "Computer Science",
+  "Information Technology",
+  "Technical Sciences",
+];
+
+const grades = ["Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"];
 
 export default function OnboardingPage() {
   const [, setLocation] = useLocation();
@@ -30,6 +53,8 @@ export default function OnboardingPage() {
   const name = searchParams.get("name") || "Student";
 
   const [currentStep, setCurrentStep] = useState<OnboardingStep>("welcome");
+  const [selectedGrade, setSelectedGrade] = useState<string>("");
+  const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,14 +65,30 @@ export default function OnboardingPage() {
 
   const handleNext = () => {
     if (currentStep === "welcome") {
+      setCurrentStep("grade-selection");
+    } else if (currentStep === "grade-selection") {
+      setCurrentStep("subject-selection");
+    } else if (currentStep === "subject-selection") {
       setCurrentStep("assessment-intro");
     } else if (currentStep === "assessment-intro") {
       setCurrentStep("start-assessment");
     } else if (currentStep === "start-assessment") {
-      setLocation("/assessment");
+      setLocation(`/assessment?grade=${selectedGrade}&subjects=${selectedSubjects.join(",")}`);
     } else if (currentStep === "completion") {
       setLocation("/career-map");
     }
+  };
+
+  const toggleSubject = (subject: string) => {
+    setSelectedSubjects(prev =>
+      prev.includes(subject) ? prev.filter(s => s !== subject) : [...prev, subject]
+    );
+  };
+
+  const canProceed = () => {
+    if (currentStep === "grade-selection") return !!selectedGrade;
+    if (currentStep === "subject-selection") return selectedSubjects.length > 0;
+    return true;
   };
 
   const handleSkip = () => {
@@ -74,6 +115,116 @@ export default function OnboardingPage() {
             </div>
             <Progress value={currentStepConfig?.progress || 0} className="h-2" />
           </div>
+
+          {/* Grade Selection Step */}
+          {currentStep === "grade-selection" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="space-y-4 text-center">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">
+                  <Target className="h-10 w-10 text-primary" />
+                </div>
+                <h1 className="font-heading text-4xl font-bold tracking-tight">
+                  What Grade Are You In?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  This helps us tailor your career path and opportunities to your stage
+                </p>
+              </div>
+
+              <div className="space-y-3 max-w-md mx-auto">
+                {grades.map((grade) => (
+                  <button
+                    key={grade}
+                    onClick={() => setSelectedGrade(grade)}
+                    className={`w-full p-4 rounded-lg border-2 transition-all text-lg font-medium ${
+                      selectedGrade === grade
+                        ? "border-primary bg-primary/5 text-primary"
+                        : "border-muted hover:border-primary/50 hover:bg-muted/50"
+                    }`}
+                  >
+                    {grade}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex gap-4 justify-center">
+                <Button
+                  onClick={() => setCurrentStep("welcome")}
+                  variant="outline"
+                  size="lg"
+                  className="gap-2"
+                >
+                  Previous
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  disabled={!canProceed()}
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+                >
+                  Continue <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {/* Subject Selection Step */}
+          {currentStep === "subject-selection" && (
+            <div className="space-y-8 animate-in fade-in duration-500">
+              <div className="space-y-4 text-center">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">
+                  <BookOpen className="h-10 w-10 text-primary" />
+                </div>
+                <h1 className="font-heading text-4xl font-bold tracking-tight">
+                  What Subjects Are You Taking?
+                </h1>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Select your current subjects (you can change this anytime)
+                </p>
+              </div>
+
+              <div className="max-w-2xl mx-auto">
+                <div className="grid grid-cols-2 gap-3">
+                  {SASubjects.map((subject) => (
+                    <button
+                      key={subject}
+                      onClick={() => toggleSubject(subject)}
+                      className={`p-4 rounded-lg border-2 transition-all text-sm font-medium ${
+                        selectedSubjects.includes(subject)
+                          ? "border-primary bg-primary/5 text-primary"
+                          : "border-muted hover:border-primary/50 hover:bg-muted/50"
+                      }`}
+                    >
+                      {subject}
+                    </button>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground mt-4 text-center">
+                  Selected: {selectedSubjects.length} subject{selectedSubjects.length !== 1 ? "s" : ""}
+                </p>
+              </div>
+
+              <div className="flex gap-4 justify-center">
+                <Button
+                  onClick={() => setCurrentStep("grade-selection")}
+                  variant="outline"
+                  size="lg"
+                  className="gap-2"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  Previous
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  disabled={!canProceed()}
+                  size="lg"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
+                >
+                  Continue <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          )}
 
           {/* Welcome Step */}
           {currentStep === "welcome" && (
