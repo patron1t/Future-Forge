@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 
 export default function AuthPage() {
@@ -15,6 +15,8 @@ export default function AuthPage() {
   const defaultRole = (searchParams.get("role") || "student") as "student" | "professional" | "counselor";
   
   const [role, setRole] = useState<"student" | "professional" | "counselor">(defaultRole);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [showSignupPassword, setShowSignupPassword] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,7 +69,17 @@ export default function AuthPage() {
                       <Label htmlFor="password">Password</Label>
                       <a href="#" className="text-xs text-primary hover:underline">Forgot password?</a>
                     </div>
-                    <Input id="password" type="password" required />
+                    <div className="relative">
+                      <Input id="password" type={showLoginPassword ? "text" : "password"} required />
+                      <button
+                        type="button"
+                        onClick={() => setShowLoginPassword(!showLoginPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                        aria-label="Toggle password visibility"
+                      >
+                        {showLoginPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                   </div>
                 </CardContent>
                 <CardFooter>
@@ -134,7 +146,17 @@ export default function AuthPage() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="password-signup">Password</Label>
-                    <Input id="password-signup" type="password" required />
+                    <div className="relative">
+                      <Input id="password-signup" type={showSignupPassword ? "text" : "password"} required />
+                      <button
+                        type="button"
+                        onClick={() => setShowSignupPassword(!showSignupPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                        aria-label="Toggle password visibility"
+                      >
+                        {showSignupPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                   </div>
                 </CardContent>
                 <CardFooter>
