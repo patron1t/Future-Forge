@@ -18,6 +18,7 @@ import WellnessPage from "@/pages/wellness";
 import DigitalFootprintPage from "@/pages/digital-footprint";
 import AuthPage from "@/pages/auth";
 import AssessmentPage from "@/pages/assessment";
+import CareerMapPage from "@/pages/career-map";
 
 function Router() {
   return (
@@ -27,6 +28,7 @@ function Router() {
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
       <Route path="/assessment" component={AssessmentPage} />
+      <Route path="/career-map" component={CareerMapPage} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
       <Route path="/sponsorship" component={SponsorshipPage} />

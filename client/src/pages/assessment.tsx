@@ -137,12 +137,12 @@ export default function AssessmentPage() {
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/student-dashboard">
+              <Link href="/career-map">
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
                   View Your Career Map <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Link href="/home">
+              <Link href="/">
                 <Button size="lg" variant="outline">
                   Back to Home
                 </Button>
