@@ -29,6 +29,18 @@ export default function AuthPage() {
     }
   };
 
+  const handleSignup = (e: React.FormEvent) => {
+    e.preventDefault();
+    // For students, go through onboarding flow
+    if (role === "student") {
+      setLocation(`/onboarding?role=student&name=Student`);
+    } else if (role === "counselor") {
+      setLocation("/counselor-dashboard");
+    } else {
+      setLocation("/professional-dashboard");
+    }
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/20 px-4 py-12">
       <Link href="/">
@@ -95,7 +107,7 @@ export default function AuthPage() {
                 <CardTitle>Create Account</CardTitle>
                 <CardDescription>Join the platform to unlock your potential.</CardDescription>
               </CardHeader>
-              <form onSubmit={handleLogin}>
+              <form onSubmit={handleSignup}>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-3 gap-4">
                      <button
