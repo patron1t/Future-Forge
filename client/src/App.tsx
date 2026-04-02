@@ -17,6 +17,7 @@ import CounselorDashboard from "@/pages/counselor-dashboard";
 import WellnessPage from "@/pages/wellness";
 import DigitalFootprintPage from "@/pages/digital-footprint";
 import AuthPage from "@/pages/auth";
+import AssessmentPage from "@/pages/assessment";
 
 function Router() {
   return (
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/about" component={AboutPage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
+      <Route path="/assessment" component={AssessmentPage} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
       <Route path="/sponsorship" component={SponsorshipPage} />
