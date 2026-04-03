@@ -145,6 +145,10 @@ export default function AssessmentPage() {
   const isAnswered = question.id in answers;
 
   if (isComplete) {
+    const grade = localStorage.getItem("onboarding_grade") || "";
+    const subjectsStr = localStorage.getItem("onboarding_subjects") || "";
+    const careerMapUrl = `/career-map?grade=${encodeURIComponent(grade)}&subjects=${encodeURIComponent(subjectsStr)}`;
+
     return (
       <div className="min-h-screen bg-background font-sans flex flex-col">
         <Navbar />
@@ -188,7 +192,7 @@ export default function AssessmentPage() {
             </Card>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/career-map">
+              <Link href={careerMapUrl}>
                 <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
                   View Your Career Map <ArrowRight className="h-4 w-4" />
                 </Button>

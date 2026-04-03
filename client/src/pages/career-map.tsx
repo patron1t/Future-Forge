@@ -1186,7 +1186,14 @@ export default function CareerMapPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    
+    // Check if assessment scores exist
+    const assessmentScores = localStorage.getItem("assessmentScores");
+    if (!assessmentScores && grade === "Your Grade") {
+      // Redirect to assessment if no scores and no grade info
+      setLocation(`/assessment?grade=${grade}&subjects=${subjectsParam}`);
+    }
+  }, [setLocation, grade, subjectsParam]);
 
   const generateStrengths = (): StrengthScore[] => {
     // Try to get actual assessment scores from localStorage
