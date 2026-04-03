@@ -9,7 +9,8 @@ import {
   Menu, 
   X,
   Briefcase,
-  Heart
+  Heart,
+  FileText
 } from "lucide-react";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,7 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
 
   const studentLinks = [
     { href: "/student-dashboard", icon: LayoutDashboard, label: "Overview" },
+    { href: "/portfolio", icon: FileText, label: "Portfolio" },
     { href: "/digital-footprint", icon: User, label: "Digital Footprint" },
     { href: "/wellness", icon: Heart, label: "Wellness Hub" },
   ];
