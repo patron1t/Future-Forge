@@ -34,6 +34,9 @@ export default function AuthPage() {
     const form = e.target as HTMLFormElement;
     const firstName = (form.querySelector("#first-name") as HTMLInputElement)?.value || "Student";
     
+    // Save student name to localStorage immediately
+    localStorage.setItem("student_name", firstName);
+    
     // For students, go through onboarding flow
     if (role === "student") {
       setLocation(`/onboarding?role=student&name=${encodeURIComponent(firstName)}`);
