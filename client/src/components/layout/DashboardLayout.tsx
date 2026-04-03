@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useLocation } from "wouter";
 import { 
   LayoutDashboard, 
@@ -18,6 +18,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export function DashboardLayout({ children, type = "student" }: { children: React.ReactNode, type?: "student" | "professional" }) {
   const [location] = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  // Get dynamic student info from localStorage
+  const studentInfo = useMemo(() => {
+    const name = localStorage.getItem("student_name") || "Student";
+    const grade = localStorage.getItem("onboarding_grade") || "Grade 11";
+    const initials = name
+      .split(" ")
+      .map((n: string) => n[0])
+      .join("")
+      .toUpperCase()
+      .slice(0, 2) || "ST";
+    return { name, grade, initials };
+  }, []);
 
   const studentLinks = [
     { href: "/student-dashboard", icon: LayoutDashboard, label: "Overview" },
@@ -86,11 +99,11 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
             <div className="mb-4 flex items-center gap-3 rounded-lg border p-3">
               <Avatar>
                 <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>JD</AvatarFallback>
+                <AvatarFallback>{studentInfo.initials}</AvatarFallback>
               </Avatar>
               <div className="overflow-hidden">
-                <p className="truncate text-sm font-medium">John Doe</p>
-                <p className="truncate text-xs text-muted-foreground">Grade 11 Student</p>
+                <p className="truncate text-sm font-medium">{studentInfo.name}</p>
+                <p className="truncate text-xs text-muted-foreground">{studentInfo.grade} Student</p>
               </div>
             </div>
             <Link href="/auth">
