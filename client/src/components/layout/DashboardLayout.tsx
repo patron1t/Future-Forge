@@ -39,7 +39,7 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
   const studentLinks = [
     { href: "/student-dashboard", icon: LayoutDashboard, label: "Overview" },
     { href: "/opportunities", icon: Target, label: "Opportunities", badge: "New" },
-    { href: "/inbox", icon: MessageSquare, label: "Scout Inbox", badge: "1" },
+    { href: "/inbox", icon: MessageSquare, label: "Scout Inbox" },
     { href: "/portfolio", icon: FileText, label: "Portfolio" },
     { href: "/digital-footprint", icon: User, label: "Digital Footprint" },
     { href: "/wellness", icon: Heart, label: "Wellness Hub" },
