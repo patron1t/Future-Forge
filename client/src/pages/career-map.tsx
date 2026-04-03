@@ -25,7 +25,7 @@ interface CareerPathway {
 }
 
 const careerPathways: CareerPathway[] = [
-  // STEM - Traditional
+  // STEM - Traditional (Science & Health)
   {
     id: "engineer",
     title: "Engineer",
@@ -38,6 +38,20 @@ const careerPathways: CareerPathway[] = [
     requiredSubjects: ["Mathematics", "Physical Sciences"],
     skills: ["Technical Design", "Problem Solving", "Mathematics"],
     opportunities: 45,
+    pathway: "Traditional",
+  },
+  {
+    id: "doctor",
+    title: "Doctor / Medical Professional",
+    description: "Provide healthcare and treatment to patients.",
+    icon: "⚕️",
+    strength: "STEM",
+    duration: "5-6 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences", "Mathematics"],
+    skills: ["Medical Knowledge", "Empathy", "Problem Solving"],
+    opportunities: 30,
     pathway: "Traditional",
   },
   {
@@ -55,25 +69,209 @@ const careerPathways: CareerPathway[] = [
     pathway: "Traditional",
   },
   {
-    id: "doctor",
-    title: "Doctor / Medical Professional",
-    description: "Provide healthcare and treatment to patients.",
-    icon: "⚕️",
+    id: "pharmacist",
+    title: "Pharmacist",
+    description: "Dispense medications and provide pharmaceutical advice.",
+    icon: "💊",
+    strength: "STEM",
+    duration: "4-5 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+    skills: ["Pharmaceutical Knowledge", "Patient Care", "Chemistry"],
+    opportunities: 25,
+    pathway: "Traditional",
+  },
+  {
+    id: "dentist",
+    title: "Dentist",
+    description: "Provide dental care and oral health services.",
+    icon: "😁",
+    strength: "STEM",
+    duration: "4-5 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+    skills: ["Dental Medicine", "Patient Care", "Precision"],
+    opportunities: 22,
+    pathway: "Traditional",
+  },
+  {
+    id: "veterinarian",
+    title: "Veterinarian",
+    description: "Provide medical care to animals.",
+    icon: "🐾",
     strength: "STEM",
     duration: "5-6 years",
     cost: "Expensive",
     entryLevel: "Grade 12",
-    requiredSubjects: ["Life Sciences", "Physical Sciences", "Mathematics"],
-    skills: ["Medical Knowledge", "Empathy", "Problem Solving"],
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+    skills: ["Animal Medicine", "Diagnostics", "Research"],
+    opportunities: 20,
+    pathway: "Traditional",
+  },
+  {
+    id: "physicist",
+    title: "Physicist",
+    description: "Study matter, energy, and fundamental forces.",
+    icon: "⚛️",
+    strength: "STEM",
+    duration: "4+ years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Mathematics", "Physical Sciences"],
+    skills: ["Physics", "Research", "Mathematical Analysis"],
+    opportunities: 18,
+    pathway: "Traditional",
+  },
+  {
+    id: "chemist",
+    title: "Chemist",
+    description: "Study and work with chemical reactions and materials.",
+    icon: "🧪",
+    strength: "STEM",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Chemistry", "Mathematics"],
+    skills: ["Chemistry", "Laboratory Work", "Analysis"],
+    opportunities: 22,
+    pathway: "Traditional",
+  },
+  {
+    id: "geologist",
+    title: "Geologist",
+    description: "Study Earth's rocks, minerals, and geological processes.",
+    icon: "🪨",
+    strength: "STEM",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Earth Science", "Mathematics"],
+    skills: ["Geology", "Field Work", "Data Analysis"],
     opportunities: 30,
     pathway: "Traditional",
   },
 
-  // STEM - Certification
+  // STEM - Technology & Developer Roles
   {
-    id: "software-tester",
-    title: "Software Tester (ISTQB)",
-    description: "Test software applications to find bugs and ensure quality. ISTQB Foundation certificate in 2 months.",
+    id: "software-developer",
+    title: "Software Developer",
+    description: "Build applications and software solutions.",
+    icon: "💻",
+    strength: "STEM",
+    duration: "3-4 years or bootcamp 3-6 months",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science", "Mathematics"],
+    skills: ["Programming", "Problem Solving", "Technical Design"],
+    opportunities: 70,
+    pathway: "Traditional",
+  },
+  {
+    id: "web-developer",
+    title: "Web Developer",
+    description: "Create and maintain websites and web applications.",
+    icon: "🌐",
+    strength: "STEM",
+    duration: "3-4 years or bootcamp 3-6 months",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Web Development", "HTML/CSS/JavaScript", "Problem Solving"],
+    opportunities: 65,
+    pathway: "Traditional",
+  },
+  {
+    id: "mobile-app-developer",
+    title: "Mobile App Developer",
+    description: "Develop applications for phones and tablets.",
+    icon: "📱",
+    strength: "STEM",
+    duration: "3-4 years or bootcamp 3-6 months",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["App Development", "Programming", "User Interface"],
+    opportunities: 60,
+    pathway: "Traditional",
+  },
+  {
+    id: "game-developer",
+    title: "Game Developer",
+    description: "Create video games and interactive entertainment.",
+    icon: "🎮",
+    strength: "STEM",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Programming", "Game Design", "Creativity"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "data-scientist",
+    title: "Data Scientist",
+    description: "Analyze complex data to inform business decisions.",
+    icon: "📊",
+    strength: "STEM",
+    duration: "4 years or bootcamp",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Mathematics", "Computer Science"],
+    skills: ["Data Analysis", "Statistics", "Programming"],
+    opportunities: 42,
+    pathway: "Traditional",
+  },
+  {
+    id: "data-engineer",
+    title: "Data Engineer",
+    description: "Build systems to manage and process large data.",
+    icon: "🔧",
+    strength: "STEM",
+    duration: "4 years or bootcamp",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Mathematics", "Computer Science"],
+    skills: ["Data Systems", "Programming", "Database Management"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+  {
+    id: "cybersecurity-specialist",
+    title: "Cybersecurity Specialist",
+    description: "Protect organizations from cyber threats.",
+    icon: "🔒",
+    strength: "STEM",
+    duration: "4 years or certification 6-12 months",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Computer Science", "Mathematics"],
+    skills: ["Security Systems", "Risk Analysis", "Problem Solving"],
+    opportunities: 50,
+    pathway: "Traditional",
+  },
+  {
+    id: "systems-administrator",
+    title: "Systems Administrator",
+    description: "Manage computer systems and networks.",
+    icon: "🖥️",
+    strength: "STEM",
+    duration: "2-3 years or certification",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["System Management", "Troubleshooting", "Networks"],
+    opportunities: 45,
+    pathway: "Traditional",
+  },
+
+  // STEM - Certification Programs
+  {
+    id: "software-tester-istqb",
+    title: "Software Tester (ISTQB Certified)",
+    description: "Test software applications. ISTQB Foundation in 2 months.",
     icon: "🧪",
     strength: "STEM",
     duration: "2 months",
@@ -86,7 +284,7 @@ const careerPathways: CareerPathway[] = [
     pathway: "Certification",
   },
   {
-    id: "cloud-specialist",
+    id: "cloud-aws",
     title: "Cloud Specialist (AWS Certified)",
     description: "Manage cloud infrastructure and applications.",
     icon: "☁️",
@@ -101,7 +299,37 @@ const careerPathways: CareerPathway[] = [
     pathway: "Certification",
   },
   {
-    id: "data-analyst-cert",
+    id: "cloud-azure",
+    title: "Cloud Admin (Azure Certified)",
+    description: "Manage Microsoft Azure cloud infrastructure.",
+    icon: "☁️",
+    strength: "STEM",
+    duration: "3-4 months",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Cloud Management", "Azure Platform", "Infrastructure"],
+    opportunities: 38,
+    organization: "Microsoft",
+    pathway: "Certification",
+  },
+  {
+    id: "cloud-gcp",
+    title: "Cloud Architect (Google Cloud)",
+    description: "Design and manage Google Cloud solutions.",
+    icon: "☁️",
+    strength: "STEM",
+    duration: "3-4 months",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Cloud Architecture", "GCP Platform", "System Design"],
+    opportunities: 35,
+    organization: "Google",
+    pathway: "Certification",
+  },
+  {
+    id: "data-analyst-google",
     title: "Data Analyst (Google Certificate)",
     description: "Analyze data to inform business decisions.",
     icon: "📊",
@@ -115,10 +343,140 @@ const careerPathways: CareerPathway[] = [
     organization: "Google",
     pathway: "Certification",
   },
+  {
+    id: "it-support-comptia",
+    title: "IT Support Specialist (CompTIA A+)",
+    description: "Provide technical support and troubleshooting.",
+    icon: "🖥️",
+    strength: "STEM",
+    duration: "3 months",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Technical Support", "Troubleshooting", "Hardware"],
+    opportunities: 45,
+    organization: "CompTIA",
+    pathway: "Certification",
+  },
+  {
+    id: "network-admin-cisco",
+    title: "Network Admin (Cisco CCNA)",
+    description: "Design and manage computer networks.",
+    icon: "🌐",
+    strength: "STEM",
+    duration: "4-6 months",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Computer Science", "Mathematics"],
+    skills: ["Networking", "System Administration", "Problem Solving"],
+    opportunities: 35,
+    organization: "Cisco",
+    pathway: "Certification",
+  },
+
+  // STEM - Trades & Skilled Labor
+  {
+    id: "electrician",
+    title: "Electrician",
+    description: "Install and maintain electrical systems.",
+    icon: "⚡",
+    strength: "STEM",
+    duration: "3-4 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Mathematics"],
+    skills: ["Electrical Systems", "Problem Solving", "Safety"],
+    opportunities: 55,
+    pathway: "Alternative",
+  },
+  {
+    id: "plumber",
+    title: "Plumber",
+    description: "Install and repair plumbing systems.",
+    icon: "🔧",
+    strength: "STEM",
+    duration: "3-4 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Mathematics"],
+    skills: ["Plumbing", "Problem Solving", "Maintenance"],
+    opportunities: 50,
+    pathway: "Alternative",
+  },
+  {
+    id: "welder",
+    title: "Welder",
+    description: "Join metal parts using welding techniques.",
+    icon: "🔥",
+    strength: "STEM",
+    duration: "2-3 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Technical Sciences"],
+    skills: ["Welding", "Technical Skills", "Precision"],
+    opportunities: 45,
+    pathway: "Alternative",
+  },
+  {
+    id: "auto-mechanic",
+    title: "Auto Mechanic",
+    description: "Repair and maintain vehicles.",
+    icon: "🚗",
+    strength: "STEM",
+    duration: "3-4 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Mathematics"],
+    skills: ["Vehicle Maintenance", "Diagnostics", "Problem Solving"],
+    opportunities: 55,
+    pathway: "Alternative",
+  },
+  {
+    id: "hvac-technician",
+    title: "HVAC Technician",
+    description: "Install and maintain heating/cooling systems.",
+    icon: "❄️",
+    strength: "STEM",
+    duration: "2-3 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Mathematics"],
+    skills: ["HVAC Systems", "Technical Skills", "Maintenance"],
+    opportunities: 48,
+    pathway: "Alternative",
+  },
+  {
+    id: "carpenter",
+    title: "Carpenter / Woodworker",
+    description: "Build and repair wooden structures.",
+    icon: "🪵",
+    strength: "STEM",
+    duration: "3-4 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Technical Sciences"],
+    skills: ["Carpentry", "Precision", "Creativity"],
+    opportunities: 50,
+    pathway: "Alternative",
+  },
+  {
+    id: "construction-worker",
+    title: "Construction Worker",
+    description: "Build and renovate buildings and structures.",
+    icon: "👷",
+    strength: "STEM",
+    duration: "2-3 years apprenticeship",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Mathematics"],
+    skills: ["Construction", "Safety", "Teamwork"],
+    opportunities: 52,
+    pathway: "Alternative",
+  },
 
   // Entrepreneurship - Traditional
   {
-    id: "business-owner",
+    id: "entrepreneur",
     title: "Entrepreneur / Business Owner",
     description: "Start and manage your own business.",
     icon: "🚀",
@@ -146,11 +504,11 @@ const careerPathways: CareerPathway[] = [
     pathway: "Traditional",
   },
 
-  // Entrepreneurship - Alternative (TINP, Softstart BTI)
+  // Entrepreneurship - Alternative (TINP, Softstart, Freelance)
   {
-    id: "startup-founder",
+    id: "startup-founder-tinp",
     title: "Startup Founder (TINP / Softstart BTI)",
-    description: "Launch your startup with mentorship and resources from TINP hubs and Softstart BTI incubator.",
+    description: "Launch your startup with TINP hubs and Softstart BTI mentorship.",
     icon: "🌱",
     strength: "Entrepreneurship",
     duration: "12-24 months incubation",
@@ -165,7 +523,7 @@ const careerPathways: CareerPathway[] = [
   {
     id: "tech-entrepreneur",
     title: "Tech Entrepreneur",
-    description: "Build innovative tech solutions. Access to tech hubs, accelerators, and investor networks.",
+    description: "Build innovative tech solutions.",
     icon: "💻",
     strength: "Entrepreneurship",
     duration: "12-36 months",
@@ -176,8 +534,36 @@ const careerPathways: CareerPathway[] = [
     opportunities: 70,
     pathway: "Alternative",
   },
+  {
+    id: "ecommerce-entrepreneur",
+    title: "E-Commerce Entrepreneur",
+    description: "Build online businesses and digital storefronts.",
+    icon: "🛍️",
+    strength: "Entrepreneurship",
+    duration: "6-12 months to start",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Business Studies"],
+    skills: ["Digital Marketing", "E-commerce", "Sales"],
+    opportunities: 75,
+    pathway: "Alternative",
+  },
+  {
+    id: "freelancer",
+    title: "Freelancer (Creative/Technical)",
+    description: "Offer services independently online.",
+    icon: "👨‍💼",
+    strength: "Entrepreneurship",
+    duration: "Start immediately",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Any"],
+    skills: ["Self-Management", "Client Relations", "Specialized Skills"],
+    opportunities: 80,
+    pathway: "Alternative",
+  },
 
-  // Leadership - Traditional
+  // Leadership - Management & Business
   {
     id: "manager",
     title: "Manager / Team Leader",
@@ -193,7 +579,49 @@ const careerPathways: CareerPathway[] = [
     pathway: "Traditional",
   },
   {
-    id: "executive",
+    id: "project-manager",
+    title: "Project Manager",
+    description: "Plan, execute, and oversee projects.",
+    icon: "📋",
+    strength: "Leadership",
+    duration: "3-4 years or certification 4-6 months",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies", "Mathematics"],
+    skills: ["Project Planning", "Team Management", "Risk Management"],
+    opportunities: 45,
+    pathway: "Traditional",
+  },
+  {
+    id: "hr-manager",
+    title: "HR Manager",
+    description: "Manage human resources and employee relations.",
+    icon: "👥",
+    strength: "Leadership",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies"],
+    skills: ["People Management", "Communication", "Problem Solving"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+  {
+    id: "operations-manager",
+    title: "Operations Manager",
+    description: "Oversee daily business operations.",
+    icon: "⚙️",
+    strength: "Leadership",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies", "Mathematics"],
+    skills: ["Operations", "Process Improvement", "Analysis"],
+    opportunities: 42,
+    pathway: "Traditional",
+  },
+  {
+    id: "executive-ceo",
     title: "Executive / C-Suite",
     description: "Lead organizations at the highest levels.",
     icon: "🏢",
@@ -206,6 +634,52 @@ const careerPathways: CareerPathway[] = [
     opportunities: 15,
     pathway: "Traditional",
   },
+
+  // Leadership - Accounting & Finance
+  {
+    id: "accountant",
+    title: "Accountant",
+    description: "Manage financial records and provide accounting services.",
+    icon: "💰",
+    strength: "Leadership",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Accounting", "Mathematics"],
+    skills: ["Accounting", "Financial Analysis", "Attention to Detail"],
+    opportunities: 42,
+    pathway: "Traditional",
+  },
+  {
+    id: "financial-analyst",
+    title: "Financial Analyst",
+    description: "Analyze financial data for investment decisions.",
+    icon: "📈",
+    strength: "Leadership",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Mathematics", "Economics"],
+    skills: ["Financial Analysis", "Data Analysis", "Economics"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "banker",
+    title: "Banker / Banking Professional",
+    description: "Provide banking and financial services.",
+    icon: "🏦",
+    strength: "Leadership",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies", "Mathematics"],
+    skills: ["Banking Knowledge", "Customer Service", "Sales"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+
+  // Leadership - Education & Government
   {
     id: "teacher",
     title: "Teacher / Educator",
@@ -220,12 +694,112 @@ const careerPathways: CareerPathway[] = [
     opportunities: 40,
     pathway: "Traditional",
   },
+  {
+    id: "government-official",
+    title: "Government Official / Public Administrator",
+    description: "Work in government departments.",
+    icon: "🏛️",
+    strength: "Leadership",
+    duration: "4 years degree + recruitment",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Any"],
+    skills: ["Policy Knowledge", "Communication", "Ethics"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "police-officer",
+    title: "Police Officer",
+    description: "Serve and protect communities.",
+    icon: "👮",
+    strength: "Leadership",
+    duration: "Academy training 12-18 months",
+    cost: "Affordable",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Any"],
+    skills: ["Law Enforcement", "Physical Fitness", "Decision Making"],
+    opportunities: 30,
+    pathway: "Alternative",
+  },
+  {
+    id: "military-officer",
+    title: "Military Officer",
+    description: "Lead and serve in military operations.",
+    icon: "🪖",
+    strength: "Leadership",
+    duration: "Military training + degree",
+    cost: "Affordable",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Physical Education"],
+    skills: ["Leadership", "Strategic Thinking", "Discipline"],
+    opportunities: 25,
+    pathway: "Alternative",
+  },
 
-  // Creativity - Traditional & Alternative
+  // Leadership - Hospitality & Service
+  {
+    id: "hotel-manager",
+    title: "Hotel / Hospitality Manager",
+    description: "Manage hotel operations and guest services.",
+    icon: "🏨",
+    strength: "Leadership",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies"],
+    skills: ["Hospitality", "Management", "Customer Service"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "event-planner",
+    title: "Event Planner",
+    description: "Organize and coordinate events.",
+    icon: "🎉",
+    strength: "Leadership",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies"],
+    skills: ["Event Management", "Coordination", "Communication"],
+    opportunities: 38,
+    pathway: "Traditional",
+  },
+  {
+    id: "tour-guide",
+    title: "Tourism Guide",
+    description: "Guide tourists and share cultural knowledge.",
+    icon: "🗺️",
+    strength: "Leadership",
+    duration: "2-3 years",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Any"],
+    skills: ["Tourism Knowledge", "Communication", "Customer Service"],
+    opportunities: 32,
+    pathway: "Traditional",
+  },
+  {
+    id: "chef",
+    title: "Chef / Cook",
+    description: "Prepare meals and manage kitchen operations.",
+    icon: "👨‍🍳",
+    strength: "Creativity",
+    duration: "2-4 years apprenticeship",
+    cost: "Moderate",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Any"],
+    skills: ["Cooking", "Food Safety", "Creativity"],
+    opportunities: 45,
+    pathway: "Alternative",
+  },
+
+  // Creativity - Visual & Graphic Design
   {
     id: "graphic-designer",
     title: "Graphic Designer",
-    description: "Create visual content for brands and businesses.",
+    description: "Create visual content for brands.",
     icon: "🎨",
     strength: "Creativity",
     duration: "3-4 years",
@@ -236,6 +810,78 @@ const careerPathways: CareerPathway[] = [
     opportunities: 45,
     pathway: "Traditional",
   },
+  {
+    id: "web-designer",
+    title: "Web Designer",
+    description: "Design beautiful and functional websites.",
+    icon: "🌐",
+    strength: "Creativity",
+    duration: "3-4 years or bootcamp 4-6 months",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Web Design", "UX Principles", "Coding Basics"],
+    opportunities: 50,
+    pathway: "Traditional",
+  },
+  {
+    id: "animator",
+    title: "Animator / Motion Graphics",
+    description: "Create animations and visual effects.",
+    icon: "✨",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Animation", "Technical Skills", "Creativity"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+  {
+    id: "illustrator",
+    title: "Illustrator",
+    description: "Create illustrations for books and media.",
+    icon: "🖌️",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Art"],
+    skills: ["Illustration", "Creativity", "Technical Tools"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "fashion-designer",
+    title: "Fashion Designer",
+    description: "Design and create fashion garments.",
+    icon: "👗",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Any"],
+    skills: ["Fashion Design", "Sewing", "Creativity"],
+    opportunities: 30,
+    pathway: "Traditional",
+  },
+  {
+    id: "photographer",
+    title: "Photographer",
+    description: "Capture images for clients and businesses.",
+    icon: "📸",
+    strength: "Creativity",
+    duration: "2-3 years or self-taught",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Any"],
+    skills: ["Photography", "Technical Skills", "Creativity"],
+    opportunities: 45,
+    pathway: "Alternative",
+  },
+
+  // Creativity - Media & Performance
   {
     id: "musician",
     title: "Musician / Music Producer",
@@ -251,9 +897,51 @@ const careerPathways: CareerPathway[] = [
     pathway: "Traditional",
   },
   {
-    id: "artist",
+    id: "filmmaker",
+    title: "Filmmaker / Video Producer",
+    description: "Create films, documentaries, and video.",
+    icon: "🎬",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Any"],
+    skills: ["Storytelling", "Technical Skills", "Creativity"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "actor",
+    title: "Theater Actor / Performer",
+    description: "Perform in theater and film.",
+    icon: "🎭",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Drama"],
+    skills: ["Acting", "Expression", "Stage Presence"],
+    opportunities: 20,
+    pathway: "Traditional",
+  },
+  {
+    id: "dancer",
+    title: "Dancer / Choreographer",
+    description: "Perform dance and create choreography.",
+    icon: "💃",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 9",
+    requiredSubjects: ["Physical Education"],
+    skills: ["Dance", "Choreography", "Expression"],
+    opportunities: 25,
+    pathway: "Traditional",
+  },
+  {
+    id: "visual-artist",
     title: "Visual Artist",
-    description: "Create art for galleries, exhibitions, and communities.",
+    description: "Create art for galleries and exhibitions.",
     icon: "🖼️",
     strength: "Creativity",
     duration: "3-4 years",
@@ -264,10 +952,12 @@ const careerPathways: CareerPathway[] = [
     opportunities: 25,
     pathway: "Traditional",
   },
+
+  // Creativity - Content & Writing
   {
     id: "digital-creator",
     title: "Digital Content Creator / Influencer",
-    description: "Create content on social media and streaming platforms.",
+    description: "Create content on social media.",
     icon: "📱",
     strength: "Creativity",
     duration: "6-12 months to start",
@@ -279,17 +969,31 @@ const careerPathways: CareerPathway[] = [
     pathway: "Alternative",
   },
   {
-    id: "filmmaker",
-    title: "Filmmaker / Video Producer",
-    description: "Create films, documentaries, and video content.",
-    icon: "🎬",
+    id: "copywriter",
+    title: "Copywriter",
+    description: "Write compelling marketing content.",
+    icon: "✍️",
+    strength: "Creativity",
+    duration: "3-4 years or portfolio-based",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["English"],
+    skills: ["Writing", "Creativity", "Marketing Knowledge"],
+    opportunities: 50,
+    pathway: "Traditional",
+  },
+  {
+    id: "journalist",
+    title: "Journalist / Reporter",
+    description: "Report news and investigate stories.",
+    icon: "📰",
     strength: "Creativity",
     duration: "3-4 years",
     cost: "Moderate",
-    entryLevel: "Grade 11",
-    requiredSubjects: ["Any"],
-    skills: ["Storytelling", "Technical Skills", "Creativity"],
-    opportunities: 35,
+    entryLevel: "Grade 12",
+    requiredSubjects: ["English"],
+    skills: ["Journalism", "Writing", "Research"],
+    opportunities: 28,
     pathway: "Traditional",
   },
 
@@ -311,7 +1015,7 @@ const careerPathways: CareerPathway[] = [
   {
     id: "sports-coach",
     title: "Sports Coach",
-    description: "Train and develop athletes in your sport.",
+    description: "Train and develop athletes.",
     icon: "🏆",
     strength: "Sports",
     duration: "2-4 years",
@@ -323,7 +1027,7 @@ const careerPathways: CareerPathway[] = [
     pathway: "Traditional",
   },
   {
-    id: "sports-science",
+    id: "sports-scientist",
     title: "Sports Scientist / Physiotherapist",
     description: "Support athlete performance and health.",
     icon: "🏥",
@@ -336,12 +1040,54 @@ const careerPathways: CareerPathway[] = [
     opportunities: 35,
     pathway: "Traditional",
   },
+  {
+    id: "fitness-trainer",
+    title: "Fitness Trainer / Personal Trainer",
+    description: "Help clients achieve fitness goals.",
+    icon: "💪",
+    strength: "Sports",
+    duration: "3-6 months certification",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Physical Education"],
+    skills: ["Fitness Knowledge", "Client Relations", "Motivation"],
+    opportunities: 55,
+    pathway: "Certification",
+  },
+  {
+    id: "sports-manager",
+    title: "Sports Manager",
+    description: "Manage sports teams and facilities.",
+    icon: "📊",
+    strength: "Sports",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies"],
+    skills: ["Management", "Sports Knowledge", "Organization"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "sports-journalist",
+    title: "Sports Journalist / Commentator",
+    description: "Report on sports and commentate.",
+    icon: "📺",
+    strength: "Sports",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["English"],
+    skills: ["Journalism", "Sports Knowledge", "Communication"],
+    opportunities: 25,
+    pathway: "Traditional",
+  },
 
   // Social Impact
   {
     id: "social-worker",
     title: "Social Worker",
-    description: "Help vulnerable communities and individuals.",
+    description: "Help vulnerable communities.",
     icon: "🤝",
     strength: "Social Impact",
     duration: "4 years",
@@ -355,7 +1101,7 @@ const careerPathways: CareerPathway[] = [
   {
     id: "ngo-leader",
     title: "NGO / Non-Profit Leader",
-    description: "Lead organizations focused on social change.",
+    description: "Lead organizations for social change.",
     icon: "🌍",
     strength: "Social Impact",
     duration: "Variable",
@@ -369,7 +1115,7 @@ const careerPathways: CareerPathway[] = [
   {
     id: "environmental-specialist",
     title: "Environmental Specialist",
-    description: "Work on climate, conservation, and sustainability.",
+    description: "Work on climate and conservation.",
     icon: "🌱",
     strength: "Social Impact",
     duration: "4 years",
@@ -377,6 +1123,48 @@ const careerPathways: CareerPathway[] = [
     entryLevel: "Grade 12",
     requiredSubjects: ["Life Sciences", "Physical Sciences"],
     skills: ["Environmental Science", "Research", "Advocacy"],
+    opportunities: 30,
+    pathway: "Traditional",
+  },
+  {
+    id: "counselor",
+    title: "Counselor / Psychologist",
+    description: "Provide mental health support.",
+    icon: "💭",
+    strength: "Social Impact",
+    duration: "4-5 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences"],
+    skills: ["Psychology", "Empathy", "Listening"],
+    opportunities: 32,
+    pathway: "Traditional",
+  },
+  {
+    id: "community-developer",
+    title: "Community Development Officer",
+    description: "Work with communities to improve conditions.",
+    icon: "👫",
+    strength: "Social Impact",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Any"],
+    skills: ["Community Engagement", "Leadership", "Problem Solving"],
+    opportunities: 28,
+    pathway: "Traditional",
+  },
+  {
+    id: "public-health",
+    title: "Public Health Officer",
+    description: "Promote health and prevent disease.",
+    icon: "⚕️",
+    strength: "Social Impact",
+    duration: "4-5 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+    skills: ["Public Health", "Data Analysis", "Communication"],
     opportunities: 30,
     pathway: "Traditional",
   },
@@ -481,12 +1269,12 @@ export default function CareerMapPage() {
               Your Career Map
             </h1>
             <p className="text-lg text-muted-foreground">
-              Explore pathways across all your strengths — Traditional degrees, Fast certifications, or Alternative routes
+              Explore 90+ pathways across all strengths — Traditional degrees, Fast certifications, Skilled trades, or Alternative routes
             </p>
           </div>
 
           {/* Strength Profile */}
-          <Card className="p-8 mb-12">
+          <div className="bg-card border rounded-lg p-8 mb-12">
             <h2 className="text-2xl font-bold mb-6">Your Strength Profile</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
               {strengths.map((strength) => (
@@ -504,14 +1292,14 @@ export default function CareerMapPage() {
                 </div>
               ))}
             </div>
-          </Card>
+          </div>
 
           {/* Top 3 Recommendations */}
           <div className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Your Top Recommendations</h2>
             <div className="grid gap-4 md:grid-cols-3">
               {recommendedPaths.map((path) => (
-                <Card key={path.id} className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-l-primary">
+                <div key={path.id} className="bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-l-primary">
                   <div className="text-3xl mb-3">{path.icon}</div>
                   <h3 className="text-xl font-bold mb-2">{path.title}</h3>
                   <p className="text-sm text-muted-foreground mb-4">{path.description}</p>
@@ -520,20 +1308,17 @@ export default function CareerMapPage() {
                     <Badge className={`text-xs ${costColors[path.cost]}`}>{path.cost}</Badge>
                     <Badge variant="outline" className={`text-xs ${pathwayColors[path.pathway]}`}>{path.pathway}</Badge>
                   </div>
-                  <Button 
-                    onClick={() => setSelectedPathway(path)}
-                    className="w-full gap-2"
-                  >
+                  <Button className="w-full gap-2">
                     Learn More <ArrowRight className="h-4 w-4" />
                   </Button>
-                </Card>
+                </div>
               ))}
             </div>
           </div>
 
-          {/* Browse All Pathways by Strength */}
+          {/* Browse All Pathways */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">Explore All Pathways</h2>
+            <h2 className="text-2xl font-bold mb-6">Explore All {careerPathways.length}+ Pathways</h2>
             <Tabs defaultValue="STEM" className="w-full">
               <TabsList className="grid w-full grid-cols-3 md:grid-cols-6">
                 <TabsTrigger value="STEM">STEM</TabsTrigger>
@@ -548,7 +1333,7 @@ export default function CareerMapPage() {
                 <TabsContent key={strength} value={strength} className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                     {pathsByStrength(strength).map((path) => (
-                      <Card key={path.id} className="p-5 hover:shadow-md transition-shadow">
+                      <div key={path.id} className="bg-card border rounded-lg p-5 hover:shadow-md transition-shadow">
                         <div className="flex items-start justify-between mb-3">
                           <div className="text-3xl">{path.icon}</div>
                           <Badge className={`text-xs ${pathwayColors[path.pathway]}`}>{path.pathway}</Badge>
@@ -562,7 +1347,7 @@ export default function CareerMapPage() {
                           </div>
                           <div className="flex items-center gap-2">
                             <DollarSign className="h-3 w-3" />
-                            <span className={costColors[path.cost]}>{path.cost}</span>
+                            <span>{path.cost}</span>
                           </div>
                           <div className="flex items-center gap-2">
                             <BookOpen className="h-3 w-3" />
@@ -574,15 +1359,10 @@ export default function CareerMapPage() {
                             📌 {path.organization}
                           </div>
                         )}
-                        <Button 
-                          onClick={() => setSelectedPathway(path)}
-                          size="sm"
-                          variant="outline"
-                          className="w-full"
-                        >
+                        <Button size="sm" variant="outline" className="w-full">
                           Explore
                         </Button>
-                      </Card>
+                      </div>
                     ))}
                   </div>
                 </TabsContent>
