@@ -45,11 +45,18 @@ export default function PortfolioPage() {
     return JSON.parse(subjectsJson);
   }, []);
 
-  // Initialize portfolio with localStorage data
+  // Initialize portfolio with localStorage data (fresh student name on each load)
   const [portfolio, setPortfolio] = useState<PortfolioAbout>(() => {
     const saved = localStorage.getItem("portfolio_about");
-    return saved ? JSON.parse(saved) : {
-      name: studentName,
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error("Failed to parse portfolio_about", e);
+      }
+    }
+    return {
+      name: studentName || "Student",
       headline: `Aspiring Professional | ${studentGrade}`,
       bio: "",
       location: "South Africa",
@@ -76,6 +83,7 @@ export default function PortfolioPage() {
 
   // Save portfolio to localStorage whenever it changes
   useEffect(() => {
+    console.log("Saving portfolio:", { portfolio, projects, skills });
     localStorage.setItem("portfolio_about", JSON.stringify(portfolio));
     localStorage.setItem("portfolio_projects", JSON.stringify(projects));
     localStorage.setItem("portfolio_skills", JSON.stringify(skills));
@@ -83,6 +91,12 @@ export default function PortfolioPage() {
     const timer = setTimeout(() => setPortfolioSaved(false), 2000);
     return () => clearTimeout(timer);
   }, [portfolio, projects, skills]);
+
+  // Debug: Load and verify data on mount
+  useEffect(() => {
+    const saved = localStorage.getItem("portfolio_about");
+    console.log("Portfolio About from localStorage:", saved);
+  }, []);
 
   const [newProject, setNewProject] = useState<Omit<Project, "id">>({
     title: "",
@@ -156,6 +170,21 @@ export default function PortfolioPage() {
                 Saved
               </div>
             )}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                if (confirm("Clear all portfolio data? This cannot be undone.")) {
+                  localStorage.removeItem("portfolio_about");
+                  localStorage.removeItem("portfolio_projects");
+                  localStorage.removeItem("portfolio_skills");
+                  window.location.reload();
+                }
+              }}
+              className="text-muted-foreground hover:text-foreground"
+            >
+              Reset
+            </Button>
             <Link href="/portfolio-view">
               <Button variant="outline" className="gap-2">
                 <Eye className="h-4 w-4" />
