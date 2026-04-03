@@ -38,8 +38,8 @@ export default function PortfolioPage() {
   const [portfolioSaved, setPortfolioSaved] = useState(false);
 
   // Get student info from localStorage
-  const studentName = localStorage.getItem("student_name") || "Student";
-  const studentGrade = localStorage.getItem("onboarding_grade") || "Grade 11";
+  const studentName = useMemo(() => localStorage.getItem("student_name") || "Student", []);
+  const studentGrade = useMemo(() => localStorage.getItem("onboarding_grade") || "Grade 11", []);
   const studentSubjects = useMemo(() => {
     const subjectsJson = localStorage.getItem("onboarding_subjects") || "[]";
     return JSON.parse(subjectsJson);
@@ -50,19 +50,40 @@ export default function PortfolioPage() {
     const saved = localStorage.getItem("portfolio_about");
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        // Check if name is still the old mock name, if so reset
+        if (parsed.name === "Alex Johnson" || parsed.name === "Student") {
+          return {
+            name: studentName,
+            headline: `Aspiring Professional | ${studentGrade}`,
+            bio: parsed.bio || "",
+            location: parsed.location || "South Africa",
+            website: parsed.website || "",
+          };
+        }
+        return parsed;
       } catch (e) {
         console.error("Failed to parse portfolio_about", e);
       }
     }
     return {
-      name: studentName || "Student",
+      name: studentName,
       headline: `Aspiring Professional | ${studentGrade}`,
       bio: "",
       location: "South Africa",
       website: "",
     };
   });
+
+  // Update portfolio name if student name changes
+  useEffect(() => {
+    if (portfolio.name === "Alex Johnson" || portfolio.name === "Student") {
+      setPortfolio(prev => ({
+        ...prev,
+        name: studentName
+      }));
+    }
+  }, [studentName]);
 
   const [projects, setProjects] = useState<Project[]>(() => {
     const saved = localStorage.getItem("portfolio_projects");
