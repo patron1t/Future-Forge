@@ -115,32 +115,65 @@ export default function KioskPortfolioBuilderPage() {
               )}
 
               {step === 2 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
+                <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4">
+                  <div className="space-y-4">
+                    <label className="text-2xl font-bold">What are your top skills? (Pick up to 3)</label>
+                    <div className="flex flex-wrap gap-3">
+                      {["Coding", "Public Speaking", "Leadership", "Mathematics", "Writing", "Problem Solving", "Design", "Science", "Teamwork", "Debating", "Art", "Sports"].map(skill => {
+                        const currentSkills = formData.skills ? formData.skills.split(', ') : [];
+                        const isSelected = currentSkills.includes(skill);
+                        
+                        return (
+                          <div 
+                            key={skill}
+                            onClick={() => {
+                              if (isSelected) {
+                                handleChange('skills', currentSkills.filter(s => s !== skill).join(', '));
+                              } else if (currentSkills.length < 3) {
+                                handleChange('skills', [...currentSkills, skill].join(', '));
+                              }
+                            }}
+                            className={`px-5 py-3 rounded-xl text-lg font-bold cursor-pointer border-2 transition-all ${
+                              isSelected 
+                                ? 'bg-primary text-primary-foreground border-primary' 
+                                : currentSkills.length >= 3 
+                                  ? 'bg-muted/50 text-muted-foreground border-transparent opacity-50 cursor-not-allowed'
+                                  : 'bg-background hover:border-primary/50'
+                            }`}
+                          >
+                            {skill}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <label className="text-2xl font-bold">Choose your dream career path</label>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {["Software Engineer", "Doctor", "Accountant", "Lawyer", "Entrepreneur", "Engineer", "Teacher", "Designer", "Scientist"].map(career => (
+                        <div 
+                          key={career}
+                          onClick={() => handleChange('dreamCareer', career)}
+                          className={`h-16 rounded-xl flex items-center justify-center text-lg font-bold cursor-pointer border-2 transition-all ${
+                            formData.dreamCareer === career 
+                              ? 'bg-primary text-primary-foreground border-primary' 
+                              : 'bg-background hover:border-primary/50'
+                          }`}
+                        >
+                          {career}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   <div className="space-y-3">
-                    <label className="text-xl font-bold">A short bio about you</label>
+                    <label className="text-2xl font-bold">A short bio about you</label>
                     <Textarea 
                       value={formData.bio}
                       onChange={(e) => handleChange('bio', e.target.value)}
-                      placeholder="e.g. I am a passionate student who loves solving problems and wants to start my own tech company..."
+                      placeholder="e.g. I am a passionate student who loves solving problems..."
                       className="h-32 text-xl rounded-xl resize-none"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-xl font-bold">Top 3 Skills (comma separated)</label>
-                    <Input 
-                      value={formData.skills}
-                      onChange={(e) => handleChange('skills', e.target.value)}
-                      placeholder="e.g. Coding, Public Speaking, Leadership"
-                      className="h-16 text-2xl rounded-xl"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-xl font-bold">Dream Career Path</label>
-                    <Input 
-                      value={formData.dreamCareer}
-                      onChange={(e) => handleChange('dreamCareer', e.target.value)}
-                      placeholder="e.g. Software Engineer"
-                      className="h-16 text-2xl rounded-xl"
                     />
                   </div>
                 </div>
