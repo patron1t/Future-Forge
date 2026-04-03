@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "6gwdAIHZBgR9NRULyBiZa"
+uri = "file://client/public/logo.png"
+type = "image"
+title = "Career Plug AI Logo"
