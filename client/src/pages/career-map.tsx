@@ -1,20 +1,386 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "wouter";
-import { ArrowRight, Zap, TrendingUp, Users, Briefcase } from "lucide-react";
+import { ArrowRight, Clock, DollarSign, BookOpen, Users, Zap } from "lucide-react";
 
-interface CareerPath {
+interface CareerPathway {
   id: string;
   title: string;
   description: string;
   icon: string;
-  match: number;
+  strength: "STEM" | "Entrepreneurship" | "Leadership" | "Creativity" | "Sports" | "Social Impact";
+  duration: string;
+  cost: "Affordable" | "Moderate" | "Expensive";
+  entryLevel: "Grade 8" | "Grade 10" | "Grade 11" | "Grade 12";
+  requiredSubjects: string[];
   skills: string[];
   opportunities: number;
+  organization?: string;
+  pathway: "Traditional" | "Certification" | "Alternative";
 }
+
+const careerPathways: CareerPathway[] = [
+  // STEM - Traditional
+  {
+    id: "engineer",
+    title: "Engineer",
+    description: "Design and build infrastructure, systems, and products.",
+    icon: "🏗️",
+    strength: "STEM",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Mathematics", "Physical Sciences"],
+    skills: ["Technical Design", "Problem Solving", "Mathematics"],
+    opportunities: 45,
+    pathway: "Traditional",
+  },
+  {
+    id: "scientist",
+    title: "Scientist (Research)",
+    description: "Conduct research to advance knowledge in science.",
+    icon: "🔬",
+    strength: "STEM",
+    duration: "4+ years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Physical Sciences", "Mathematics"],
+    skills: ["Research", "Data Analysis", "Scientific Method"],
+    opportunities: 20,
+    pathway: "Traditional",
+  },
+  {
+    id: "doctor",
+    title: "Doctor / Medical Professional",
+    description: "Provide healthcare and treatment to patients.",
+    icon: "⚕️",
+    strength: "STEM",
+    duration: "5-6 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences", "Mathematics"],
+    skills: ["Medical Knowledge", "Empathy", "Problem Solving"],
+    opportunities: 30,
+    pathway: "Traditional",
+  },
+
+  // STEM - Certification
+  {
+    id: "software-tester",
+    title: "Software Tester (ISTQB)",
+    description: "Test software applications to find bugs and ensure quality. ISTQB Foundation certificate in 2 months.",
+    icon: "🧪",
+    strength: "STEM",
+    duration: "2 months",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Mathematics", "Computer Science"],
+    skills: ["Quality Assurance", "Testing", "Attention to Detail"],
+    opportunities: 50,
+    organization: "ISTQB",
+    pathway: "Certification",
+  },
+  {
+    id: "cloud-specialist",
+    title: "Cloud Specialist (AWS Certified)",
+    description: "Manage cloud infrastructure and applications.",
+    icon: "☁️",
+    strength: "STEM",
+    duration: "3-4 months",
+    cost: "Affordable",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Computer Science"],
+    skills: ["Cloud Systems", "Infrastructure", "Problem Solving"],
+    opportunities: 40,
+    organization: "AWS",
+    pathway: "Certification",
+  },
+  {
+    id: "data-analyst-cert",
+    title: "Data Analyst (Google Certificate)",
+    description: "Analyze data to inform business decisions.",
+    icon: "📊",
+    strength: "STEM",
+    duration: "4-6 months",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Mathematics"],
+    skills: ["Data Analysis", "Excel", "Statistics"],
+    opportunities: 35,
+    organization: "Google",
+    pathway: "Certification",
+  },
+
+  // Entrepreneurship - Traditional
+  {
+    id: "business-owner",
+    title: "Entrepreneur / Business Owner",
+    description: "Start and manage your own business.",
+    icon: "🚀",
+    strength: "Entrepreneurship",
+    duration: "Ongoing",
+    cost: "Variable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Business Studies"],
+    skills: ["Business Strategy", "Leadership", "Financial Management"],
+    opportunities: 60,
+    pathway: "Traditional",
+  },
+  {
+    id: "consultant",
+    title: "Business Consultant",
+    description: "Help organizations improve operations and strategy.",
+    icon: "💼",
+    strength: "Entrepreneurship",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies", "Mathematics"],
+    skills: ["Strategic Thinking", "Analysis", "Communication"],
+    opportunities: 25,
+    pathway: "Traditional",
+  },
+
+  // Entrepreneurship - Alternative (TINP, Softstart BTI)
+  {
+    id: "startup-founder",
+    title: "Startup Founder (TINP / Softstart BTI)",
+    description: "Launch your startup with mentorship and resources from TINP hubs and Softstart BTI incubator.",
+    icon: "🌱",
+    strength: "Entrepreneurship",
+    duration: "12-24 months incubation",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Any"],
+    skills: ["Innovation", "Leadership", "Adaptability"],
+    opportunities: 100,
+    organization: "TINP / Softstart BTI",
+    pathway: "Alternative",
+  },
+  {
+    id: "tech-entrepreneur",
+    title: "Tech Entrepreneur",
+    description: "Build innovative tech solutions. Access to tech hubs, accelerators, and investor networks.",
+    icon: "💻",
+    strength: "Entrepreneurship",
+    duration: "12-36 months",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Computer Science", "Business Studies"],
+    skills: ["Technical Skills", "Business Acumen", "Innovation"],
+    opportunities: 70,
+    pathway: "Alternative",
+  },
+
+  // Leadership - Traditional
+  {
+    id: "manager",
+    title: "Manager / Team Leader",
+    description: "Lead teams and manage organizational operations.",
+    icon: "👔",
+    strength: "Leadership",
+    duration: "Variable",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies"],
+    skills: ["Leadership", "Communication", "Decision Making"],
+    opportunities: 55,
+    pathway: "Traditional",
+  },
+  {
+    id: "executive",
+    title: "Executive / C-Suite",
+    description: "Lead organizations at the highest levels.",
+    icon: "🏢",
+    strength: "Leadership",
+    duration: "10+ years progression",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Business Studies", "Economics"],
+    skills: ["Strategic Leadership", "Vision", "Negotiation"],
+    opportunities: 15,
+    pathway: "Traditional",
+  },
+  {
+    id: "teacher",
+    title: "Teacher / Educator",
+    description: "Shape the next generation through education.",
+    icon: "📚",
+    strength: "Leadership",
+    duration: "4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Any"],
+    skills: ["Communication", "Empathy", "Organization"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+
+  // Creativity - Traditional & Alternative
+  {
+    id: "graphic-designer",
+    title: "Graphic Designer",
+    description: "Create visual content for brands and businesses.",
+    icon: "🎨",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Any"],
+    skills: ["Design", "Creativity", "Tech Tools"],
+    opportunities: 45,
+    pathway: "Traditional",
+  },
+  {
+    id: "musician",
+    title: "Musician / Music Producer",
+    description: "Create and perform music professionally.",
+    icon: "🎵",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Music"],
+    skills: ["Musical Talent", "Creativity", "Discipline"],
+    opportunities: 30,
+    pathway: "Traditional",
+  },
+  {
+    id: "artist",
+    title: "Visual Artist",
+    description: "Create art for galleries, exhibitions, and communities.",
+    icon: "🖼️",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Art"],
+    skills: ["Artistic Talent", "Creativity", "Expression"],
+    opportunities: 25,
+    pathway: "Traditional",
+  },
+  {
+    id: "digital-creator",
+    title: "Digital Content Creator / Influencer",
+    description: "Create content on social media and streaming platforms.",
+    icon: "📱",
+    strength: "Creativity",
+    duration: "6-12 months to start",
+    cost: "Affordable",
+    entryLevel: "Grade 10",
+    requiredSubjects: ["Any"],
+    skills: ["Creativity", "Digital Tools", "Audience Engagement"],
+    opportunities: 80,
+    pathway: "Alternative",
+  },
+  {
+    id: "filmmaker",
+    title: "Filmmaker / Video Producer",
+    description: "Create films, documentaries, and video content.",
+    icon: "🎬",
+    strength: "Creativity",
+    duration: "3-4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Any"],
+    skills: ["Storytelling", "Technical Skills", "Creativity"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+
+  // Sports
+  {
+    id: "professional-athlete",
+    title: "Professional Athlete",
+    description: "Compete professionally in your sport.",
+    icon: "⚽",
+    strength: "Sports",
+    duration: "10+ years training",
+    cost: "Variable",
+    entryLevel: "Grade 8",
+    requiredSubjects: ["Physical Education"],
+    skills: ["Athletic Excellence", "Discipline", "Teamwork"],
+    opportunities: 50,
+    pathway: "Traditional",
+  },
+  {
+    id: "sports-coach",
+    title: "Sports Coach",
+    description: "Train and develop athletes in your sport.",
+    icon: "🏆",
+    strength: "Sports",
+    duration: "2-4 years",
+    cost: "Affordable",
+    entryLevel: "Grade 11",
+    requiredSubjects: ["Physical Education"],
+    skills: ["Coaching", "Leadership", "Sports Knowledge"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+  {
+    id: "sports-science",
+    title: "Sports Scientist / Physiotherapist",
+    description: "Support athlete performance and health.",
+    icon: "🏥",
+    strength: "Sports",
+    duration: "4 years",
+    cost: "Expensive",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+    skills: ["Science", "Biomechanics", "Health Knowledge"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+
+  // Social Impact
+  {
+    id: "social-worker",
+    title: "Social Worker",
+    description: "Help vulnerable communities and individuals.",
+    icon: "🤝",
+    strength: "Social Impact",
+    duration: "4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Any"],
+    skills: ["Empathy", "Communication", "Problem Solving"],
+    opportunities: 35,
+    pathway: "Traditional",
+  },
+  {
+    id: "ngo-leader",
+    title: "NGO / Non-Profit Leader",
+    description: "Lead organizations focused on social change.",
+    icon: "🌍",
+    strength: "Social Impact",
+    duration: "Variable",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Any"],
+    skills: ["Leadership", "Impact Focus", "Fundraising"],
+    opportunities: 40,
+    pathway: "Traditional",
+  },
+  {
+    id: "environmental-specialist",
+    title: "Environmental Specialist",
+    description: "Work on climate, conservation, and sustainability.",
+    icon: "🌱",
+    strength: "Social Impact",
+    duration: "4 years",
+    cost: "Moderate",
+    entryLevel: "Grade 12",
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+    skills: ["Environmental Science", "Research", "Advocacy"],
+    opportunities: 30,
+    pathway: "Traditional",
+  },
+];
 
 interface StrengthScore {
   category: string;
@@ -22,167 +388,81 @@ interface StrengthScore {
   color: string;
 }
 
-interface CareerPathFull extends CareerPath {
-  requiredSubjects: string[];
-}
-
-const allCareerPaths: CareerPathFull[] = [
-  {
-    id: "tech-entrepreneur",
-    title: "Tech Entrepreneur",
-    description: "Build innovative technology solutions and start your own company. Perfect for combining leadership, STEM, and entrepreneurial drive.",
-    icon: "🚀",
-    match: 95,
-    skills: ["Product Strategy", "Team Leadership", "Technical Foundation", "Business Development"],
-    opportunities: 12,
-    requiredSubjects: ["Mathematics", "Computer Science", "Physical Sciences"],
-  },
-  {
-    id: "product-manager",
-    title: "Product Manager",
-    description: "Lead product vision and strategy at growing tech companies. Leverage your leadership and creative problem-solving.",
-    icon: "🎯",
-    match: 88,
-    skills: ["User Research", "Strategic Thinking", "Data Analysis", "Cross-functional Communication"],
-    opportunities: 18,
-    requiredSubjects: ["Mathematics", "Business Studies"],
-  },
-  {
-    id: "data-scientist",
-    title: "Data Scientist",
-    description: "Analyze complex data to solve real-world problems. Use mathematics and programming to drive business decisions.",
-    icon: "📊",
-    match: 82,
-    skills: ["Data Analysis", "Programming", "Statistics", "Machine Learning"],
-    opportunities: 15,
-    requiredSubjects: ["Mathematics", "Physical Sciences", "Computer Science"],
-  },
-  {
-    id: "business-analyst",
-    title: "Business Analyst",
-    description: "Help organizations improve efficiency and strategy through data-driven insights and process optimization.",
-    icon: "📈",
-    match: 80,
-    skills: ["Business Analysis", "Data Analysis", "Communication", "Problem Solving"],
-    opportunities: 14,
-    requiredSubjects: ["Business Studies", "Mathematics"],
-  },
-  {
-    id: "design-engineer",
-    title: "Design Engineer",
-    description: "Create innovative products combining design thinking with technical implementation.",
-    icon: "🎨",
-    match: 85,
-    skills: ["Design Thinking", "Technical Skills", "Creativity", "User Experience"],
-    opportunities: 10,
-    requiredSubjects: ["Computer Science", "Technical Sciences"],
-  },
-  {
-    id: "environmental-scientist",
-    title: "Environmental Scientist",
-    description: "Address environmental challenges through scientific research and sustainable solutions.",
-    icon: "🌱",
-    match: 78,
-    skills: ["Research", "Scientific Analysis", "Environmental Systems", "Communication"],
-    opportunities: 8,
-    requiredSubjects: ["Life Sciences", "Physical Sciences"],
-  },
-  {
-    id: "marketing-strategist",
-    title: "Marketing Strategist",
-    description: "Create compelling brand strategies and campaigns that connect with audiences.",
-    icon: "🎯",
-    match: 80,
-    skills: ["Strategy", "Creative Thinking", "Data Analysis", "Communication"],
-    opportunities: 12,
-    requiredSubjects: ["Business Studies", "Economics"],
-  },
-  {
-    id: "systems-architect",
-    title: "Systems Architect",
-    description: "Design large-scale technical systems and infrastructure for organizations.",
-    icon: "🏗️",
-    match: 82,
-    skills: ["Systems Design", "Technical Knowledge", "Problem Solving", "Leadership"],
-    opportunities: 9,
-    requiredSubjects: ["Mathematics", "Computer Science", "Physical Sciences"],
-  },
-];
-
 export default function CareerMapPage() {
   const searchParams = new URLSearchParams(window.location.search);
   const grade = searchParams.get("grade") || "Your Grade";
   const subjectsParam = searchParams.get("subjects") || "";
   const subjects = subjectsParam ? subjectsParam.split(",") : [];
+  const [selectedPathway, setSelectedPathway] = useState<CareerPathway | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Generate strength scores based on assessment
   const generateStrengths = (): StrengthScore[] => {
-    const baseStrengths = [
-      { category: "Entrepreneurship", score: 7, color: "bg-blue-500" },
-      { category: "Leadership", score: 6, color: "bg-purple-500" },
+    const strengths = [
       { category: "STEM", score: 5, color: "bg-green-500" },
-      { category: "Creativity", score: 6, color: "bg-pink-500" },
-      { category: "Social Impact", score: 6, color: "bg-orange-500" },
-      { category: "Sports", score: 4, color: "bg-yellow-500" },
+      { category: "Entrepreneurship", score: 5, color: "bg-blue-500" },
+      { category: "Leadership", score: 5, color: "bg-purple-500" },
+      { category: "Creativity", score: 5, color: "bg-pink-500" },
+      { category: "Sports", score: 5, color: "bg-yellow-500" },
+      { category: "Social Impact", score: 5, color: "bg-orange-500" },
     ];
 
-    // Boost STEM if student has math/science subjects
-    if (subjects.includes("Mathematics") || subjects.includes("Computer Science")) {
-      baseStrengths[2].score = 9;
+    if (subjects.includes("Mathematics") || subjects.includes("Computer Science") || subjects.includes("Physical Sciences")) {
+      strengths[0].score = 9;
     }
-    if (subjects.includes("Physical Sciences") || subjects.includes("Life Sciences")) {
-      baseStrengths[2].score = Math.max(baseStrengths[2].score, 8);
-    }
-
-    // Boost business/leadership if they have business studies
     if (subjects.includes("Business Studies") || subjects.includes("Economics")) {
-      baseStrengths[1].score = 8;
+      strengths[1].score = 8;
     }
-
-    // Boost creativity for certain subjects
     if (subjects.includes("Technical Sciences")) {
-      baseStrengths[3].score = 8;
+      strengths[3].score = 8;
     }
 
-    return baseStrengths;
+    return strengths;
   };
 
-  // Filter and rank career paths based on subjects
-  const getRecommendedCareerPaths = (): CareerPath[] => {
-    return allCareerPaths
-      .map((career) => {
-        const matchingSubjects = career.requiredSubjects.filter((req) =>
-          subjects.includes(req)
-        ).length;
-        const match = Math.max(
-          50,
-          Math.round(
-            (matchingSubjects / career.requiredSubjects.length) * 100 * 0.7 +
-              (10 * (3 - matchingSubjects))
-          )
-        );
-        return { ...career, match };
+  const getRecommendedPaths = (): CareerPathway[] => {
+    return careerPathways
+      .filter(path => {
+        const hasRequiredSubjects = path.requiredSubjects.length === 0 || 
+          path.requiredSubjects.some(req => subjects.includes(req));
+        const gradeNum = parseInt(grade);
+        const entryNum = parseInt(path.entryLevel);
+        return hasRequiredSubjects && gradeNum >= entryNum;
       })
-      .sort((a, b) => b.match - a.match)
+      .sort((a, b) => b.opportunities - a.opportunities)
       .slice(0, 3);
   };
 
-  const strengthScores = generateStrengths();
-  const careerPaths = getRecommendedCareerPaths();
+  const pathsByStrength = (strength: CareerPathway["strength"]) => {
+    return careerPathways.filter(p => p.strength === strength);
+  };
+
+  const strengths = generateStrengths();
+  const recommendedPaths = getRecommendedPaths();
+
+  const costColors = {
+    Affordable: "bg-green-100 text-green-800",
+    Moderate: "bg-blue-100 text-blue-800",
+    Expensive: "bg-red-100 text-red-800",
+  };
+
+  const pathwayColors = {
+    Traditional: "bg-purple-100 text-purple-800",
+    Certification: "bg-green-100 text-green-800",
+    Alternative: "bg-blue-100 text-blue-800",
+  };
 
   return (
-    <div className="min-h-screen bg-background font-sans flex flex-col">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
 
       <div className="flex-1 px-4 py-12">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="mb-16 text-center space-y-3">
-            <div className="flex items-center justify-center gap-3 text-muted-foreground mb-4">
+          <div className="mb-12 text-center space-y-3">
+            <div className="flex items-center justify-center gap-3 text-muted-foreground mb-4 flex-wrap">
               <span className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold">{grade}</span>
               {subjects.length > 0 && (
                 <div className="flex flex-wrap gap-1 justify-center">
@@ -198,148 +478,116 @@ export default function CareerMapPage() {
               )}
             </div>
             <h1 className="font-heading text-4xl font-bold tracking-tight">
-              Your Personalized Career Map
+              Your Career Map
             </h1>
             <p className="text-lg text-muted-foreground">
-              Based on your strengths and {grade.toLowerCase()} profile, here are the career paths that match your potential
+              Explore pathways across all your strengths — Traditional degrees, Fast certifications, or Alternative routes
             </p>
           </div>
 
-          {/* Strength Visualization */}
+          {/* Strength Profile */}
           <Card className="p-8 mb-12">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-6">Your Strength Profile</h2>
-              <div className="space-y-4">
-                {strengthScores.map((strength) => (
-                  <div key={strength.category} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-foreground">{strength.category}</span>
-                      <span className="text-sm font-bold text-primary">{strength.score}/10</span>
-                    </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div
-                        className={`h-full ${strength.color} rounded-full transition-all duration-500`}
-                        style={{ width: `${(strength.score / 10) * 100}%` }}
-                      />
-                    </div>
+            <h2 className="text-2xl font-bold mb-6">Your Strength Profile</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+              {strengths.map((strength) => (
+                <div key={strength.category}>
+                  <div className="flex justify-between mb-2">
+                    <span className="font-medium">{strength.category}</span>
+                    <span className="text-primary font-bold">{strength.score}/10</span>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="pt-6 border-t flex items-center gap-2 text-muted-foreground text-sm">
-              <TrendingUp className="h-4 w-4" />
-              <span>Your top strengths: Entrepreneurship, Leadership, and Creativity</span>
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div
+                      className={`h-full rounded-full ${strength.color}`}
+                      style={{ width: `${(strength.score / 10) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </Card>
 
-          {/* Top Career Paths */}
+          {/* Top 3 Recommendations */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-8">Top Career Paths for You</h2>
-            <div className="space-y-6">
-              {careerPaths.map((career) => (
-                <Card
-                  key={career.id}
-                  className="p-8 border-l-4 border-l-primary hover:shadow-lg transition-shadow"
-                >
-                  <div className="grid md:grid-cols-3 gap-8">
-                    {/* Left: Title & Description */}
-                    <div className="md:col-span-2 space-y-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-4xl">{career.icon}</span>
-                        <div>
-                          <h3 className="text-2xl font-bold">{career.title}</h3>
-                          <div className="flex items-center gap-2 mt-1">
-                            <span className="inline-flex items-center gap-1 px-2 py-1 rounded bg-primary/10 text-primary text-sm font-semibold">
-                              <Zap className="h-3 w-3" />
-                              {career.match}% Match
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-muted-foreground">{career.description}</p>
-
-                      {/* Skills */}
-                      <div className="space-y-3">
-                        <p className="text-sm font-semibold text-foreground">Key Skills to Develop:</p>
-                        <div className="flex flex-wrap gap-2">
-                          {career.skills.map((skill) => (
-                            <span
-                              key={skill}
-                              className="inline-flex items-center px-3 py-1 rounded-full bg-muted text-muted-foreground text-sm"
-                            >
-                              {skill}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right: CTA & Opportunities */}
-                    <div className="flex flex-col justify-between">
-                      <div className="space-y-2 p-4 rounded-lg bg-muted/50">
-                        <p className="text-sm text-muted-foreground">Matching Opportunities</p>
-                        <p className="text-3xl font-bold text-primary">{career.opportunities}</p>
-                        <p className="text-xs text-muted-foreground">internships, scholarships, mentorships</p>
-                      </div>
-                      <Link href="/student-dashboard">
-                        <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 gap-2 mt-4">
-                          Explore Path <ArrowRight className="h-4 w-4" />
-                        </Button>
-                      </Link>
-                    </div>
+            <h2 className="text-2xl font-bold mb-6">Your Top Recommendations</h2>
+            <div className="grid gap-4 md:grid-cols-3">
+              {recommendedPaths.map((path) => (
+                <Card key={path.id} className="p-6 hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-l-primary">
+                  <div className="text-3xl mb-3">{path.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{path.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{path.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="secondary" className="text-xs">{path.duration}</Badge>
+                    <Badge className={`text-xs ${costColors[path.cost]}`}>{path.cost}</Badge>
+                    <Badge variant="outline" className={`text-xs ${pathwayColors[path.pathway]}`}>{path.pathway}</Badge>
                   </div>
+                  <Button 
+                    onClick={() => setSelectedPathway(path)}
+                    className="w-full gap-2"
+                  >
+                    Learn More <ArrowRight className="h-4 w-4" />
+                  </Button>
                 </Card>
               ))}
             </div>
           </div>
 
-          {/* Next Steps */}
-          <Card className="p-8 space-y-6 mb-12">
-            <h2 className="text-2xl font-bold">What's Next?</h2>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div className="space-y-3 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500/10">
-                  <Users className="h-6 w-6 text-blue-500" />
-                </div>
-                <h3 className="font-semibold">Connect with Mentors</h3>
-                <p className="text-sm text-muted-foreground">
-                  Meet professionals in your top career paths
-                </p>
-              </div>
+          {/* Browse All Pathways by Strength */}
+          <div>
+            <h2 className="text-2xl font-bold mb-6">Explore All Pathways</h2>
+            <Tabs defaultValue="STEM" className="w-full">
+              <TabsList className="grid w-full grid-cols-3 md:grid-cols-6">
+                <TabsTrigger value="STEM">STEM</TabsTrigger>
+                <TabsTrigger value="Entrepreneurship">Entrepreneurship</TabsTrigger>
+                <TabsTrigger value="Leadership">Leadership</TabsTrigger>
+                <TabsTrigger value="Creativity">Creativity</TabsTrigger>
+                <TabsTrigger value="Sports">Sports</TabsTrigger>
+                <TabsTrigger value="Social Impact">Social Impact</TabsTrigger>
+              </TabsList>
 
-              <div className="space-y-3 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/10">
-                  <Briefcase className="h-6 w-6 text-purple-500" />
-                </div>
-                <h3 className="font-semibold">Explore Opportunities</h3>
-                <p className="text-sm text-muted-foreground">
-                  Apply for internships and scholarships
-                </p>
-              </div>
-
-              <div className="space-y-3 text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/10">
-                  <TrendingUp className="h-6 w-6 text-green-500" />
-                </div>
-                <h3 className="font-semibold">Build Your Digital Footprint</h3>
-                <p className="text-sm text-muted-foreground">
-                  Showcase your strengths and achievements
-                </p>
-              </div>
-            </div>
-          </Card>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/student-dashboard">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2">
-                Go to Dashboard <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-            <Button size="lg" variant="outline">
-              Retake Assessment
-            </Button>
+              {(["STEM", "Entrepreneurship", "Leadership", "Creativity", "Sports", "Social Impact"] as const).map((strength) => (
+                <TabsContent key={strength} value={strength} className="space-y-4">
+                  <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                    {pathsByStrength(strength).map((path) => (
+                      <Card key={path.id} className="p-5 hover:shadow-md transition-shadow">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="text-3xl">{path.icon}</div>
+                          <Badge className={`text-xs ${pathwayColors[path.pathway]}`}>{path.pathway}</Badge>
+                        </div>
+                        <h3 className="font-bold mb-2">{path.title}</h3>
+                        <p className="text-xs text-muted-foreground mb-3">{path.description}</p>
+                        <div className="space-y-2 mb-4 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Clock className="h-3 w-3" />
+                            <span>{path.duration}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <DollarSign className="h-3 w-3" />
+                            <span className={costColors[path.cost]}>{path.cost}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <BookOpen className="h-3 w-3" />
+                            <span>Entry: {path.entryLevel}</span>
+                          </div>
+                        </div>
+                        {path.organization && (
+                          <div className="mb-3 p-2 rounded bg-primary/5 text-xs font-medium text-primary">
+                            📌 {path.organization}
+                          </div>
+                        )}
+                        <Button 
+                          onClick={() => setSelectedPathway(path)}
+                          size="sm"
+                          variant="outline"
+                          className="w-full"
+                        >
+                          Explore
+                        </Button>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
           </div>
         </div>
       </div>
