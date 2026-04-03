@@ -13,9 +13,45 @@ import {
   PolarRadiusAxis, 
   ResponsiveContainer,
 } from "recharts";
-import { Heart, BookOpen, Building2, Users, Zap, ArrowRight, MapPin, Clock, Bookmark, MessageSquare, TrendingUp, Sparkles } from "lucide-react";
+import { Heart, BookOpen, Building2, Users, Zap, ArrowRight, MapPin, Clock, Bookmark, MessageSquare, TrendingUp, Sparkles, X } from "lucide-react";
 
 const grades = ["Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12"];
+
+interface Scout {
+  id: string;
+  name: string;
+  organization: string;
+  role: string;
+  viewedDate: string;
+  avatar: string;
+}
+
+const mockScouts: Scout[] = [
+  {
+    id: "1",
+    name: "Sarah Mthembu",
+    organization: "TINP - Tshwane Innovation Network",
+    role: "Talent Scout",
+    viewedDate: "Today",
+    avatar: "SM",
+  },
+  {
+    id: "2",
+    name: "James Park",
+    organization: "Tech Startups SA",
+    role: "Recruitment Manager",
+    viewedDate: "2 days ago",
+    avatar: "JP",
+  },
+  {
+    id: "3",
+    name: "Naledi Koala",
+    organization: "Softstart BTI Accelerator",
+    role: "Program Director",
+    viewedDate: "1 week ago",
+    avatar: "NK",
+  },
+];
 
 export default function StudentDashboard() {
   const [, setLocation] = useLocation();
@@ -23,6 +59,7 @@ export default function StudentDashboard() {
   const [showGradeProgression, setShowGradeProgression] = useState(false);
   const [previousGradeData, setPreviousGradeData] = useState<{ grade: string; scores: Record<string, number>; year: number } | null>(null);
   const [studentName, setStudentName] = useState<string>("");
+  const [showScoutViews, setShowScoutViews] = useState(false);
 
   useEffect(() => {
     // Get student name
@@ -393,8 +430,13 @@ const typeConfig = {
             <CardTitle className="text-sm font-medium">Profile Views</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">{profileViewsValue}</div>
-            <p className="text-xs text-muted-foreground mt-1">From scouts</p>
+            <button 
+              onClick={() => setShowScoutViews(true)}
+              className="w-full text-left hover:opacity-70 transition-opacity"
+            >
+              <div className="text-3xl font-bold">{profileViewsValue}</div>
+              <p className="text-xs text-muted-foreground mt-1">From scouts (click to view)</p>
+            </button>
           </CardContent>
         </Card>
       </div>
@@ -604,6 +646,44 @@ const typeConfig = {
           </CardContent>
         </Card>
       </div>
+
+      {/* Scout Views Modal */}
+      {showScoutViews && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+          <Card className="w-full max-w-md">
+            <CardHeader className="flex items-center justify-between">
+              <div>
+                <CardTitle>Who's Viewed Your Profile</CardTitle>
+                <CardDescription>Scouts interested in your profile</CardDescription>
+              </div>
+              <button
+                onClick={() => setShowScoutViews(false)}
+                className="text-muted-foreground hover:text-foreground"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {mockScouts.map((scout) => (
+                <div key={scout.id} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                    {scout.avatar}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-semibold text-sm">{scout.name}</h4>
+                    <p className="text-xs text-muted-foreground truncate">{scout.role}</p>
+                    <p className="text-xs text-muted-foreground truncate">{scout.organization}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{scout.viewedDate}</p>
+                  </div>
+                  <Button variant="ghost" size="sm" className="flex-shrink-0">
+                    View
+                  </Button>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </DashboardLayout>
   );
 }
