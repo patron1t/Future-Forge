@@ -260,7 +260,9 @@ export default function KioskResultsPage() {
         </Button>
 
         <Button
-          onClick={() => setLocation("/")}
+          onClick={() => {
+            alert("To learn more about these careers, scan the QR code to connect with Career Plug AI on WhatsApp, or visit our website on your personal device!");
+          }}
           size="lg"
           className="h-16 px-12 text-lg font-semibold rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
         >

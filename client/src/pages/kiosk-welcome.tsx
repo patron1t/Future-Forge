@@ -67,7 +67,9 @@ export default function KioskWelcomePage() {
         </Button>
 
         <Button
-          onClick={handleLearnMore}
+          onClick={() => {
+            alert("Career Plug AI is an intelligent career guidance platform designed for South African students. Please ask your facilitator for more information.");
+          }}
           size="lg"
           variant="ghost"
           className="h-12 text-lg text-muted-foreground font-semibold rounded-2xl w-full"
