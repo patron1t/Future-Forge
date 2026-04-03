@@ -62,11 +62,17 @@ export default function OnboardingPage() {
     const savedGrade = localStorage.getItem("onboarding_grade");
     const savedSubjects = localStorage.getItem("onboarding_subjects");
     const savedStep = localStorage.getItem("onboarding_step");
+    const savedName = localStorage.getItem("student_name");
     
     if (savedGrade) setSelectedGrade(savedGrade);
     if (savedSubjects) setSelectedSubjects(JSON.parse(savedSubjects));
     if (savedStep) setCurrentStep(savedStep as OnboardingStep);
-  }, []);
+    
+    // Save student name if not already saved
+    if (!savedName && name) {
+      localStorage.setItem("student_name", name);
+    }
+  }, [name]);
 
   const currentStepConfig = steps.find((s) => s.id === currentStep);
   const stepIndex = steps.findIndex((s) => s.id === currentStep);

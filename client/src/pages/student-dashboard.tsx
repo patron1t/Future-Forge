@@ -22,8 +22,13 @@ export default function StudentDashboard() {
   const [isLoading, setIsLoading] = useState(true);
   const [showGradeProgression, setShowGradeProgression] = useState(false);
   const [previousGradeData, setPreviousGradeData] = useState<{ grade: string; scores: Record<string, number>; year: number } | null>(null);
+  const [studentName, setStudentName] = useState<string>("");
 
   useEffect(() => {
+    // Get student name
+    const name = localStorage.getItem("student_name") || "there";
+    setStudentName(name);
+
     // Check if onboarding is complete
     const onboardingComplete = localStorage.getItem("onboarding_complete");
     const hasAssessmentScores = localStorage.getItem("assessmentScores");
@@ -256,10 +261,8 @@ const typeConfig = {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
               <Sparkles className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="font-heading text-4xl font-bold tracking-tight">You're Ready for the Next Chapter!</h1>
-            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-              It's a new year and you've grown. Let's update your journey and see how your strengths have evolved.
-            </p>
+            <h1 className="font-heading text-4xl font-bold tracking-tight">Welcome back, {studentName}! 🎉</h1>
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">You're ready for the next chapter. Let's update your journey and see how your strengths have evolved.</p>
           </div>
 
           <div className="bg-card border rounded-lg p-8 space-y-6">
@@ -316,6 +319,12 @@ const typeConfig = {
 
   return (
     <DashboardLayout type="student">
+      {/* Welcome Banner */}
+      <div className="mb-6 text-center space-y-2">
+        <h1 className="font-heading text-3xl font-bold tracking-tight">Welcome back to Career Plug AI, {studentName}! 👋</h1>
+        <p className="text-muted-foreground">Your personalized career journey continues here</p>
+      </div>
+
       {/* Growth Badge (if has history) */}
       {previousGrade && (
         <Card className="mb-6 border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950/20">

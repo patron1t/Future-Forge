@@ -31,9 +31,12 @@ export default function AuthPage() {
 
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const firstName = (form.querySelector("#first-name") as HTMLInputElement)?.value || "Student";
+    
     // For students, go through onboarding flow
     if (role === "student") {
-      setLocation(`/onboarding?role=student&name=Student`);
+      setLocation(`/onboarding?role=student&name=${encodeURIComponent(firstName)}`);
     } else if (role === "counselor") {
       setLocation("/counselor-dashboard");
     } else {
