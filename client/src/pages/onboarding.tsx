@@ -58,31 +58,63 @@ export default function OnboardingPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Load saved progress
+    const savedGrade = localStorage.getItem("onboarding_grade");
+    const savedSubjects = localStorage.getItem("onboarding_subjects");
+    const savedStep = localStorage.getItem("onboarding_step");
+    
+    if (savedGrade) setSelectedGrade(savedGrade);
+    if (savedSubjects) setSelectedSubjects(JSON.parse(savedSubjects));
+    if (savedStep) setCurrentStep(savedStep as OnboardingStep);
   }, []);
 
   const currentStepConfig = steps.find((s) => s.id === currentStep);
   const stepIndex = steps.findIndex((s) => s.id === currentStep);
 
+  const saveProgress = (step: OnboardingStep) => {
+    localStorage.setItem("onboarding_step", step);
+    localStorage.setItem("onboarding_grade", selectedGrade);
+    localStorage.setItem("onboarding_subjects", JSON.stringify(selectedSubjects));
+  };
+
   const handleNext = () => {
+    let nextStep: OnboardingStep | null = null;
+
     if (currentStep === "welcome") {
-      setCurrentStep("grade-selection");
+      nextStep = "grade-selection";
     } else if (currentStep === "grade-selection") {
-      setCurrentStep("subject-selection");
+      nextStep = "subject-selection";
     } else if (currentStep === "subject-selection") {
-      setCurrentStep("assessment-intro");
+      nextStep = "assessment-intro";
     } else if (currentStep === "assessment-intro") {
-      setCurrentStep("start-assessment");
+      nextStep = "start-assessment";
     } else if (currentStep === "start-assessment") {
+      saveProgress("start-assessment");
       setLocation(`/assessment?grade=${selectedGrade}&subjects=${selectedSubjects.join(",")}`);
+      return;
     } else if (currentStep === "completion") {
-      setLocation("/career-map");
+      // Mark onboarding as complete
+      localStorage.setItem("onboarding_complete", "true");
+      localStorage.removeItem("onboarding_step");
+      localStorage.removeItem("onboarding_grade");
+      localStorage.removeItem("onboarding_subjects");
+      setLocation("/student-dashboard");
+      return;
+    }
+
+    if (nextStep) {
+      setCurrentStep(nextStep);
+      saveProgress(nextStep);
     }
   };
 
   const toggleSubject = (subject: string) => {
-    setSelectedSubjects(prev =>
-      prev.includes(subject) ? prev.filter(s => s !== subject) : [...prev, subject]
-    );
+    setSelectedSubjects(prev => {
+      const updated = prev.includes(subject) ? prev.filter(s => s !== subject) : [...prev, subject];
+      // Save as they toggle
+      localStorage.setItem("onboarding_subjects", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   const canProceed = () => {
@@ -135,7 +167,10 @@ export default function OnboardingPage() {
                 {grades.map((grade) => (
                   <button
                     key={grade}
-                    onClick={() => setSelectedGrade(grade)}
+                    onClick={() => {
+                      setSelectedGrade(grade);
+                      localStorage.setItem("onboarding_grade", grade);
+                    }}
                     className={`w-full p-4 rounded-lg border-2 transition-all text-lg font-medium ${
                       selectedGrade === grade
                         ? "border-primary bg-primary/5 text-primary"

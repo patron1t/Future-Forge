@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,35 +15,81 @@ import {
 } from "recharts";
 import { Heart, BookOpen, Building2, Users, Zap, ArrowRight, MapPin, Clock, Bookmark, MessageSquare } from "lucide-react";
 
-const strengthData = [
-  { subject: 'Entrepreneurship', A: 90, fullMark: 100 },
-  { subject: 'Leadership', A: 80, fullMark: 100 },
-  { subject: 'STEM', A: 70, fullMark: 100 },
-  { subject: 'Creativity', A: 80, fullMark: 100 },
-  { subject: 'Social Impact', A: 80, fullMark: 100 },
-  { subject: 'Sports', A: 50, fullMark: 100 },
-];
+export default function StudentDashboard() {
+  const [, setLocation] = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
 
-const careerPaths = [
-  { 
-    title: "Tech Entrepreneur", 
-    match: 95,
-    icon: "🚀",
-    description: "Start your own tech company and build innovative solutions."
-  },
-  { 
-    title: "Product Manager", 
-    match: 88,
-    icon: "🎯",
-    description: "Lead product strategy at growing tech companies."
-  },
-  { 
-    title: "Innovation Consultant", 
-    match: 85,
-    icon: "💡",
-    description: "Help organizations transform through innovation."
-  },
-];
+  useEffect(() => {
+    // Check if onboarding is complete
+    const onboardingComplete = localStorage.getItem("onboarding_complete");
+    const hasAssessmentScores = localStorage.getItem("assessmentScores");
+    
+    if (!onboardingComplete || !hasAssessmentScores) {
+      // Redirect back to onboarding
+      setLocation("/onboarding?role=student");
+      return;
+    }
+    setIsLoading(false);
+  }, [setLocation]);
+
+  // Get actual assessment scores
+  const savedScores = localStorage.getItem("assessmentScores");
+  const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : {};
+
+  const strengthData = [
+    { subject: 'Entrepreneurship', A: scoreMap.Entrepreneurship ?? 50, fullMark: 100 },
+    { subject: 'Leadership', A: scoreMap.Leadership ?? 50, fullMark: 100 },
+    { subject: 'STEM', A: scoreMap.STEM ?? 50, fullMark: 100 },
+    { subject: 'Creativity', A: scoreMap.Creativity ?? 50, fullMark: 100 },
+    { subject: 'Social Impact', A: scoreMap['Social Impact'] ?? 50, fullMark: 100 },
+    { subject: 'Sports', A: scoreMap.Sports ?? 50, fullMark: 100 },
+  ];
+
+  const getCareerPathsForProfile = (scores: Record<string, number>) => {
+    // Sort strengths by score
+    const sortedStrengths = Object.entries(scores)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 3);
+
+    // Simple career path recommendations based on top 3 strengths
+    const careerMap: Record<string, { title: string; icon: string; description: string }> = {
+      Entrepreneurship: { 
+        title: "Startup Founder", 
+        icon: "🚀",
+        description: "Start your own venture with TINP and Softstart BTI support."
+      },
+      Leadership: { 
+        title: "Business Manager", 
+        icon: "👔",
+        description: "Lead teams and drive organizational success."
+      },
+      STEM: { 
+        title: "Software Developer", 
+        icon: "💻",
+        description: "Build innovative tech solutions and applications."
+      },
+      Creativity: { 
+        title: "Digital Creator", 
+        icon: "🎨",
+        description: "Express yourself through digital content and design."
+      },
+      "Social Impact": { 
+        title: "Social Entrepreneur", 
+        icon: "🌍",
+        description: "Create positive change in your community."
+      },
+      Sports: { 
+        title: "Sports Coach", 
+        icon: "⚽",
+        description: "Train and develop the next generation of athletes."
+      },
+    };
+
+    return sortedStrengths.map(([strength, score], index) => ({
+      ...careerMap[strength] || { title: "Career Path", icon: "🎯", description: "Explore career opportunities" },
+      match: Math.round(score * 1.05), // Convert 0-10 score to match percentage
+    }));
+  };
 
 interface Opportunity {
   id: string;
@@ -127,7 +174,6 @@ const typeConfig = {
   competition: { icon: Zap, color: "bg-orange-500/10 text-orange-600", badge: "Competition" },
 };
 
-export default function StudentDashboard() {
   const [savedOps, setSavedOps] = useState<string[]>([]);
   const [filterType, setFilterType] = useState<string>("all");
 
@@ -140,6 +186,11 @@ export default function StudentDashboard() {
   const filteredOpportunities = filterType === "all" 
     ? opportunities 
     : opportunities.filter(op => op.type === filterType);
+
+  if (isLoading) return null;
+
+  // Get career paths based on actual assessment scores
+  const careerPaths = getCareerPathsForProfile(scoreMap);
 
   return (
     <DashboardLayout type="student">
