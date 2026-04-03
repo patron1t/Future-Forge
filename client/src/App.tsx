@@ -23,6 +23,7 @@ import OnboardingPage from "@/pages/onboarding";
 import KioskWelcomePage from "@/pages/kiosk-welcome";
 import KioskAssessmentPage from "@/pages/kiosk-assessment";
 import KioskResultsPage from "@/pages/kiosk-results";
+import KioskSetupPage from "@/pages/kiosk-setup";
 import PortfolioPage from "@/pages/portfolio";
 import PortfolioViewPage from "@/pages/portfolio-view";
 import OpportunitiesPage from "@/pages/opportunities";
@@ -41,6 +42,7 @@ function Router() {
       <Route path="/assessment" component={AssessmentPage} />
       <Route path="/career-map" component={CareerMapPage} />
       <Route path="/kiosk" component={KioskWelcomePage} />
+      <Route path="/kiosk-setup" component={KioskSetupPage} />
       <Route path="/kiosk-assessment" component={KioskAssessmentPage} />
       <Route path="/kiosk-results" component={KioskResultsPage} />
       <Route path="/portfolio" component={PortfolioPage} />

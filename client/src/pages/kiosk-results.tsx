@@ -15,9 +15,19 @@ export default function KioskResultsPage() {
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const [schoolName, setSchoolName] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    // Try to get school from URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const locationParam = params.get('location');
+    if (locationParam) {
+      setSchoolName(locationParam);
+    } else {
+      // Fallback to localStorage if set by facilitator
+      setSchoolName(localStorage.getItem('kiosk_location') || "Unknown School");
+    }
   }, []);
 
   const careerPaths: CareerPath[] = [
@@ -98,7 +108,7 @@ export default function KioskResultsPage() {
                 <p className="text-lg text-muted-foreground mb-2">Or scan to view on your phone:</p>
                 <div className="bg-white p-4 rounded-xl mx-auto inline-block border-4 border-primary/20 mt-4 mb-4 shadow-sm">
                   <QRCodeSVG 
-                    value="https://wa.me/27796158762?text=Hi%20Career%20Plug%20AI!%20I%20just%20took%20the%20kiosk%20assessment.%20Please%20send%20me%20my%20career%20action%20plan!" 
+                    value={`https://wa.me/27796158762?text=Hi%20Career%20Plug%20AI!%20I%20just%20took%20the%20kiosk%20assessment${schoolName !== "Unknown School" ? `%20at%20${encodeURIComponent(schoolName)}` : ""}.%20Please%20send%20me%20my%20career%20action%20plan!`} 
                     size={160}
                     level="H"
                     includeMargin={false}
