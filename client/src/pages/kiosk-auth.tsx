@@ -30,12 +30,7 @@ export default function KioskAuthPage() {
     }
 
     if (isLogin) {
-      // Mock login - in a real app this would verify with backend
-      // For the prototype, we just pretend they logged in successfully
-      // unless they left it completely blank
       if (phoneNumber && pin) {
-        // Recover mock name if we have one, otherwise generic
-        const storedName = localStorage.getItem("student_name") || "Learner";
         toast({
           title: "Welcome back!",
           description: "Successfully logged in."
@@ -43,10 +38,9 @@ export default function KioskAuthPage() {
         setLocation("/kiosk-dashboard");
       }
     } else {
-      // Mock signup
       if (phoneNumber && pin && name) {
         localStorage.setItem("student_name", name);
-        localStorage.setItem("kiosk_phone", phoneNumber);
+        localStorage.setItem("kiosk_identifier", phoneNumber);
         toast({
           title: "Account Created!",
           description: "Your profile is now secured with your PIN."
@@ -75,7 +69,7 @@ export default function KioskAuthPage() {
             {isLogin ? "Welcome Back" : "Create Account"}
           </h1>
           <p className="text-xl text-muted-foreground">
-            {isLogin ? "Enter your phone number and PIN to resume" : "Secure your profile so you can return later"}
+            {isLogin ? "Enter your ID or phone number and PIN to resume" : "Secure your profile so you can return later"}
           </p>
         </div>
 
@@ -94,18 +88,19 @@ export default function KioskAuthPage() {
           )}
 
           <div className="space-y-3">
-            <label className="text-lg font-bold">Phone Number</label>
+            <label className="text-lg font-bold">Phone Number OR ID Number</label>
             <div className="relative">
               <Phone className="absolute left-4 top-5 h-6 w-6 text-muted-foreground" />
               <Input 
-                type="tel"
+                type="text"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder="082 123 4567"
+                placeholder="082 123 4567 or 040101..."
                 className="h-16 text-xl rounded-xl pl-14"
                 required
               />
             </div>
+            {!isLogin && <p className="text-sm text-muted-foreground">No phone? Use your ID number or Student Number instead.</p>}
           </div>
 
           <div className="space-y-3">
