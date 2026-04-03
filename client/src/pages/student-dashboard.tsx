@@ -120,7 +120,7 @@ export default function StudentDashboard() {
 
     return sortedStrengths.map(([strength, score], index) => ({
       ...careerMap[strength] || { title: "Career Path", icon: "🎯", description: "Explore career opportunities" },
-      match: Math.round(score * 1.05), // Convert 0-10 score to match percentage
+      match: Math.round(score * 10), // Convert 0-10 score to 0-100 percentage
     }));
   };
 
