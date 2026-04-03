@@ -6,8 +6,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
 import { Mail, Share2, Download, ArrowLeft, Check, Briefcase } from "lucide-react";
-// @ts-ignore
-import html2pdf from "html2pdf.js";
 
 interface PortfolioAbout {
   name: string;
@@ -95,35 +93,22 @@ export default function PortfolioViewPage() {
   };
 
   const handleDownloadPDF = () => {
-    if (!pdfRef.current) return;
-    
-    setDownloadClicked(true);
-    
-    const element = pdfRef.current;
-    
-    // Configure PDF options
-    const opt = {
-      margin: [10, 10, 10, 10], // top, left, bottom, right
-      filename: `${about.name.replace(/\s+/g, "_")}_Portfolio.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    // Generate PDF
-    html2pdf().set(opt).from(element).save().then(() => {
-      setTimeout(() => setDownloadClicked(false), 2000);
-    });
+    // The browser's native print dialog is much more reliable for generating
+    // PDFs from modern CSS (like oklch colors) than javascript libraries.
+    // We use print:hidden utility classes to hide UI elements from the PDF.
+    window.print();
   };
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <Navbar />
+      <div className="print:hidden">
+        <Navbar />
+      </div>
 
       <div className="flex-1 px-4 py-12">
         <div className="max-w-4xl mx-auto" ref={pdfRef}>
           {/* Header Navigation - Hidden in PDF */}
-          <div className="flex items-center justify-between mb-8 html2pdf__ignore">
+          <div className="flex items-center justify-between mb-8 print:hidden">
             <Link href="/portfolio">
               <Button variant="ghost" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
@@ -169,7 +154,7 @@ export default function PortfolioViewPage() {
 
           {/* Career Plug AI Logo for PDF */}
           <div className="mb-8 flex items-center justify-center">
-            <div className="bg-primary/10 text-primary px-6 py-3 rounded-xl inline-flex items-center gap-3">
+            <div className="bg-primary/10 text-primary px-6 py-3 rounded-xl inline-flex items-center gap-3 print:border print:border-gray-200">
               <Briefcase className="h-8 w-8" />
               <div>
                 <h2 className="text-2xl font-bold tracking-tight leading-none">Career Plug AI</h2>
@@ -319,7 +304,9 @@ export default function PortfolioViewPage() {
         </div>
       </div>
 
-      <Footer />
+      <div className="print:hidden">
+        <Footer />
+      </div>
     </div>
   );
 }
