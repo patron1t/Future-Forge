@@ -58,17 +58,33 @@ export default function OnboardingPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Load saved progress
+    // Load saved progress only if onboarding is not yet complete
+    const onboardingComplete = localStorage.getItem("onboarding_complete");
+    const savedStep = localStorage.getItem("onboarding_step");
     const savedGrade = localStorage.getItem("onboarding_grade");
     const savedSubjects = localStorage.getItem("onboarding_subjects");
-    const savedStep = localStorage.getItem("onboarding_step");
-    const savedName = localStorage.getItem("student_name");
     
-    if (savedGrade) setSelectedGrade(savedGrade);
-    if (savedSubjects) setSelectedSubjects(JSON.parse(savedSubjects));
-    if (savedStep) setCurrentStep(savedStep as OnboardingStep);
+    if (!onboardingComplete) {
+      // If user has completed onboarding before but is coming back, start fresh
+      // OR if there's no saved progress, start fresh
+      if (savedStep && savedGrade && savedSubjects) {
+        // Resume mid-onboarding session
+        setSelectedGrade(savedGrade);
+        setSelectedSubjects(JSON.parse(savedSubjects));
+        setCurrentStep(savedStep as OnboardingStep);
+      } else {
+        // Fresh start - clear any partial data and start from welcome
+        localStorage.removeItem("onboarding_step");
+        localStorage.removeItem("onboarding_grade");
+        localStorage.removeItem("onboarding_subjects");
+        setCurrentStep("welcome");
+        setSelectedGrade("");
+        setSelectedSubjects([]);
+      }
+    }
     
     // Save student name if not already saved
+    const savedName = localStorage.getItem("student_name");
     if (!savedName && name) {
       localStorage.setItem("student_name", name);
     }
