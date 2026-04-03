@@ -38,7 +38,7 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
 
   const studentLinks = [
     { href: "/student-dashboard", icon: LayoutDashboard, label: "Overview" },
-    { href: "/opportunities", icon: Target, label: "Opportunities", badge: "New" },
+    { href: "/opportunities", icon: Target, label: "Opportunities" },
     { href: "/inbox", icon: MessageSquare, label: "Scout Inbox" },
     { href: "/portfolio", icon: FileText, label: "Portfolio" },
     { href: "/digital-footprint", icon: User, label: "Digital Footprint" },
@@ -98,11 +98,6 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
                       <link.icon className="h-4 w-4" />
                       {link.label}
                     </div>
-                    {link.badge && (
-                      <Badge variant={link.badge === "New" ? "default" : "destructive"} className="h-5 px-1.5 text-[10px] uppercase">
-                        {link.badge}
-                      </Badge>
-                    )}
                   </div>
                 </Link>
               );
