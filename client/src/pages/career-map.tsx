@@ -1217,7 +1217,7 @@ export default function CareerMapPage() {
     const savedScores = localStorage.getItem("assessmentScores");
     const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : null;
 
-    const gradeNum = parseInt(grade);
+    const gradeNum = parseInt(grade) || 11; // Default to grade 11 if invalid
 
     // First, try to get pathways matching subject + grade
     let filtered = careerPathways.filter(path => {
@@ -1233,6 +1233,11 @@ export default function CareerMapPage() {
         const entryNum = parseInt(path.entryLevel);
         return gradeNum >= entryNum;
       });
+    }
+
+    // If still no results, show all pathways (fallback)
+    if (filtered.length === 0) {
+      filtered = careerPathways.slice();
     }
 
     // Sort by strength match
