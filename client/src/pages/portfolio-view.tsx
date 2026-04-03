@@ -1,11 +1,13 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { Mail, Share2, Download, ArrowLeft, Check } from "lucide-react";
+import { Mail, Share2, Download, ArrowLeft, Check, Briefcase } from "lucide-react";
+// @ts-ignore
+import html2pdf from "html2pdf.js";
 
 interface PortfolioAbout {
   name: string;
@@ -32,6 +34,7 @@ interface Skill {
 export default function PortfolioViewPage() {
   const [shareClicked, setShareClicked] = useState(false);
   const [downloadClicked, setDownloadClicked] = useState(false);
+  const pdfRef = useRef<HTMLDivElement>(null);
 
   // Get portfolio data from localStorage
   const portfolioData = useMemo(() => {
@@ -62,55 +65,49 @@ export default function PortfolioViewPage() {
 
   const { about, projects, skills, strengths, subjects } = portfolioData;
 
-  const handleShare = () => {
-    const shareUrl = `${window.location.origin}/portfolio-view`;
-    navigator.clipboard.writeText(shareUrl);
-    setShareClicked(true);
-    setTimeout(() => setShareClicked(false), 2000);
+  const handleShare = async () => {
+    try {
+      const shareUrl = `${window.location.origin}/portfolio-view`;
+      
+      // Try using the native Web Share API first (great for mobile)
+      if (navigator.share) {
+        await navigator.share({
+          title: `${about.name}'s Portfolio | Career Plug AI`,
+          text: `Check out my portfolio and career profile on Career Plug AI!`,
+          url: shareUrl,
+        });
+      } else {
+        // Fallback to clipboard copy
+        await navigator.clipboard.writeText(shareUrl);
+      }
+      
+      setShareClicked(true);
+      setTimeout(() => setShareClicked(false), 2000);
+    } catch (err) {
+      console.error("Error sharing:", err);
+    }
   };
 
   const handleDownloadPDF = () => {
-    const content = `
-${about.name}
-${about.headline}
-
-${about.bio}
-
-📍 ${about.location}
-${about.website ? `🌐 ${about.website}` : ""}
-
-STRENGTH PROFILE
-${strengths.map((s) => `${s.name}: ${s.score}/10`).join("\n")}
-
-PROJECTS & ACHIEVEMENTS
-${projects
-  .map(
-    (p) => `
-${p.title}
-${p.description}
-Skills: ${p.skills.join(", ")}
-${p.date}
-`
-  )
-  .join("\n")}
-
-SKILLS
-${skills.map((s) => `${s.name} - ${s.level}`).join("\n")}
-
-EDUCATION
-Subjects: ${subjects.join(", ")}
-    `.trim();
-
-    const element = document.createElement("a");
-    const file = new Blob([content], { type: "text/plain" });
-    element.href = URL.createObjectURL(file);
-    element.download = `${about.name.replace(/\s+/g, "_")}_Portfolio.txt`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-
+    if (!pdfRef.current) return;
+    
     setDownloadClicked(true);
-    setTimeout(() => setDownloadClicked(false), 2000);
+    
+    const element = pdfRef.current;
+    
+    // Configure PDF options
+    const opt = {
+      margin: [10, 10, 10, 10], // top, left, bottom, right
+      filename: `${about.name.replace(/\s+/g, "_")}_Portfolio.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Generate PDF
+    html2pdf().set(opt).from(element).save().then(() => {
+      setTimeout(() => setDownloadClicked(false), 2000);
+    });
   };
 
   return (
@@ -118,9 +115,9 @@ Subjects: ${subjects.join(", ")}
       <Navbar />
 
       <div className="flex-1 px-4 py-12">
-        <div className="max-w-4xl mx-auto">
-          {/* Header Navigation */}
-          <div className="flex items-center justify-between mb-8">
+        <div className="max-w-4xl mx-auto" ref={pdfRef}>
+          {/* Header Navigation - Hidden in PDF */}
+          <div className="flex items-center justify-between mb-8 html2pdf__ignore">
             <Link href="/portfolio">
               <Button variant="ghost" className="gap-2">
                 <ArrowLeft className="h-4 w-4" />
@@ -161,6 +158,17 @@ Subjects: ${subjects.join(", ")}
                   </>
                 )}
               </Button>
+            </div>
+          </div>
+
+          {/* Career Plug AI Logo for PDF */}
+          <div className="mb-8 flex items-center justify-center">
+            <div className="bg-primary/10 text-primary px-6 py-3 rounded-xl inline-flex items-center gap-3">
+              <Briefcase className="h-8 w-8" />
+              <div>
+                <h2 className="text-2xl font-bold tracking-tight leading-none">Career Plug AI</h2>
+                <p className="text-xs font-medium uppercase tracking-wider text-primary/80">Student Portfolio</p>
+              </div>
             </div>
           </div>
 
