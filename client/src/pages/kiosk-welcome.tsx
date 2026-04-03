@@ -52,7 +52,7 @@ export default function KioskWelcomePage() {
         <Button
           onClick={handleStart}
           size="lg"
-          className="h-20 text-2xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl gap-3"
+          className="h-20 text-2xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-2xl gap-3 w-full"
         >
           Start Assessment <ArrowRight className="h-7 w-7" />
         </Button>
@@ -61,7 +61,7 @@ export default function KioskWelcomePage() {
           onClick={handleLearnMore}
           size="lg"
           variant="outline"
-          className="h-16 text-xl font-semibold rounded-2xl"
+          className="h-16 text-xl font-semibold rounded-2xl w-full"
         >
           Learn More
         </Button>

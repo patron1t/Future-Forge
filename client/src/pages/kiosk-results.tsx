@@ -67,35 +67,47 @@ export default function KioskResultsPage() {
       {/* Save Results Section */}
       <div className="max-w-2xl mx-auto w-full space-y-6 mb-12">
         <div className="p-8 rounded-2xl bg-muted/50 border-2 border-muted space-y-6">
-          <h2 className="text-3xl font-bold">Save Your Results</h2>
+          <h2 className="text-3xl font-bold text-center">Save Your Results</h2>
 
           {!isSaved ? (
             <>
-              <p className="text-xl text-muted-foreground">
-                Enter your email to receive your full career map and opportunities
+              <p className="text-xl text-muted-foreground text-center">
+                Enter your phone number to receive your full career map and opportunities via WhatsApp
               </p>
 
-              <form onSubmit={handleSaveResults} className="flex flex-col gap-4">
+              <form onSubmit={handleSaveResults} className="flex flex-col gap-4 mt-6">
                 <Input
-                  type="email"
-                  placeholder="your.email@example.com"
+                  type="tel"
+                  placeholder="e.g. 082 123 4567"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-14 text-xl rounded-xl"
+                  className="h-14 text-xl rounded-xl text-center"
                   required
                 />
                 <Button
                   type="submit"
                   size="lg"
-                  className="h-14 text-xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl"
+                  className="h-14 text-xl font-bold bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl mt-2 w-full"
                 >
-                  Save Results
+                  Send to WhatsApp
                 </Button>
               </form>
 
-              <div className="text-center pt-6 border-t">
-                <p className="text-lg text-muted-foreground mb-4">Or visit on your phone:</p>
-                <p className="text-2xl font-bold text-primary">careerplugai.co.za</p>
+              <div className="text-center pt-8 mt-4 border-t border-border">
+                <p className="text-lg text-muted-foreground mb-2">Or scan to view on your phone:</p>
+                <div className="w-48 h-48 bg-white rounded-xl mx-auto flex items-center justify-center border-4 border-primary/20 mt-4 mb-4 shadow-sm">
+                  {/* Placeholder for actual QR code */}
+                  <div className="text-center">
+                    <div className="grid grid-cols-2 gap-1 w-32 h-32 mx-auto opacity-80">
+                      <div className="bg-primary/80 rounded-tl-lg rounded-br-sm"></div>
+                      <div className="bg-primary/60 rounded-tr-lg rounded-bl-sm"></div>
+                      <div className="bg-primary/70 rounded-bl-lg rounded-tr-sm"></div>
+                      <div className="bg-primary/90 rounded-br-lg rounded-tl-sm"></div>
+                    </div>
+                    <span className="text-xs font-bold text-primary mt-2 block">SCAN ME</span>
+                  </div>
+                </div>
+                <p className="text-xl font-bold text-primary">careerplugai.co.za</p>
               </div>
             </>
           ) : (
