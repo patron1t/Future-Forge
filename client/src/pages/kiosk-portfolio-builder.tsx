@@ -222,7 +222,15 @@ export default function KioskPortfolioBuilderPage() {
               <span className="text-sm font-bold text-primary mt-4 block tracking-widest uppercase">SCAN TO SYNC TO PHONE</span>
             </div>
 
-            <div className="pt-8">
+            <div className="mt-6 text-center">
+              <Button variant="ghost" className="text-muted-foreground underline" onClick={() => {
+                alert("Please write down your unique reference code: " + Math.random().toString(36).substring(2, 8).toUpperCase() + " and give it to your teacher or facilitator.");
+              }}>
+                Don't have a phone right now?
+              </Button>
+            </div>
+
+            <div className="pt-4">
               <Button 
                 onClick={() => setLocation("/kiosk-dashboard")}
                 size="lg"

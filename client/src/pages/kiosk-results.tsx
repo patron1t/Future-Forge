@@ -119,6 +119,14 @@ export default function KioskResultsPage() {
                 </div>
                 <p className="text-xl font-bold text-primary">careerplugai.co.za</p>
               </div>
+
+              <div className="mt-6 text-center">
+                <Button variant="ghost" className="text-muted-foreground underline" onClick={() => {
+                  alert("Please write down your unique reference code: " + Math.random().toString(36).substring(2, 8).toUpperCase() + " and give it to your teacher or facilitator.");
+                }}>
+                  Don't have a phone right now?
+                </Button>
+              </div>
             </>
           ) : (
             <div className="text-center space-y-4 py-8">
