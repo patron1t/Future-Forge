@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { Plus, Edit2, Trash2, ExternalLink, Share2, Eye } from "lucide-react";
+import { Plus, Edit2, Trash2, ExternalLink, Share2, Eye, Check } from "lucide-react";
 
 interface PortfolioAbout {
   name: string;
@@ -34,43 +34,55 @@ export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState("about");
   const [isEditingAbout, setIsEditingAbout] = useState(false);
   const [isEditingSkills, setIsEditingSkills] = useState(false);
+  const [showAddProject, setShowAddProject] = useState(false);
+  const [portfolioSaved, setPortfolioSaved] = useState(false);
 
-  // Mock portfolio data
-  const [portfolio, setPortfolio] = useState<PortfolioAbout>({
-    name: "Alex Johnson",
-    headline: "Aspiring Tech Entrepreneur | Grade 11",
-    bio: "Passionate about building innovative solutions for social impact. Strong in leadership, STEM, and entrepreneurship.",
-    location: "Johannesburg, South Africa",
-    website: "www.alexjohnson.tech",
+  // Get student info from localStorage
+  const studentName = localStorage.getItem("student_name") || "Student";
+  const studentGrade = localStorage.getItem("onboarding_grade") || "Grade 11";
+  const studentSubjects = useMemo(() => {
+    const subjectsJson = localStorage.getItem("onboarding_subjects") || "[]";
+    return JSON.parse(subjectsJson);
+  }, []);
+
+  // Initialize portfolio with localStorage data
+  const [portfolio, setPortfolio] = useState<PortfolioAbout>(() => {
+    const saved = localStorage.getItem("portfolio_about");
+    return saved ? JSON.parse(saved) : {
+      name: studentName,
+      headline: `Aspiring Professional | ${studentGrade}`,
+      bio: "",
+      location: "South Africa",
+      website: "",
+    };
   });
 
-  const [projects, setProjects] = useState<Project[]>([
-    {
-      id: "1",
-      title: "Community App MVP",
-      description: "Built a mobile app to connect students with mentors. Designed UI/UX and led a team of 3.",
-      skills: ["Leadership", "App Design", "Project Management"],
-      link: "github.com/alexjohnson/community-app",
-      date: "2024",
-    },
-    {
-      id: "2",
-      title: "School Website Redesign",
-      description: "Redesigned school website with improved UX and mobile responsiveness. Increased user engagement by 40%.",
-      skills: ["Web Design", "HTML/CSS", "UX Research"],
-      link: "schoolwebsite.co.za",
-      date: "2023",
-    },
-  ]);
+  const [projects, setProjects] = useState<Project[]>(() => {
+    const saved = localStorage.getItem("portfolio_projects");
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  const [skills, setSkills] = useState<Skill[]>([
-    { name: "Leadership", level: "Advanced" },
-    { name: "Web Development", level: "Intermediate" },
-    { name: "Product Strategy", level: "Advanced" },
-    { name: "Team Management", level: "Intermediate" },
-    { name: "Entrepreneurship", level: "Expert" },
-    { name: "Data Analysis", level: "Beginner" },
-  ]);
+  const [skills, setSkills] = useState<Skill[]>(() => {
+    const saved = localStorage.getItem("portfolio_skills");
+    if (saved) return JSON.parse(saved);
+    // Default skills based on assessment strengths
+    return [
+      { name: "Leadership", level: "Intermediate" },
+      { name: "Problem Solving", level: "Intermediate" },
+      { name: "Communication", level: "Intermediate" },
+      { name: "Teamwork", level: "Intermediate" },
+    ];
+  });
+
+  // Save portfolio to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("portfolio_about", JSON.stringify(portfolio));
+    localStorage.setItem("portfolio_projects", JSON.stringify(projects));
+    localStorage.setItem("portfolio_skills", JSON.stringify(skills));
+    setPortfolioSaved(true);
+    const timer = setTimeout(() => setPortfolioSaved(false), 2000);
+    return () => clearTimeout(timer);
+  }, [portfolio, projects, skills]);
 
   const [newProject, setNewProject] = useState<Omit<Project, "id">>({
     title: "",
@@ -79,7 +91,19 @@ export default function PortfolioPage() {
     date: new Date().getFullYear().toString(),
   });
 
-  const [showAddProject, setShowAddProject] = useState(false);
+  // Calculate profile completion percentage
+  const profileCompletion = useMemo(() => {
+    let completedItems = 0;
+    const totalItems = 5;
+    
+    if (portfolio.name && portfolio.name !== "Student") completedItems++;
+    if (portfolio.headline) completedItems++;
+    if (portfolio.bio) completedItems++;
+    if (projects.length > 0) completedItems++;
+    if (skills.length > 0) completedItems++;
+    
+    return Math.round((completedItems / totalItems) * 100);
+  }, [portfolio, projects, skills]);
 
   const handleAddProject = () => {
     if (newProject.title && newProject.description) {
@@ -125,7 +149,13 @@ export default function PortfolioPage() {
             <h1 className="text-3xl font-bold">My Portfolio</h1>
             <p className="text-muted-foreground">Build your digital presence and showcase your strengths</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
+            {portfolioSaved && (
+              <div className="flex items-center gap-2 text-green-600 text-sm font-medium">
+                <Check className="h-4 w-4" />
+                Saved
+              </div>
+            )}
             <Link href="/portfolio-view">
               <Button variant="outline" className="gap-2">
                 <Eye className="h-4 w-4" />
@@ -499,7 +529,7 @@ export default function PortfolioPage() {
                 <p className="text-sm text-muted-foreground">Skills</p>
               </div>
               <div>
-                <div className="text-2xl font-bold text-primary">85%</div>
+                <div className="text-2xl font-bold text-primary">{profileCompletion}%</div>
                 <p className="text-sm text-muted-foreground">Profile Complete</p>
               </div>
             </div>
