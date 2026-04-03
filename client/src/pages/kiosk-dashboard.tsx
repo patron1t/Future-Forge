@@ -20,7 +20,7 @@ export default function KioskDashboardPage() {
       description: "Discover careers based on your strengths",
       icon: Compass,
       path: "/kiosk-assessment",
-      color: "bg-blue-500/10 text-blue-600 border-blue-500/20",
+      color: "bg-primary text-primary-foreground border-primary/20",
       isPrimary: true
     },
     {
@@ -28,7 +28,7 @@ export default function KioskDashboardPage() {
       description: "Start building your digital CV right now",
       icon: FileText,
       path: "/kiosk-portfolio-builder",
-      color: "bg-purple-500/10 text-purple-600 border-purple-500/20",
+      color: "bg-card text-card-foreground border-border hover:border-primary/50",
       isPrimary: false
     },
     {
@@ -36,7 +36,7 @@ export default function KioskDashboardPage() {
       description: "Pick the right subjects for your goals",
       icon: Briefcase,
       path: "/kiosk-subjects",
-      color: "bg-green-500/10 text-green-600 border-green-500/20",
+      color: "bg-card text-card-foreground border-border hover:border-primary/50",
       isPrimary: false
     },
     {
@@ -44,7 +44,7 @@ export default function KioskDashboardPage() {
       description: "Quick tips for mental health and exams",
       icon: Heart,
       path: "/kiosk-wellness",
-      color: "bg-rose-500/10 text-rose-600 border-rose-500/20",
+      color: "bg-card text-card-foreground border-border hover:border-primary/50",
       isPrimary: false
     }
   ];
@@ -88,14 +88,14 @@ export default function KioskDashboardPage() {
               <div 
                 key={idx}
                 onClick={() => setLocation(mod.path)}
-                className={`cursor-pointer rounded-2xl border-2 p-8 transition-all hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between min-h-[220px] ${mod.color} ${mod.isPrimary ? "md:col-span-2 bg-primary/5 border-primary/30" : ""}`}
+                className={`cursor-pointer rounded-2xl border-2 p-8 transition-all hover:scale-[1.02] hover:shadow-lg flex flex-col justify-between min-h-[220px] ${mod.color} ${mod.isPrimary ? "md:col-span-2 shadow-sm" : ""}`}
               >
                 <div className="flex items-start justify-between">
-                  <div className={`p-4 rounded-xl bg-white/50 backdrop-blur-sm shadow-sm`}>
+                  <div className={`p-4 rounded-xl ${mod.isPrimary ? "bg-white/20" : "bg-primary/10 text-primary"} backdrop-blur-sm shadow-sm`}>
                     <mod.icon className="h-10 w-10" />
                   </div>
                   {mod.isPrimary && (
-                    <span className="bg-primary text-primary-foreground text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    <span className="bg-background text-foreground text-sm font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                       Recommended
                     </span>
                   )}
@@ -107,7 +107,7 @@ export default function KioskDashboardPage() {
                 </div>
                 
                 <div className="mt-6 flex justify-end">
-                  <div className="h-12 w-12 rounded-full bg-black/5 flex items-center justify-center">
+                  <div className={`h-12 w-12 rounded-full ${mod.isPrimary ? "bg-white/20" : "bg-primary/10"} flex items-center justify-center`}>
                     <ArrowRight className="h-6 w-6" />
                   </div>
                 </div>
