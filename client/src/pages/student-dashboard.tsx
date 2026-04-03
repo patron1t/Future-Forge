@@ -26,33 +26,6 @@ interface Scout {
   avatar: string;
 }
 
-const mockScouts: Scout[] = [
-  {
-    id: "1",
-    name: "Sarah Mthembu",
-    organization: "TINP - Tshwane Innovation Network",
-    role: "Talent Scout",
-    viewedDate: "Today",
-    avatar: "SM",
-  },
-  {
-    id: "2",
-    name: "James Park",
-    organization: "Tech Startups SA",
-    role: "Recruitment Manager",
-    viewedDate: "2 days ago",
-    avatar: "JP",
-  },
-  {
-    id: "3",
-    name: "Naledi Koala",
-    organization: "Softstart BTI Accelerator",
-    role: "Program Director",
-    viewedDate: "1 week ago",
-    avatar: "NK",
-  },
-];
-
 export default function StudentDashboard() {
   const [, setLocation] = useLocation();
   const [isLoading, setIsLoading] = useState(true);
@@ -113,10 +86,16 @@ export default function StudentDashboard() {
     return Math.round(avgScore * 10);
   }, [scoreMap]);
 
-  // Get Profile Views (stored in localStorage, defaults to mock data)
+  // Get Profile Views (stored in localStorage, defaults to 0)
   const profileViewsValue = useMemo(() => {
     const views = localStorage.getItem("profile_views");
-    return views ? parseInt(views) : Math.floor(Math.random() * 25) + 5; // Random 5-30 if not set
+    return views ? parseInt(views) : 0;
+  }, []);
+
+  // Get scouts who viewed the profile
+  const scoutViewers = useMemo(() => {
+    const scouts = localStorage.getItem("profile_scouts");
+    return scouts ? JSON.parse(scouts) : [];
   }, []);
 
   const strengthData = [
@@ -654,7 +633,7 @@ const typeConfig = {
             <CardHeader className="flex items-center justify-between">
               <div>
                 <CardTitle>Who's Viewed Your Profile</CardTitle>
-                <CardDescription>Scouts interested in your profile</CardDescription>
+                <CardDescription>{profileViewsValue > 0 ? `${profileViewsValue} scouts interested` : "No scouts yet"}</CardDescription>
               </div>
               <button
                 onClick={() => setShowScoutViews(false)}
@@ -664,22 +643,30 @@ const typeConfig = {
               </button>
             </CardHeader>
             <CardContent className="space-y-4">
-              {mockScouts.map((scout) => (
-                <div key={scout.id} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-semibold flex-shrink-0">
-                    {scout.avatar}
+              {scoutViewers.length > 0 ? (
+                scoutViewers.map((scout: Scout) => (
+                  <div key={scout.id} className="flex items-start gap-3 p-3 rounded-lg border hover:bg-muted/50 transition-colors">
+                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                      {scout.avatar}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="font-semibold text-sm">{scout.name}</h4>
+                      <p className="text-xs text-muted-foreground truncate">{scout.role}</p>
+                      <p className="text-xs text-muted-foreground truncate">{scout.organization}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{scout.viewedDate}</p>
+                    </div>
+                    <Button variant="ghost" size="sm" className="flex-shrink-0">
+                      View
+                    </Button>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-sm">{scout.name}</h4>
-                    <p className="text-xs text-muted-foreground truncate">{scout.role}</p>
-                    <p className="text-xs text-muted-foreground truncate">{scout.organization}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{scout.viewedDate}</p>
-                  </div>
-                  <Button variant="ghost" size="sm" className="flex-shrink-0">
-                    View
-                  </Button>
+                ))
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Users className="h-8 w-8 mx-auto mb-2 opacity-50" />
+                  <p className="text-sm">No scouts have viewed your profile yet.</p>
+                  <p className="text-xs mt-2">Complete your portfolio to attract scouts!</p>
                 </div>
-              ))}
+              )}
             </CardContent>
           </Card>
         </div>
