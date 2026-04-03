@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "wouter";
-import { ArrowRight, Clock, DollarSign, BookOpen, Users, Zap } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { ArrowRight, Clock, DollarSign, BookOpen, Users, Zap, Home } from "lucide-react";
 
 interface CareerPathway {
   id: string;
@@ -1177,6 +1177,7 @@ interface StrengthScore {
 }
 
 export default function CareerMapPage() {
+  const [, setLocation] = useLocation();
   const searchParams = new URLSearchParams(window.location.search);
   const grade = searchParams.get("grade") || "Your Grade";
   const subjectsParam = searchParams.get("subjects") || "";
@@ -1302,7 +1303,14 @@ export default function CareerMapPage() {
 
           {/* Top 3 Recommendations */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Your Top Recommendations</h2>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold">Your Top Recommendations</h2>
+              <Link href="/student-dashboard">
+                <Button className="gap-2" size="sm">
+                  Go to Dashboard <Home className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
             <div className="grid gap-4 md:grid-cols-3">
               {recommendedPaths.map((path) => (
                 <div key={path.id} className="bg-card border rounded-lg p-6 hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-l-primary">
