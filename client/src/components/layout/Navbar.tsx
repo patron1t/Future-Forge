@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
+import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "@/hooks/useTheme";
@@ -32,7 +33,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 cursor-pointer">
-          <img src="/logo.png" alt="Career Plug AI" className="h-10 w-auto object-contain" />
+          <img src={logo} alt="Career Plug AI" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Menu */}

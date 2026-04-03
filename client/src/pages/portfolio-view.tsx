@@ -154,10 +154,10 @@ export default function PortfolioViewPage() {
 
           {/* Career Plug AI Logo for PDF */}
           <div className="mb-8 flex items-center justify-center">
-            <div className="bg-primary/10 px-8 py-4 rounded-xl inline-flex items-center gap-4 print:border print:border-gray-200">
-              <img src="/logo.png" alt="Career Plug AI Logo" className="h-12 w-12 object-contain" />
+            <div className="bg-primary/10 text-primary px-6 py-3 rounded-xl inline-flex items-center gap-3 print:border print:border-gray-200">
+              <Briefcase className="h-8 w-8" />
               <div>
-                <h2 className="text-2xl font-bold tracking-tight leading-none text-primary">Career Plug AI</h2>
+                <h2 className="text-2xl font-bold tracking-tight leading-none">Career Plug AI</h2>
                 <p className="text-xs font-medium uppercase tracking-wider text-primary/80">Student Portfolio</p>
               </div>
             </div>
