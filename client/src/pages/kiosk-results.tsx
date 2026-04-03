@@ -3,6 +3,7 @@ import { useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ArrowRight } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 
 interface CareerPath {
   title: string;
@@ -95,17 +96,16 @@ export default function KioskResultsPage() {
 
               <div className="text-center pt-8 mt-4 border-t border-border">
                 <p className="text-lg text-muted-foreground mb-2">Or scan to view on your phone:</p>
-                <div className="w-48 h-48 bg-white rounded-xl mx-auto flex items-center justify-center border-4 border-primary/20 mt-4 mb-4 shadow-sm">
-                  {/* Placeholder for actual QR code */}
-                  <div className="text-center">
-                    <div className="grid grid-cols-2 gap-1 w-32 h-32 mx-auto opacity-80">
-                      <div className="bg-primary/80 rounded-tl-lg rounded-br-sm"></div>
-                      <div className="bg-primary/60 rounded-tr-lg rounded-bl-sm"></div>
-                      <div className="bg-primary/70 rounded-bl-lg rounded-tr-sm"></div>
-                      <div className="bg-primary/90 rounded-br-lg rounded-tl-sm"></div>
-                    </div>
-                    <span className="text-xs font-bold text-primary mt-2 block">SCAN ME</span>
-                  </div>
+                <div className="bg-white p-4 rounded-xl mx-auto inline-block border-4 border-primary/20 mt-4 mb-4 shadow-sm">
+                  <QRCodeSVG 
+                    value="https://wa.me/27796158762?text=Hi%20Career%20Plug%20AI!%20I%20just%20took%20the%20kiosk%20assessment.%20Please%20send%20me%20my%20career%20action%20plan!" 
+                    size={160}
+                    level="H"
+                    includeMargin={false}
+                    fgColor="#000000"
+                    bgColor="#ffffff"
+                  />
+                  <span className="text-xs font-bold text-primary mt-2 block">SCAN WITH WHATSAPP</span>
                 </div>
                 <p className="text-xl font-bold text-primary">careerplugai.co.za</p>
               </div>
