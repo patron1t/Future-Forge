@@ -24,6 +24,10 @@ import KioskWelcomePage from "@/pages/kiosk-welcome";
 import KioskAssessmentPage from "@/pages/kiosk-assessment";
 import KioskResultsPage from "@/pages/kiosk-results";
 import KioskSetupPage from "@/pages/kiosk-setup";
+import KioskDashboardPage from "@/pages/kiosk-dashboard";
+import KioskPortfolioBuilderPage from "@/pages/kiosk-portfolio-builder";
+import KioskSubjectsPage from "@/pages/kiosk-subjects";
+import KioskWellnessPage from "@/pages/kiosk-wellness";
 import PortfolioPage from "@/pages/portfolio";
 import PortfolioViewPage from "@/pages/portfolio-view";
 import OpportunitiesPage from "@/pages/opportunities";
@@ -43,8 +47,12 @@ function Router() {
       <Route path="/career-map" component={CareerMapPage} />
       <Route path="/kiosk" component={KioskWelcomePage} />
       <Route path="/kiosk-setup" component={KioskSetupPage} />
+      <Route path="/kiosk-dashboard" component={KioskDashboardPage} />
       <Route path="/kiosk-assessment" component={KioskAssessmentPage} />
       <Route path="/kiosk-results" component={KioskResultsPage} />
+      <Route path="/kiosk-portfolio-builder" component={KioskPortfolioBuilderPage} />
+      <Route path="/kiosk-subjects" component={KioskSubjectsPage} />
+      <Route path="/kiosk-wellness" component={KioskWellnessPage} />
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/portfolio-view" component={PortfolioViewPage} />
       <Route path="/opportunities" component={OpportunitiesPage} />

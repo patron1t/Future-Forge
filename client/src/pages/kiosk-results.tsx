@@ -47,7 +47,7 @@ export default function KioskResultsPage() {
   };
 
   const handleBack = () => {
-    setLocation("/kiosk");
+    setLocation("/kiosk-dashboard");
   };
 
   return (

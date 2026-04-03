@@ -12,7 +12,7 @@ export default function KioskWelcomePage() {
   }, []);
 
   const handleStart = () => {
-    setLocation("/kiosk-assessment");
+    setLocation("/kiosk-dashboard");
   };
 
   const handleLearnMore = () => {

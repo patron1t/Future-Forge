@@ -87,7 +87,7 @@ export default function KioskAssessmentPage() {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     } else {
-      setLocation("/kiosk");
+      setLocation("/kiosk-dashboard");
     }
   };
 
