@@ -147,7 +147,9 @@ export default function AssessmentPage() {
 
   if (isComplete) {
     const grade = localStorage.getItem("onboarding_grade") || "";
-    const subjectsStr = localStorage.getItem("onboarding_subjects") || "";
+    const subjectsJson = localStorage.getItem("onboarding_subjects") || "[]";
+    const subjectsArray = JSON.parse(subjectsJson);
+    const subjectsStr = subjectsArray.join(",");
     const careerMapUrl = `/career-map?grade=${encodeURIComponent(grade)}&subjects=${encodeURIComponent(subjectsStr)}`;
 
     return (
