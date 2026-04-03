@@ -22,6 +22,93 @@ interface StrengthScore {
   color: string;
 }
 
+interface CareerPathFull extends CareerPath {
+  requiredSubjects: string[];
+}
+
+const allCareerPaths: CareerPathFull[] = [
+  {
+    id: "tech-entrepreneur",
+    title: "Tech Entrepreneur",
+    description: "Build innovative technology solutions and start your own company. Perfect for combining leadership, STEM, and entrepreneurial drive.",
+    icon: "🚀",
+    match: 95,
+    skills: ["Product Strategy", "Team Leadership", "Technical Foundation", "Business Development"],
+    opportunities: 12,
+    requiredSubjects: ["Mathematics", "Computer Science", "Physical Sciences"],
+  },
+  {
+    id: "product-manager",
+    title: "Product Manager",
+    description: "Lead product vision and strategy at growing tech companies. Leverage your leadership and creative problem-solving.",
+    icon: "🎯",
+    match: 88,
+    skills: ["User Research", "Strategic Thinking", "Data Analysis", "Cross-functional Communication"],
+    opportunities: 18,
+    requiredSubjects: ["Mathematics", "Business Studies"],
+  },
+  {
+    id: "data-scientist",
+    title: "Data Scientist",
+    description: "Analyze complex data to solve real-world problems. Use mathematics and programming to drive business decisions.",
+    icon: "📊",
+    match: 82,
+    skills: ["Data Analysis", "Programming", "Statistics", "Machine Learning"],
+    opportunities: 15,
+    requiredSubjects: ["Mathematics", "Physical Sciences", "Computer Science"],
+  },
+  {
+    id: "business-analyst",
+    title: "Business Analyst",
+    description: "Help organizations improve efficiency and strategy through data-driven insights and process optimization.",
+    icon: "📈",
+    match: 80,
+    skills: ["Business Analysis", "Data Analysis", "Communication", "Problem Solving"],
+    opportunities: 14,
+    requiredSubjects: ["Business Studies", "Mathematics"],
+  },
+  {
+    id: "design-engineer",
+    title: "Design Engineer",
+    description: "Create innovative products combining design thinking with technical implementation.",
+    icon: "🎨",
+    match: 85,
+    skills: ["Design Thinking", "Technical Skills", "Creativity", "User Experience"],
+    opportunities: 10,
+    requiredSubjects: ["Computer Science", "Technical Sciences"],
+  },
+  {
+    id: "environmental-scientist",
+    title: "Environmental Scientist",
+    description: "Address environmental challenges through scientific research and sustainable solutions.",
+    icon: "🌱",
+    match: 78,
+    skills: ["Research", "Scientific Analysis", "Environmental Systems", "Communication"],
+    opportunities: 8,
+    requiredSubjects: ["Life Sciences", "Physical Sciences"],
+  },
+  {
+    id: "marketing-strategist",
+    title: "Marketing Strategist",
+    description: "Create compelling brand strategies and campaigns that connect with audiences.",
+    icon: "🎯",
+    match: 80,
+    skills: ["Strategy", "Creative Thinking", "Data Analysis", "Communication"],
+    opportunities: 12,
+    requiredSubjects: ["Business Studies", "Economics"],
+  },
+  {
+    id: "systems-architect",
+    title: "Systems Architect",
+    description: "Design large-scale technical systems and infrastructure for organizations.",
+    icon: "🏗️",
+    match: 82,
+    skills: ["Systems Design", "Technical Knowledge", "Problem Solving", "Leadership"],
+    opportunities: 9,
+    requiredSubjects: ["Mathematics", "Computer Science", "Physical Sciences"],
+  },
+];
+
 export default function CareerMapPage() {
   const searchParams = new URLSearchParams(window.location.search);
   const grade = searchParams.get("grade") || "Your Grade";
@@ -32,45 +119,60 @@ export default function CareerMapPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  // Mock data based on assessment - in real app, would come from backend
-  const strengthScores: StrengthScore[] = [
-    { category: "Entrepreneurship", score: 9, color: "bg-blue-500" },
-    { category: "Leadership", score: 8, color: "bg-purple-500" },
-    { category: "STEM", score: 7, color: "bg-green-500" },
-    { category: "Creativity", score: 8, color: "bg-pink-500" },
-    { category: "Social Impact", score: 8, color: "bg-orange-500" },
-    { category: "Sports", score: 5, color: "bg-yellow-500" },
-  ];
+  // Generate strength scores based on assessment
+  const generateStrengths = (): StrengthScore[] => {
+    const baseStrengths = [
+      { category: "Entrepreneurship", score: 7, color: "bg-blue-500" },
+      { category: "Leadership", score: 6, color: "bg-purple-500" },
+      { category: "STEM", score: 5, color: "bg-green-500" },
+      { category: "Creativity", score: 6, color: "bg-pink-500" },
+      { category: "Social Impact", score: 6, color: "bg-orange-500" },
+      { category: "Sports", score: 4, color: "bg-yellow-500" },
+    ];
 
-  const careerPaths: CareerPath[] = [
-    {
-      id: "tech-entrepreneur",
-      title: "Tech Entrepreneur",
-      description: "Build innovative technology solutions and start your own company. Perfect for combining leadership, STEM, and entrepreneurial drive.",
-      icon: "🚀",
-      match: 95,
-      skills: ["Product Strategy", "Team Leadership", "Technical Foundation", "Business Development"],
-      opportunities: 12,
-    },
-    {
-      id: "product-manager",
-      title: "Product Manager",
-      description: "Lead product vision and strategy at growing tech companies. Leverage your leadership and creative problem-solving.",
-      icon: "🎯",
-      match: 88,
-      skills: ["User Research", "Strategic Thinking", "Data Analysis", "Cross-functional Communication"],
-      opportunities: 18,
-    },
-    {
-      id: "innovation-consultant",
-      title: "Innovation Consultant",
-      description: "Help organizations transform through innovation and digital strategy. Use your entrepreneurial mindset to drive change.",
-      icon: "💡",
-      match: 85,
-      skills: ["Systems Thinking", "Change Management", "Business Strategy", "Creative Problem Solving"],
-      opportunities: 8,
-    },
-  ];
+    // Boost STEM if student has math/science subjects
+    if (subjects.includes("Mathematics") || subjects.includes("Computer Science")) {
+      baseStrengths[2].score = 9;
+    }
+    if (subjects.includes("Physical Sciences") || subjects.includes("Life Sciences")) {
+      baseStrengths[2].score = Math.max(baseStrengths[2].score, 8);
+    }
+
+    // Boost business/leadership if they have business studies
+    if (subjects.includes("Business Studies") || subjects.includes("Economics")) {
+      baseStrengths[1].score = 8;
+    }
+
+    // Boost creativity for certain subjects
+    if (subjects.includes("Technical Sciences")) {
+      baseStrengths[3].score = 8;
+    }
+
+    return baseStrengths;
+  };
+
+  // Filter and rank career paths based on subjects
+  const getRecommendedCareerPaths = (): CareerPath[] => {
+    return allCareerPaths
+      .map((career) => {
+        const matchingSubjects = career.requiredSubjects.filter((req) =>
+          subjects.includes(req)
+        ).length;
+        const match = Math.max(
+          50,
+          Math.round(
+            (matchingSubjects / career.requiredSubjects.length) * 100 * 0.7 +
+              (10 * (3 - matchingSubjects))
+          )
+        );
+        return { ...career, match };
+      })
+      .sort((a, b) => b.match - a.match)
+      .slice(0, 3);
+  };
+
+  const strengthScores = generateStrengths();
+  const careerPaths = getRecommendedCareerPaths();
 
   return (
     <div className="min-h-screen bg-background font-sans flex flex-col">
