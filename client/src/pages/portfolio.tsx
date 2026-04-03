@@ -36,6 +36,7 @@ export default function PortfolioPage() {
   const [isEditingSkills, setIsEditingSkills] = useState(false);
   const [showAddProject, setShowAddProject] = useState(false);
   const [portfolioSaved, setPortfolioSaved] = useState(false);
+  const [shareClicked, setShareClicked] = useState(false);
 
   // Get student info from localStorage
   const studentName = useMemo(() => localStorage.getItem("student_name") || "Student", []);
@@ -126,6 +127,37 @@ export default function PortfolioPage() {
     date: new Date().getFullYear().toString(),
   });
 
+  const handleShare = async () => {
+    try {
+      // Create absolute URL
+      const shareUrl = `${window.location.protocol}//${window.location.host}/portfolio-view`;
+      
+      // Fallback to clipboard first because navigator.share fails in some embedded browsers (like Replit's webview)
+      await navigator.clipboard.writeText(shareUrl);
+      setShareClicked(true);
+      setTimeout(() => setShareClicked(false), 2000);
+      
+      // Still try to open native share if available, but don't fail if it blocks
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `${portfolio.name}'s Portfolio | Career Plug AI`,
+            text: `Check out my portfolio and career profile on Career Plug AI!`,
+            url: shareUrl,
+          });
+        } catch (e) {
+          // Ignore abort errors from user canceling share dialog
+          console.log("Native share aborted or failed:", e);
+        }
+      }
+    } catch (err) {
+      console.error("Error sharing:", err);
+      // Ultimate fallback
+      const fallbackUrl = `${window.location.protocol}//${window.location.host}/portfolio-view`;
+      prompt("Copy your portfolio link:", fallbackUrl);
+    }
+  };
+
   // Calculate profile completion percentage
   const profileCompletion = useMemo(() => {
     let completedItems = 0;
@@ -212,9 +244,21 @@ export default function PortfolioPage() {
                 Preview
               </Button>
             </Link>
-            <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-              <Share2 className="h-4 w-4" />
-              Share Portfolio
+            <Button 
+              className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
+              onClick={handleShare}
+            >
+              {shareClicked ? (
+                <>
+                  <Check className="h-4 w-4" />
+                  Copied!
+                </>
+              ) : (
+                <>
+                  <Share2 className="h-4 w-4" />
+                  Share Portfolio
+                </>
+              )}
             </Button>
           </div>
         </div>

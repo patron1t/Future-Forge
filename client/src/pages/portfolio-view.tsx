@@ -67,24 +67,30 @@ export default function PortfolioViewPage() {
 
   const handleShare = async () => {
     try {
-      const shareUrl = `${window.location.origin}/portfolio-view`;
+      const shareUrl = `${window.location.protocol}//${window.location.host}/portfolio-view`;
       
-      // Try using the native Web Share API first (great for mobile)
-      if (navigator.share) {
-        await navigator.share({
-          title: `${about.name}'s Portfolio | Career Plug AI`,
-          text: `Check out my portfolio and career profile on Career Plug AI!`,
-          url: shareUrl,
-        });
-      } else {
-        // Fallback to clipboard copy
-        await navigator.clipboard.writeText(shareUrl);
-      }
-      
+      // Fallback to clipboard first because navigator.share fails in some embedded browsers
+      await navigator.clipboard.writeText(shareUrl);
       setShareClicked(true);
       setTimeout(() => setShareClicked(false), 2000);
+      
+      // Still try to open native share if available
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: `${about.name}'s Portfolio | Career Plug AI`,
+            text: `Check out my portfolio and career profile on Career Plug AI!`,
+            url: shareUrl,
+          });
+        } catch (e) {
+          console.log("Native share aborted or failed:", e);
+        }
+      }
     } catch (err) {
       console.error("Error sharing:", err);
+      // Ultimate fallback
+      const fallbackUrl = `${window.location.protocol}//${window.location.host}/portfolio-view`;
+      prompt("Copy your portfolio link:", fallbackUrl);
     }
   };
 
