@@ -1269,7 +1269,7 @@ export default function CareerMapPage() {
               Your Career Map
             </h1>
             <p className="text-lg text-muted-foreground">
-              Explore 90+ pathways across all strengths — Traditional degrees, Fast certifications, Skilled trades, or Alternative routes
+              Explore pathways across all strengths — Traditional degrees, Fast certifications, Skilled trades, or Alternative routes
             </p>
           </div>
 
@@ -1318,7 +1318,7 @@ export default function CareerMapPage() {
 
           {/* Browse All Pathways */}
           <div>
-            <h2 className="text-2xl font-bold mb-6">Explore All {careerPathways.length}+ Pathways</h2>
+            <h2 className="text-2xl font-bold mb-6">Explore All Pathways</h2>
             <Tabs defaultValue="STEM" className="w-full">
               <TabsList className="grid w-full grid-cols-3 md:grid-cols-6">
                 <TabsTrigger value="STEM">STEM</TabsTrigger>
