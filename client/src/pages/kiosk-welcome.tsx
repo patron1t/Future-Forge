@@ -58,12 +58,21 @@ export default function KioskWelcomePage() {
         </Button>
 
         <Button
+          onClick={() => setLocation("/kiosk-auth")}
+          size="lg"
+          variant="secondary"
+          className="h-16 text-xl font-semibold rounded-2xl w-full border-2"
+        >
+          Returning Learner? Log In
+        </Button>
+
+        <Button
           onClick={handleLearnMore}
           size="lg"
-          variant="outline"
-          className="h-16 text-xl font-semibold rounded-2xl w-full"
+          variant="ghost"
+          className="h-12 text-lg text-muted-foreground font-semibold rounded-2xl w-full"
         >
-          Learn More
+          What is Career Plug AI?
         </Button>
       </div>
 
