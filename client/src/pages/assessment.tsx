@@ -82,10 +82,56 @@ export default function AssessmentPage() {
     setAnswers({ ...answers, [question.id]: value });
   };
 
+  const calculateScores = (allAnswers: Record<number, number | string>) => {
+    const scores: Record<string, number> = {
+      STEM: 0,
+      Entrepreneurship: 0,
+      Leadership: 0,
+      Creativity: 0,
+      Sports: 0,
+      "Social Impact": 0,
+    };
+
+    // Score each question based on the answer
+    // Q1: STEM (slider 0-10)
+    if (allAnswers[1] !== undefined) {
+      scores.STEM = (allAnswers[1] as number) ?? 0;
+    }
+    // Q2: Sports (multiple choice: 0=0, 1=3, 2=6, 3=10)
+    if (allAnswers[2] !== undefined) {
+      const sportScores = [0, 10, 6, 3];
+      scores.Sports = sportScores[allAnswers[2] as number] ?? 0;
+    }
+    // Q3: Entrepreneurship (multiple choice: 0=10, 1=7, 2=4, 3=0)
+    if (allAnswers[3] !== undefined) {
+      const entrepreneurScores = [10, 7, 4, 0];
+      scores.Entrepreneurship = entrepreneurScores[allAnswers[3] as number] ?? 0;
+    }
+    // Q4: Creativity (multiple choice: 0=10, 1=10, 2=10, 3=0)
+    if (allAnswers[4] !== undefined) {
+      const creativeScores = [10, 10, 10, 0];
+      scores.Creativity = creativeScores[allAnswers[4] as number] ?? 0;
+    }
+    // Q5: Leadership (slider 0-10)
+    if (allAnswers[5] !== undefined) {
+      scores.Leadership = (allAnswers[5] as number) ?? 0;
+    }
+    // Q6: Social Impact (multiple choice: 0=10, 1=7, 2=4, 3=0)
+    if (allAnswers[6] !== undefined) {
+      const socialScores = [10, 7, 4, 0];
+      scores["Social Impact"] = socialScores[allAnswers[6] as number] ?? 0;
+    }
+
+    return scores;
+  };
+
   const handleNext = () => {
     if (currentQuestion < assessmentQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
+      const scores = calculateScores(answers);
+      localStorage.setItem("assessmentScores", JSON.stringify(scores));
+      localStorage.setItem("assessmentAnswers", JSON.stringify(answers));
       setIsComplete(true);
     }
   };

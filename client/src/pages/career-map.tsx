@@ -1188,29 +1188,27 @@ export default function CareerMapPage() {
   }, []);
 
   const generateStrengths = (): StrengthScore[] => {
-    const strengths = [
-      { category: "STEM", score: 5, color: "bg-green-500" },
-      { category: "Entrepreneurship", score: 5, color: "bg-blue-500" },
-      { category: "Leadership", score: 5, color: "bg-purple-500" },
-      { category: "Creativity", score: 5, color: "bg-pink-500" },
-      { category: "Sports", score: 5, color: "bg-yellow-500" },
-      { category: "Social Impact", score: 5, color: "bg-orange-500" },
-    ];
+    // Try to get actual assessment scores from localStorage
+    const savedScores = localStorage.getItem("assessmentScores");
+    const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : null;
 
-    if (subjects.includes("Mathematics") || subjects.includes("Computer Science") || subjects.includes("Physical Sciences")) {
-      strengths[0].score = 9;
-    }
-    if (subjects.includes("Business Studies") || subjects.includes("Economics")) {
-      strengths[1].score = 8;
-    }
-    if (subjects.includes("Technical Sciences")) {
-      strengths[3].score = 8;
-    }
+    const strengths = [
+      { category: "STEM", score: scoreMap?.STEM ?? 5, color: "bg-green-500" },
+      { category: "Entrepreneurship", score: scoreMap?.Entrepreneurship ?? 5, color: "bg-blue-500" },
+      { category: "Leadership", score: scoreMap?.Leadership ?? 5, color: "bg-purple-500" },
+      { category: "Creativity", score: scoreMap?.Creativity ?? 5, color: "bg-pink-500" },
+      { category: "Sports", score: scoreMap?.Sports ?? 5, color: "bg-yellow-500" },
+      { category: "Social Impact", score: scoreMap?.["Social Impact"] ?? 5, color: "bg-orange-500" },
+    ];
 
     return strengths;
   };
 
   const getRecommendedPaths = (): CareerPathway[] => {
+    // Get actual assessment scores
+    const savedScores = localStorage.getItem("assessmentScores");
+    const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : null;
+
     return careerPathways
       .filter(path => {
         const hasRequiredSubjects = path.requiredSubjects.length === 0 || 
@@ -1219,7 +1217,15 @@ export default function CareerMapPage() {
         const entryNum = parseInt(path.entryLevel);
         return hasRequiredSubjects && gradeNum >= entryNum;
       })
-      .sort((a, b) => b.opportunities - a.opportunities)
+      .sort((a, b) => {
+        // Sort by strength match (if scores exist), then by opportunities
+        if (scoreMap) {
+          const aScore = scoreMap[a.strength] ?? 0;
+          const bScore = scoreMap[b.strength] ?? 0;
+          if (aScore !== bScore) return bScore - aScore;
+        }
+        return b.opportunities - a.opportunities;
+      })
       .slice(0, 3);
   };
 
