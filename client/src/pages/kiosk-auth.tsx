@@ -12,6 +12,7 @@ export default function KioskAuthPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [pin, setPin] = useState("");
   const [name, setName] = useState("");
+  const [grade, setGrade] = useState("");
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,14 +39,22 @@ export default function KioskAuthPage() {
         setLocation("/kiosk-dashboard");
       }
     } else {
-      if (phoneNumber && pin && name) {
+      if (phoneNumber && pin && name && grade) {
         localStorage.setItem("student_name", name);
         localStorage.setItem("kiosk_identifier", phoneNumber);
+        localStorage.setItem("onboarding_grade", grade);
         toast({
           title: "Account Created!",
           description: "Your profile is now secured with your PIN."
         });
         setLocation("/kiosk-dashboard");
+      } else if (!isLogin && !grade) {
+        toast({
+          variant: "destructive",
+          title: "Missing Grade",
+          description: "Please select your grade."
+        });
+        return;
       }
     }
   };
@@ -75,15 +84,32 @@ export default function KioskAuthPage() {
 
         <form onSubmit={handleSubmit} className="bg-muted/30 border-2 rounded-3xl p-8 space-y-6">
           {!isLogin && (
-            <div className="space-y-3">
-              <label className="text-lg font-bold">First Name</label>
-              <Input 
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Thabo"
-                className="h-16 text-xl rounded-xl"
-                required={!isLogin}
-              />
+            <div className="space-y-4">
+              <div className="space-y-3">
+                <label className="text-lg font-bold">First Name</label>
+                <Input 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Thabo"
+                  className="h-16 text-xl rounded-xl"
+                  required={!isLogin}
+                />
+              </div>
+
+              <div className="space-y-3">
+                <label className="text-lg font-bold">Grade</label>
+                <div className="grid grid-cols-5 gap-2">
+                  {[8, 9, 10, 11, 12].map(g => (
+                    <div 
+                      key={g}
+                      onClick={() => setGrade(`Grade ${g}`)}
+                      className={`h-14 rounded-xl flex items-center justify-center text-lg font-bold cursor-pointer border-2 transition-all ${grade === `Grade ${g}` ? 'bg-primary text-primary-foreground border-primary' : 'bg-background hover:border-primary/50'}`}
+                    >
+                      {g}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
