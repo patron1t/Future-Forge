@@ -132,6 +132,7 @@ export default function AssessmentPage() {
       const scores = calculateScores(answers);
       localStorage.setItem("assessmentScores", JSON.stringify(scores));
       localStorage.setItem("assessmentAnswers", JSON.stringify(answers));
+      localStorage.setItem("onboarding_complete", "true");
       setIsComplete(true);
     }
   };
