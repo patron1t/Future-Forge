@@ -10,11 +10,14 @@ import {
   X,
   Briefcase,
   Heart,
-  FileText
+  FileText,
+  Target,
+  MessageSquare
 } from "lucide-react";
 import logo from "@assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 
 export function DashboardLayout({ children, type = "student" }: { children: React.ReactNode, type?: "student" | "professional" }) {
   const [location] = useLocation();
@@ -35,6 +38,8 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
 
   const studentLinks = [
     { href: "/student-dashboard", icon: LayoutDashboard, label: "Overview" },
+    { href: "/opportunities", icon: Target, label: "Opportunities", badge: "New" },
+    { href: "/inbox", icon: MessageSquare, label: "Scout Inbox", badge: "1" },
     { href: "/portfolio", icon: FileText, label: "Portfolio" },
     { href: "/digital-footprint", icon: User, label: "Digital Footprint" },
     { href: "/wellness", icon: Heart, label: "Wellness Hub" },
@@ -83,14 +88,21 @@ export function DashboardLayout({ children, type = "student" }: { children: Reac
               return (
                 <Link key={link.href} href={link.href}>
                   <div
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
+                    className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors cursor-pointer ${
                       isActive 
                         ? "bg-primary/10 text-primary" 
                         : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
                   >
-                    <link.icon className="h-4 w-4" />
-                    {link.label}
+                    <div className="flex items-center gap-3">
+                      <link.icon className="h-4 w-4" />
+                      {link.label}
+                    </div>
+                    {link.badge && (
+                      <Badge variant={link.badge === "New" ? "default" : "destructive"} className="h-5 px-1.5 text-[10px] uppercase">
+                        {link.badge}
+                      </Badge>
+                    )}
                   </div>
                 </Link>
               );

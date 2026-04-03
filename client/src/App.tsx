@@ -25,6 +25,8 @@ import KioskAssessmentPage from "@/pages/kiosk-assessment";
 import KioskResultsPage from "@/pages/kiosk-results";
 import PortfolioPage from "@/pages/portfolio";
 import PortfolioViewPage from "@/pages/portfolio-view";
+import OpportunitiesPage from "@/pages/opportunities";
+import InboxPage from "@/pages/inbox";
 
 function Router() {
   return (
@@ -41,6 +43,8 @@ function Router() {
       <Route path="/kiosk-results" component={KioskResultsPage} />
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/portfolio-view" component={PortfolioViewPage} />
+      <Route path="/opportunities" component={OpportunitiesPage} />
+      <Route path="/inbox" component={InboxPage} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
       <Route path="/sponsorship" component={SponsorshipPage} />
