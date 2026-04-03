@@ -70,12 +70,12 @@ export default function StudentDashboard() {
   const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : {};
 
   const strengthData = [
-    { subject: 'Entrepreneurship', A: scoreMap.Entrepreneurship ?? 50, fullMark: 100 },
-    { subject: 'Leadership', A: scoreMap.Leadership ?? 50, fullMark: 100 },
-    { subject: 'STEM', A: scoreMap.STEM ?? 50, fullMark: 100 },
-    { subject: 'Creativity', A: scoreMap.Creativity ?? 50, fullMark: 100 },
-    { subject: 'Social Impact', A: scoreMap['Social Impact'] ?? 50, fullMark: 100 },
-    { subject: 'Sports', A: scoreMap.Sports ?? 50, fullMark: 100 },
+    { subject: 'Entrepreneurship', A: (scoreMap.Entrepreneurship ?? 5) * 10, fullMark: 100 },
+    { subject: 'Leadership', A: (scoreMap.Leadership ?? 5) * 10, fullMark: 100 },
+    { subject: 'STEM', A: (scoreMap.STEM ?? 5) * 10, fullMark: 100 },
+    { subject: 'Creativity', A: (scoreMap.Creativity ?? 5) * 10, fullMark: 100 },
+    { subject: 'Social Impact', A: (scoreMap['Social Impact'] ?? 5) * 10, fullMark: 100 },
+    { subject: 'Sports', A: (scoreMap.Sports ?? 5) * 10, fullMark: 100 },
   ];
 
   const getCareerPathsForProfile = (scores: Record<string, number>) => {
