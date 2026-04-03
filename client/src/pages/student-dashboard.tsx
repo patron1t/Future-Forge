@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 import { DashboardLayout } from "@/components/layout/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -68,6 +68,19 @@ export default function StudentDashboard() {
   // Get actual assessment scores
   const savedScores = localStorage.getItem("assessmentScores");
   const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : {};
+
+  // Calculate Career Clarity (average of all assessment scores as percentage)
+  const careerClarityValue = useMemo(() => {
+    if (Object.keys(scoreMap).length === 0) return 0;
+    const avgScore = Object.values(scoreMap).reduce((a, b) => a + b, 0) / Object.values(scoreMap).length;
+    return Math.round(avgScore * 10);
+  }, [scoreMap]);
+
+  // Get Profile Views (stored in localStorage, defaults to mock data)
+  const profileViewsValue = useMemo(() => {
+    const views = localStorage.getItem("profile_views");
+    return views ? parseInt(views) : Math.floor(Math.random() * 25) + 5; // Random 5-30 if not set
+  }, []);
 
   const strengthData = [
     { subject: 'Entrepreneurship', A: (scoreMap.Entrepreneurship ?? 5) * 10, fullMark: 100 },
@@ -353,7 +366,7 @@ const typeConfig = {
             <CardTitle className="text-sm font-medium">Career Clarity</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">85%</div>
+            <div className="text-3xl font-bold">{careerClarityValue}%</div>
             <p className="text-xs text-muted-foreground mt-1">From assessment</p>
           </CardContent>
         </Card>
@@ -380,7 +393,7 @@ const typeConfig = {
             <CardTitle className="text-sm font-medium">Profile Views</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold">12</div>
+            <div className="text-3xl font-bold">{profileViewsValue}</div>
             <p className="text-xs text-muted-foreground mt-1">From scouts</p>
           </CardContent>
         </Card>
