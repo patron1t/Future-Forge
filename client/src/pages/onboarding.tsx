@@ -129,16 +129,6 @@ export default function OnboardingPage() {
     return true;
   };
 
-  const handleSkip = () => {
-    if (role === "student") {
-      setLocation("/student-dashboard");
-    } else if (role === "counselor") {
-      setLocation("/counselor-dashboard");
-    } else {
-      setLocation("/professional-dashboard");
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background font-sans flex flex-col">
       <Navbar />
@@ -331,9 +321,6 @@ export default function OnboardingPage() {
                 >
                   Let's Get Started <ArrowRight className="h-4 w-4" />
                 </Button>
-                <Button onClick={handleSkip} size="lg" variant="outline">
-                  Skip for Now
-                </Button>
               </div>
             </div>
           )}
@@ -391,9 +378,6 @@ export default function OnboardingPage() {
                 >
                   Start Assessment <ArrowRight className="h-4 w-4" />
                 </Button>
-                <Button onClick={handleSkip} size="lg" variant="outline">
-                  Skip for Now
-                </Button>
               </div>
             </div>
           )}
@@ -434,9 +418,6 @@ export default function OnboardingPage() {
                   className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
                 >
                   Start Now <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button onClick={handleSkip} size="lg" variant="outline">
-                  Skip for Now
                 </Button>
               </div>
             </div>
@@ -489,9 +470,6 @@ export default function OnboardingPage() {
                   className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2"
                 >
                   View Career Map <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button onClick={handleSkip} size="lg" variant="outline">
-                  Go to Dashboard
                 </Button>
               </div>
             </div>
