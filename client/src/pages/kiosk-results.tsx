@@ -11,11 +11,108 @@ interface CareerPath {
   match: number;
 }
 
+// Full database of careers
+const allCareers = [
+  // STEM
+  { title: "Engineer", icon: "🏗️" },
+  { title: "Doctor / Medical Professional", icon: "⚕️" },
+  { title: "Scientist", icon: "🔬" },
+  { title: "Pharmacist", icon: "💊" },
+  { title: "Dentist", icon: "😁" },
+  { title: "Veterinarian", icon: "🐾" },
+  { title: "Physicist", icon: "⚛️" },
+  { title: "Chemist", icon: "🧪" },
+  { title: "Geologist", icon: "🪨" },
+  
+  // Tech
+  { title: "Software Developer", icon: "💻" },
+  { title: "Web Developer", icon: "🌐" },
+  { title: "Mobile App Developer", icon: "📱" },
+  { title: "Game Developer", icon: "🎮" },
+  { title: "Data Scientist", icon: "📊" },
+  { title: "Cybersecurity Analyst", icon: "🔒" },
+  { title: "Cloud Architect", icon: "☁️" },
+  { title: "AI/Machine Learning Engineer", icon: "🤖" },
+  { title: "IT Support Specialist", icon: "🖥️" },
+  { title: "Database Administrator", icon: "🗄️" },
+  { title: "Network Engineer", icon: "📡" },
+
+  // Business & Entrepreneurship
+  { title: "Entrepreneur / Business Owner", icon: "🚀" },
+  { title: "Accountant", icon: "📊" },
+  { title: "Financial Analyst", icon: "💹" },
+  { title: "Marketing Manager", icon: "📈" },
+  { title: "Human Resources Manager", icon: "👥" },
+  { title: "Sales Executive", icon: "💼" },
+  { title: "Business Consultant", icon: "💡" },
+  { title: "Project Manager", icon: "📋" },
+  { title: "Real Estate Agent", icon: "🏠" },
+  { title: "Supply Chain Manager", icon: "🚚" },
+
+  // Arts, Design & Media
+  { title: "Graphic Designer", icon: "🎨" },
+  { title: "UX/UI Designer", icon: "✨" },
+  { title: "Architect", icon: "🏛️" },
+  { title: "Interior Designer", icon: "🛋️" },
+  { title: "Fashion Designer", icon: "👗" },
+  { title: "Photographer", icon: "📸" },
+  { title: "Film Director / Video Producer", icon: "🎬" },
+  { title: "Journalist / Writer", icon: "✍️" },
+  { title: "Animator", icon: "🎞️" },
+  { title: "Musician / Audio Engineer", icon: "🎵" },
+
+  // Education & Social Sciences
+  { title: "Teacher / Educator", icon: "📚" },
+  { title: "Psychologist", icon: "🧠" },
+  { title: "Social Worker", icon: "🤝" },
+  { title: "Counselor", icon: "🗣️" },
+  { title: "Sociologist", icon: "🌍" },
+  { title: "Lawyer", icon: "⚖️" },
+  { title: "Paralegal", icon: "📜" },
+  { title: "Urban Planner", icon: "🏙️" },
+
+  // Vocational & Trades
+  { title: "Electrician", icon: "⚡" },
+  { title: "Plumber", icon: "🔧" },
+  { title: "Carpenter", icon: "🪚" },
+  { title: "Mechanic / Auto Technician", icon: "🚗" },
+  { title: "Welder", icon: "🔥" },
+  { title: "Chef / Culinary Arts", icon: "👨‍🍳" },
+  { title: "Cosmetologist / Hair Stylist", icon: "✂️" },
+  { title: "Aviation Technician", icon: "✈️" },
+
+  // Healthcare Support
+  { title: "Nurse", icon: "🏥" },
+  { title: "Physical Therapist", icon: "💪" },
+  { title: "Occupational Therapist", icon: "🦵" },
+  { title: "Radiologist", icon: "🦴" },
+  { title: "Paramedic", icon: "🚑" },
+  { title: "Dental Hygienist", icon: "🦷" },
+  { title: "Nutritionist / Dietitian", icon: "🥗" },
+
+  // Agriculture & Environment
+  { title: "Agricultural Scientist", icon: "🌾" },
+  { title: "Environmental Scientist", icon: "🌱" },
+  { title: "Marine Biologist", icon: "🐋" },
+  { title: "Conservationist", icon: "♻️" },
+  { title: "Farmer / Agribusiness", icon: "🚜" },
+  { title: "Forester", icon: "🌲" },
+
+  // Public Service & Defense
+  { title: "Police Officer", icon: "🚓" },
+  { title: "Firefighter", icon: "🚒" },
+  { title: "Military Officer", icon: "🎖️" },
+  { title: "Paramedic / EMT", icon: "🚑" },
+  { title: "Air Traffic Controller", icon: "🛫" },
+  { title: "Pilot", icon: "✈️" }
+];
+
 export default function KioskResultsPage() {
   const [, setLocation] = useLocation();
   const [email, setEmail] = useState("");
   const [isSaved, setIsSaved] = useState(false);
   const [schoolName, setSchoolName] = useState("");
+  const [careerPaths, setCareerPaths] = useState<CareerPath[]>([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,13 +125,24 @@ export default function KioskResultsPage() {
       // Fallback to localStorage if set by facilitator
       setSchoolName(localStorage.getItem('kiosk_location') || "Unknown School");
     }
-  }, []);
 
-  const careerPaths: CareerPath[] = [
-    { title: "Tech Entrepreneur", icon: "🚀", match: 95 },
-    { title: "Product Manager", icon: "🎯", match: 88 },
-    { title: "Innovation Consultant", icon: "💡", match: 85 },
-  ];
+    // Generate 3 random careers from our full database of 79 careers
+    const shuffled = [...allCareers].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 3).map((career, index) => {
+      // Generate realistic looking match scores (highest first)
+      let matchScore;
+      if (index === 0) matchScore = Math.floor(Math.random() * (98 - 92 + 1)) + 92; // 92-98%
+      else if (index === 1) matchScore = Math.floor(Math.random() * (91 - 85 + 1)) + 85; // 85-91%
+      else matchScore = Math.floor(Math.random() * (84 - 78 + 1)) + 78; // 78-84%
+
+      return {
+        ...career,
+        match: matchScore
+      };
+    });
+    
+    setCareerPaths(selected);
+  }, []);
 
   const handleSaveResults = (e: React.FormEvent) => {
     e.preventDefault();
