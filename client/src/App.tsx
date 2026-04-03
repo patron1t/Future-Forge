@@ -27,6 +27,8 @@ import PortfolioPage from "@/pages/portfolio";
 import PortfolioViewPage from "@/pages/portfolio-view";
 import OpportunitiesPage from "@/pages/opportunities";
 import InboxPage from "@/pages/inbox";
+import ActionPlanPage from "@/pages/action-plan";
+import ResourcesPage from "@/pages/resources";
 
 function Router() {
   return (
@@ -44,6 +46,8 @@ function Router() {
       <Route path="/portfolio" component={PortfolioPage} />
       <Route path="/portfolio-view" component={PortfolioViewPage} />
       <Route path="/opportunities" component={OpportunitiesPage} />
+      <Route path="/action-plan" component={ActionPlanPage} />
+      <Route path="/resources" component={ResourcesPage} />
       <Route path="/inbox" component={InboxPage} />
       <Route path="/student-dashboard" component={StudentDashboard} />
       <Route path="/professionals" component={ProfessionalsPage} />
