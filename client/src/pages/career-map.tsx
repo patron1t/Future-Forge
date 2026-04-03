@@ -508,7 +508,7 @@ const careerPathways: CareerPathway[] = [
   {
     id: "startup-founder-tinp",
     title: "Startup Founder (TINP / Softstart BTI)",
-    description: "Launch your startup with TINP hubs and Softstart BTI mentorship.",
+    description: "Launch your startup with TINP and Softstart BTI mentorship.",
     icon: "🌱",
     strength: "Entrepreneurship",
     duration: "12-24 months incubation",
