@@ -1,8 +1,0 @@
-uploads = []
-outputs = []
-
-[[generated]]
-id = "qyGGRFXPYsexI1ZaVyYxc"
-uri = "file://client/public/logo.png"
-type = "image"
-title = "Career Plug AI Logo"
