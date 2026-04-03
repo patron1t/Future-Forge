@@ -53,7 +53,7 @@ export default function DigitalFootprintPage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <CardTitle className="text-lg">Eco-Friendly Smart Home Model</CardTitle>
-                    <CardDescription>Science Fair 2024 - Regional Winner</CardDescription>
+                    <CardDescription>Science Fair {new Date().getFullYear()} - Regional Winner</CardDescription>
                   </div>
                   <Badge>Hardware</Badge>
                 </div>
@@ -113,7 +113,7 @@ export default function DigitalFootprintPage() {
                   </div>
                   <div>
                     <div className="text-sm font-semibold">Hackathon Winner</div>
-                    <div className="text-xs text-muted-foreground">TechNova 2024</div>
+                    <div className="text-xs text-muted-foreground">TechNova {new Date().getFullYear()}</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">

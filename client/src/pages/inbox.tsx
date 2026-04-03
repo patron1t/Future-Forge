@@ -6,58 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Search, Building2, Send, CheckCircle2, Clock } from "lucide-react";
+import { Search, Building2, Send, CheckCircle2, Clock, MessageSquare } from "lucide-react";
 
-// Mock data for scouts/connections
-const mockConnections = [
-  {
-    id: "c1",
-    name: "Sarah Jenkins",
-    organization: "Allan Gray Orbis Foundation",
-    role: "Talent Scout",
-    avatar: "https://i.pravatar.cc/150?u=sarah",
-    lastMessage: "Your entrepreneurship score is impressive. Have you considered applying for our Grade 12 fellowship?",
-    timestamp: "2 hours ago",
-    unread: true,
-    status: "connected"
-  },
-  {
-    id: "c2",
-    name: "Dr. Thabo Mokoena",
-    organization: "University of Cape Town",
-    role: "Engineering Admissions",
-    avatar: "https://i.pravatar.cc/150?u=thabo",
-    lastMessage: "I saw your latest STEM project in your portfolio. Excellent work with the local community app.",
-    timestamp: "Yesterday",
-    unread: false,
-    status: "connected"
-  },
-  {
-    id: "c3",
-    name: "Amanda Davis",
-    organization: "Standard Bank",
-    role: "Early Talent Program Manager",
-    avatar: "https://i.pravatar.cc/150?u=amanda",
-    lastMessage: "We'd love to invite you to our virtual open day next month.",
-    timestamp: "3 days ago",
-    unread: false,
-    status: "connected"
-  }
-];
-
-const mockPendingRequests = [
-  {
-    id: "r1",
-    name: "David Chen",
-    organization: "TechHub Incubator",
-    role: "Program Director",
-    avatar: "https://i.pravatar.cc/150?u=david",
-    message: "I've reviewed your profile and think you'd be a great fit for our summer coding bootcamp. Let's connect!"
-  }
-];
+// Mock data for scouts/connections - cleared as per request
+const mockConnections: any[] = [];
+const mockPendingRequests: any[] = [];
 
 export default function InboxPage() {
-  const [activeChat, setActiveChat] = useState(mockConnections[0]);
+  const [activeChat, setActiveChat] = useState<any | null>(null);
   const [messageInput, setMessageInput] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -167,75 +123,87 @@ export default function InboxPage() {
 
         {/* Active Chat Window */}
         <Card className="flex flex-col h-full lg:col-span-2 overflow-hidden">
-          {/* Chat Header */}
-          <div className="p-4 border-b flex items-center justify-between bg-muted/10">
-            <div className="flex items-center gap-4">
-              <Avatar className="h-12 w-12 border">
-                <AvatarImage src={activeChat.avatar} />
-                <AvatarFallback>{activeChat.name.substring(0, 2)}</AvatarFallback>
-              </Avatar>
+          {activeChat ? (
+            <>
+              {/* Chat Header */}
+              <div className="p-4 border-b flex items-center justify-between bg-muted/10">
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-12 w-12 border">
+                    <AvatarImage src={activeChat.avatar} />
+                    <AvatarFallback>{activeChat.name.substring(0, 2)}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <h3 className="font-bold">{activeChat.name}</h3>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Building2 className="h-3 w-3" />
+                      {activeChat.role} at {activeChat.organization}
+                    </div>
+                  </div>
+                </div>
+                <Button variant="outline" size="sm">View Profile</Button>
+              </div>
+
+              {/* Chat Messages Area */}
+              <ScrollArea className="flex-1 p-4 bg-muted/5">
+                <div className="space-y-6">
+                  <div className="flex justify-center">
+                    <Badge variant="outline" className="text-xs font-normal text-muted-foreground bg-background">
+                      Connection established {activeChat.timestamp.includes("ago") ? "Today" : activeChat.timestamp}
+                    </Badge>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <Avatar className="h-8 w-8 shrink-0 border mt-auto mb-1">
+                      <AvatarImage src={activeChat.avatar} />
+                    </Avatar>
+                    <div className="bg-background border rounded-2xl rounded-bl-none p-4 max-w-[80%] shadow-sm">
+                      <p className="text-sm">{activeChat.lastMessage}</p>
+                      <p className="text-[10px] text-muted-foreground mt-2 text-right">
+                        {activeChat.timestamp}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </ScrollArea>
+
+              {/* Message Input */}
+              <div className="p-4 border-t bg-background">
+                <form 
+                  className="flex gap-2" 
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (messageInput.trim()) {
+                      setMessageInput("");
+                    }
+                  }}
+                >
+                  <Input 
+                    placeholder={`Reply to ${activeChat.name.split(' ')[0]}...`}
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                    className="flex-1 bg-muted/50"
+                  />
+                  <Button type="submit" size="icon" disabled={!messageInput.trim()}>
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </form>
+                <p className="text-[10px] text-muted-foreground text-center mt-2 flex items-center justify-center gap-1">
+                  <Clock className="h-3 w-3" />
+                  Scouts usually reply within 24 hours
+                </p>
+              </div>
+            </>
+          ) : (
+            <div className="flex-1 flex flex-col items-center justify-center text-muted-foreground p-8 text-center space-y-4">
+              <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
+                <MessageSquare className="h-8 w-8 text-muted-foreground/50" />
+              </div>
               <div>
-                <h3 className="font-bold">{activeChat.name}</h3>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Building2 className="h-3 w-3" />
-                  {activeChat.role} at {activeChat.organization}
-                </div>
+                <h3 className="font-semibold text-lg text-foreground mb-1">No messages yet</h3>
+                <p>When scouts view your portfolio and want to connect, their messages will appear here.</p>
               </div>
             </div>
-            <Button variant="outline" size="sm">View Profile</Button>
-          </div>
-
-          {/* Chat Messages Area */}
-          <ScrollArea className="flex-1 p-4 bg-muted/5">
-            <div className="space-y-6">
-              <div className="flex justify-center">
-                <Badge variant="outline" className="text-xs font-normal text-muted-foreground bg-background">
-                  Connection established {activeChat.timestamp.includes("ago") ? "Today" : activeChat.timestamp}
-                </Badge>
-              </div>
-
-              <div className="flex gap-4">
-                <Avatar className="h-8 w-8 shrink-0 border mt-auto mb-1">
-                  <AvatarImage src={activeChat.avatar} />
-                </Avatar>
-                <div className="bg-background border rounded-2xl rounded-bl-none p-4 max-w-[80%] shadow-sm">
-                  <p className="text-sm">{activeChat.lastMessage}</p>
-                  <p className="text-[10px] text-muted-foreground mt-2 text-right">
-                    {activeChat.timestamp}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </ScrollArea>
-
-          {/* Message Input */}
-          <div className="p-4 border-t bg-background">
-            <form 
-              className="flex gap-2" 
-              onSubmit={(e) => {
-                e.preventDefault();
-                if (messageInput.trim()) {
-                  // In a real app, this would send the message.
-                  // For the mockup, we just clear the input.
-                  setMessageInput("");
-                }
-              }}
-            >
-              <Input 
-                placeholder={`Reply to ${activeChat.name.split(' ')[0]}...`}
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                className="flex-1 bg-muted/50"
-              />
-              <Button type="submit" size="icon" disabled={!messageInput.trim()}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </form>
-            <p className="text-[10px] text-muted-foreground text-center mt-2 flex items-center justify-center gap-1">
-              <Clock className="h-3 w-3" />
-              Scouts usually reply within 24 hours
-            </p>
-          </div>
+          )}
         </Card>
       </div>
     </DashboardLayout>

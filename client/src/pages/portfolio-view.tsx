@@ -273,7 +273,7 @@ export default function PortfolioViewPage() {
               <h2 className="text-2xl font-bold mb-6">Education</h2>
               <div className="border-l-4 border-l-primary pl-4 py-2">
                 <h3 className="text-xl font-semibold">South Africa Student</h3>
-                <p className="text-muted-foreground">{localStorage.getItem("onboarding_grade") || "Grade 11"}, 2024</p>
+                <p className="text-muted-foreground">{localStorage.getItem("onboarding_grade") || "Grade 11"}, {new Date().getFullYear()}</p>
                 <div className="mt-3">
                   <p className="text-sm font-medium mb-2">Subjects:</p>
                   <div className="flex flex-wrap gap-2">

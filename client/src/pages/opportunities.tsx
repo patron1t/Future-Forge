@@ -19,80 +19,8 @@ interface Opportunity {
   requirements: string[];
 }
 
-const allOpportunities: Opportunity[] = [
-  {
-    id: "1",
-    title: "Product Strategy Internship",
-    type: "internship",
-    company: "TechHub Innovation Labs",
-    location: "Johannesburg, SA",
-    duration: "3 months",
-    match: 95,
-    description: "Work with our product team to develop new features and strategies. Perfect for aspiring product managers.",
-    deadline: "Apply by June 15",
-    requirements: ["Grade 11-12", "Computer Science", "Business Studies"]
-  },
-  {
-    id: "2",
-    title: "Young Entrepreneur Scholarship",
-    type: "scholarship",
-    company: "Future Leaders Foundation",
-    location: "Virtual",
-    duration: "1 year",
-    match: 92,
-    description: "Fully funded mentorship and startup accelerator program for Grade 11-12 students.",
-    deadline: "Apply by May 30",
-    requirements: ["Grade 11-12", "Business Studies", "Accounting"]
-  },
-  {
-    id: "3",
-    title: "Startup Mentor - Tech & Business",
-    type: "mentorship",
-    company: "Founder Connect SA",
-    location: "Hybrid",
-    duration: "6 months",
-    match: 90,
-    description: "Get 1-on-1 mentorship from successful entrepreneurs building in SA and Africa.",
-    deadline: "Join anytime",
-    requirements: ["Grade 10-12"]
-  },
-  {
-    id: "4",
-    title: "African Tech Leaders Summit",
-    type: "competition",
-    company: "TechCrunch Africa",
-    location: "Cape Town, SA",
-    duration: "2 days",
-    match: 88,
-    description: "Pitch competition and networking event for young innovators. Winners get funding.",
-    deadline: "Registration closes June 1",
-    requirements: ["Grade 9-12"]
-  },
-  {
-    id: "5",
-    title: "Data Analytics Internship",
-    type: "internship",
-    company: "Data Science Corps",
-    location: "Pretoria, SA",
-    duration: "4 months",
-    match: 78,
-    description: "Learn data analysis and business intelligence while solving real-world problems.",
-    deadline: "Apply by June 22",
-    requirements: ["Grade 12", "Mathematics", "Information Technology"]
-  },
-  {
-    id: "6",
-    title: "Allan Gray Orbis Fellowship",
-    type: "scholarship",
-    company: "Allan Gray Orbis Foundation",
-    location: "South Africa",
-    duration: "University Duration",
-    match: 98,
-    description: "Comprehensive university funding and entrepreneurial mindset development program.",
-    deadline: "Grade 12: April 30",
-    requirements: ["Grade 12", "Mathematics (>60%)"]
-  },
-];
+// In production, these will be fetched from the backend
+const allOpportunities: Opportunity[] = [];
 
 const typeConfig = {
   internship: { icon: Building2, color: "bg-blue-500/10 text-blue-600", badge: "Internship" },

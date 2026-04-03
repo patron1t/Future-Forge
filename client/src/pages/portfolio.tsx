@@ -583,7 +583,7 @@ export default function PortfolioPage() {
               <CardContent className="space-y-4">
                 <div className="p-4 rounded-lg border">
                   <h3 className="font-semibold">Johannesburg High School</h3>
-                  <p className="text-sm text-muted-foreground">Grade 11, 2024</p>
+                  <p className="text-sm text-muted-foreground">{studentGrade}, {new Date().getFullYear()}</p>
                   <div className="mt-3 space-y-2">
                     <p className="text-sm font-medium">Subjects:</p>
                     <div className="flex flex-wrap gap-2">
