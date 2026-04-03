@@ -1,11 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
-import { Mail, Share2, Download, ArrowLeft } from "lucide-react";
+import { Mail, Share2, Download, ArrowLeft, Check } from "lucide-react";
 
 interface PortfolioAbout {
   name: string;
@@ -30,6 +30,9 @@ interface Skill {
 }
 
 export default function PortfolioViewPage() {
+  const [shareClicked, setShareClicked] = useState(false);
+  const [downloadClicked, setDownloadClicked] = useState(false);
+
   // Get portfolio data from localStorage
   const portfolioData = useMemo(() => {
     const aboutJson = localStorage.getItem("portfolio_about");
@@ -59,6 +62,57 @@ export default function PortfolioViewPage() {
 
   const { about, projects, skills, strengths, subjects } = portfolioData;
 
+  const handleShare = () => {
+    const shareUrl = `${window.location.origin}/portfolio-view`;
+    navigator.clipboard.writeText(shareUrl);
+    setShareClicked(true);
+    setTimeout(() => setShareClicked(false), 2000);
+  };
+
+  const handleDownloadPDF = () => {
+    const content = `
+${about.name}
+${about.headline}
+
+${about.bio}
+
+📍 ${about.location}
+${about.website ? `🌐 ${about.website}` : ""}
+
+STRENGTH PROFILE
+${strengths.map((s) => `${s.name}: ${s.score}/10`).join("\n")}
+
+PROJECTS & ACHIEVEMENTS
+${projects
+  .map(
+    (p) => `
+${p.title}
+${p.description}
+Skills: ${p.skills.join(", ")}
+${p.date}
+`
+  )
+  .join("\n")}
+
+SKILLS
+${skills.map((s) => `${s.name} - ${s.level}`).join("\n")}
+
+EDUCATION
+Subjects: ${subjects.join(", ")}
+    `.trim();
+
+    const element = document.createElement("a");
+    const file = new Blob([content], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = `${about.name.replace(/\s+/g, "_")}_Portfolio.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+    setDownloadClicked(true);
+    setTimeout(() => setDownloadClicked(false), 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
@@ -74,13 +128,38 @@ export default function PortfolioViewPage() {
               </Button>
             </Link>
             <div className="flex gap-2">
-              <Button variant="outline" className="gap-2">
-                <Share2 className="h-4 w-4" />
-                Share
+              <Button 
+                variant="outline" 
+                className="gap-2"
+                onClick={handleShare}
+              >
+                {shareClicked ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="h-4 w-4" />
+                    Share
+                  </>
+                )}
               </Button>
-              <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90">
-                <Download className="h-4 w-4" />
-                Download PDF
+              <Button 
+                className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
+                onClick={handleDownloadPDF}
+              >
+                {downloadClicked ? (
+                  <>
+                    <Check className="h-4 w-4" />
+                    Downloaded!
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-4 w-4" />
+                    Download
+                  </>
+                )}
               </Button>
             </div>
           </div>
