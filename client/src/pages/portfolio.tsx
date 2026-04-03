@@ -32,7 +32,8 @@ interface Skill {
 
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState("about");
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingAbout, setIsEditingAbout] = useState(false);
+  const [isEditingSkills, setIsEditingSkills] = useState(false);
 
   // Mock portfolio data
   const [portfolio, setPortfolio] = useState<PortfolioAbout>({
@@ -101,6 +102,20 @@ export default function PortfolioPage() {
     setProjects(projects.filter((p) => p.id !== id));
   };
 
+  const handleSkillLevelChange = (skillName: string, newLevel: "Beginner" | "Intermediate" | "Advanced" | "Expert") => {
+    setSkills(skills.map((s) => (s.name === skillName ? { ...s, level: newLevel } : s)));
+  };
+
+  const handleAddSkill = (newSkillName: string) => {
+    if (newSkillName && !skills.find((s) => s.name === newSkillName)) {
+      setSkills([...skills, { name: newSkillName, level: "Beginner" }]);
+    }
+  };
+
+  const handleDeleteSkill = (skillName: string) => {
+    setSkills(skills.filter((s) => s.name !== skillName));
+  };
+
   return (
     <DashboardLayout type="student">
       <div className="space-y-6">
@@ -142,16 +157,16 @@ export default function PortfolioPage() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => setIsEditing(!isEditing)}
+                    onClick={() => setIsEditingAbout(!isEditingAbout)}
                     className="gap-2"
                   >
                     <Edit2 className="h-4 w-4" />
-                    {isEditing ? "Done" : "Edit"}
+                    {isEditingAbout ? "Save Changes" : "Edit"}
                   </Button>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {isEditing ? (
+                {isEditingAbout ? (
                   <div className="space-y-4">
                     <div>
                       <label className="text-sm font-medium">Full Name</label>
@@ -352,18 +367,58 @@ export default function PortfolioPage() {
           <TabsContent value="skills" className="space-y-4">
             <Card>
               <CardHeader>
-                <CardTitle>Your Skills</CardTitle>
+                <CardTitle className="flex items-center justify-between">
+                  Your Skills
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setIsEditingSkills(!isEditingSkills)}
+                    className="gap-2"
+                  >
+                    <Edit2 className="h-4 w-4" />
+                    {isEditingSkills ? "Done" : "Edit"}
+                  </Button>
+                </CardTitle>
                 <CardDescription>
                   Skills aligned to your strengths and career paths
                 </CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   {skills.map((skill) => (
                     <div key={skill.name} className="p-4 rounded-lg border">
-                      <div className="font-semibold mb-2">{skill.name}</div>
-                      <div className="text-sm text-muted-foreground">{skill.level}</div>
-                      <div className="w-full bg-muted rounded-full h-2 mt-2">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="font-semibold">{skill.name}</div>
+                        {isEditingSkills && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDeleteSkill(skill.name)}
+                          >
+                            <Trash2 className="h-3 w-3" />
+                          </Button>
+                        )}
+                      </div>
+                      {isEditingSkills ? (
+                        <select
+                          value={skill.level}
+                          onChange={(e) =>
+                            handleSkillLevelChange(
+                              skill.name,
+                              e.target.value as "Beginner" | "Intermediate" | "Advanced" | "Expert"
+                            )
+                          }
+                          className="w-full text-sm border rounded p-1 mb-2"
+                        >
+                          <option>Beginner</option>
+                          <option>Intermediate</option>
+                          <option>Advanced</option>
+                          <option>Expert</option>
+                        </select>
+                      ) : (
+                        <div className="text-sm text-muted-foreground mb-2">{skill.level}</div>
+                      )}
+                      <div className="w-full bg-muted rounded-full h-2">
                         <div
                           className={`h-full rounded-full ${
                             skill.level === "Expert"
@@ -379,6 +434,18 @@ export default function PortfolioPage() {
                     </div>
                   ))}
                 </div>
+                {isEditingSkills && (
+                  <Input
+                    placeholder="Type skill name and press Enter to add"
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter" && e.currentTarget.value) {
+                        handleAddSkill(e.currentTarget.value);
+                        e.currentTarget.value = "";
+                      }
+                    }}
+                    className="mt-4"
+                  />
+                )}
               </CardContent>
             </Card>
           </TabsContent>
@@ -406,7 +473,11 @@ export default function PortfolioPage() {
                     </div>
                   </div>
                 </div>
-                <Button variant="outline" className="w-full gap-2">
+                <Button 
+                  onClick={() => setActiveTab("about")}
+                  variant="outline" 
+                  className="w-full gap-2"
+                >
                   <Edit2 className="h-4 w-4" />
                   Update Education
                 </Button>
