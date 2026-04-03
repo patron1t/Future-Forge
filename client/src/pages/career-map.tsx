@@ -1217,16 +1217,27 @@ export default function CareerMapPage() {
     const savedScores = localStorage.getItem("assessmentScores");
     const scoreMap: Record<string, number> = savedScores ? JSON.parse(savedScores) : null;
 
-    return careerPathways
-      .filter(path => {
-        const hasRequiredSubjects = path.requiredSubjects.length === 0 || 
-          path.requiredSubjects.some(req => subjects.includes(req));
-        const gradeNum = parseInt(grade);
+    const gradeNum = parseInt(grade);
+
+    // First, try to get pathways matching subject + grade
+    let filtered = careerPathways.filter(path => {
+      const hasRequiredSubjects = path.requiredSubjects.length === 0 || 
+        path.requiredSubjects.some(req => subjects.includes(req));
+      const entryNum = parseInt(path.entryLevel);
+      return hasRequiredSubjects && gradeNum >= entryNum;
+    });
+
+    // If none match, just filter by grade
+    if (filtered.length === 0) {
+      filtered = careerPathways.filter(path => {
         const entryNum = parseInt(path.entryLevel);
-        return hasRequiredSubjects && gradeNum >= entryNum;
-      })
+        return gradeNum >= entryNum;
+      });
+    }
+
+    // Sort by strength match
+    return filtered
       .sort((a, b) => {
-        // Sort by strength match (if scores exist), then by opportunities
         if (scoreMap) {
           const aScore = scoreMap[a.strength] ?? 0;
           const bScore = scoreMap[b.strength] ?? 0;
