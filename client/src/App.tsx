@@ -35,6 +35,7 @@ import OpportunitiesPage from "@/pages/opportunities";
 import InboxPage from "@/pages/inbox";
 import ActionPlanPage from "@/pages/action-plan";
 import ResourcesPage from "@/pages/resources";
+import PartnerBriefsPage from "@/pages/partner-briefs";
 
 function Router() {
   return (
@@ -43,6 +44,7 @@ function Router() {
       <Route path="/about" component={AboutPage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route path="/terms" component={TermsPage} />
+      <Route path="/partner-briefs" component={PartnerBriefsPage} />
       <Route path="/onboarding" component={OnboardingPage} />
       <Route path="/assessment" component={AssessmentPage} />
       <Route path="/career-map" component={CareerMapPage} />
