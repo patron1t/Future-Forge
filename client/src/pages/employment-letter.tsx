@@ -59,8 +59,12 @@ export default function EmploymentLetterPage() {
             </div>
             <div className="text-right text-sm text-slate-600">
               <h2 className="font-bold text-lg text-slate-800 mb-1">Career Plug AI (Pty) Ltd.</h2>
-              <p>info@careerplugai.co.za</p>
-              <p>+27 79 615 8762</p>
+              <p>9105 Pilane Street, Neo Delta</p>
+              <p>Zone 1, Ga-Rankuwa</p>
+              <p>Pretoria, 0208</p>
+              <p className="mt-2">info@careerplugai.co.za</p>
+              <p>Tel: +27 79 615 8762</p>
+              <p>WhatsApp: +27 76 586 6109</p>
               <p>www.careerplugai.co.za</p>
             </div>
           </div>
@@ -68,7 +72,7 @@ export default function EmploymentLetterPage() {
           {/* LETTER CONTENT */}
           <div className="space-y-6 text-[11pt] leading-relaxed">
             <div className="flex justify-between font-medium">
-              <p>Date: 03 April 2026</p>
+              <p>Date: [Insert Date]</p>
               <p className="uppercase tracking-widest text-xs font-bold text-slate-500">Private and Confidential</p>
             </div>
 
@@ -80,7 +84,7 @@ export default function EmploymentLetterPage() {
             <p>Dear Oratile,</p>
 
             <p>
-              We are delighted to officially offer you a position as a <strong>Volunteer Operations Intern</strong> at <strong>Career Plug AI (Pty) Ltd</strong>. We are excited to support your Work Integrated Learning (WIL) requirements for your National N Diploma in Business Management.
+              We are delighted to officially offer you a position as a <strong>Volunteer Business Management Intern</strong> at <strong>Career Plug AI (Pty) Ltd</strong>. We are excited to support your Work Integrated Learning (WIL) requirements for your National N Diploma in Business Management.
             </p>
 
             <p>This letter sets out the terms and conditions of your volunteer internship with us:</p>
@@ -88,7 +92,7 @@ export default function EmploymentLetterPage() {
             <div className="space-y-4 pl-4">
               <div>
                 <p className="font-bold">1. Position and Department</p>
-                <p>You will be engaged as a Volunteer Operations Intern. In this role, your daily tasks will be structured to help you fulfill the practical requirements of your logbook, specifically focusing on Entrepreneurship & Business Management, Sales Management, and general operational administration.</p>
+                <p>You will be engaged as a Volunteer Business Management Intern. In this role, your daily tasks will be structured to help you fulfill the practical requirements of your logbook, specifically focusing on Entrepreneurship & Business Management, Sales Management, and general operational administration.</p>
               </div>
 
               <div>
@@ -108,7 +112,7 @@ export default function EmploymentLetterPage() {
 
               <div>
                 <p className="font-bold">5. Supervision and Mentorship</p>
-                <p>Your direct supervisor will be <strong>Masego Diale (Project Lead)</strong>. Masego will be responsible for guiding your daily tasks, mentoring you, and signing off on your official TVET College Work Experience Logbook.</p>
+                <p>Your direct supervisor will be <strong>Masego Diale (Project Lead)</strong>. Masego will be responsible for guiding your daily tasks, mentoring you, and signing off on your official Work Experience Logbook.</p>
                 <ul className="list-disc list-inside mt-2 text-sm text-slate-600">
                   <li>Supervisor Contact: +27 79 615 8762</li>
                   <li>Supervisor Email: masego.diale@careerplugai.co.za</li>
