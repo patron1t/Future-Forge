@@ -63,7 +63,7 @@ export default function EmploymentLetterPage() {
               <p>Zone 1, Ga-Rankuwa</p>
               <p>Pretoria, 0208</p>
               <p className="mt-2">info@careerplugai.co.za</p>
-              <p>Tel: +27 79 615 8762</p>
+              <p>Phone: +27 79 615 8762</p>
               <p>WhatsApp: +27 76 586 6109</p>
               <p>www.careerplugai.co.za</p>
             </div>
@@ -72,7 +72,7 @@ export default function EmploymentLetterPage() {
           {/* LETTER CONTENT */}
           <div className="space-y-6 text-[11pt] leading-relaxed">
             <div className="flex justify-between font-medium">
-              <p>Date: [Insert Date]</p>
+              <p>Date: ___________________</p>
               <p className="uppercase tracking-widest text-xs font-bold text-slate-500">Private and Confidential</p>
             </div>
 

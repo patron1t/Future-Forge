@@ -1,7 +1,7 @@
 **Career Plug AI (Pty) Ltd.**
 9105 Pilane Street, Neo Delta, Zone 1, Ga-Rankuwa, Pretoria, 0208
-Email: info@careerplugai.co.za | Tel: +27 79 615 8762 | WhatsApp: +27 76 586 6109
-Date: [Insert Date]
+Email: info@careerplugai.co.za | Phone: +27 79 615 8762 | WhatsApp: +27 76 586 6109
+Date: ___________________
 
 **Private and Confidential**
 
