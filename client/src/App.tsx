@@ -37,6 +37,7 @@ import ActionPlanPage from "@/pages/action-plan";
 import ResourcesPage from "@/pages/resources";
 import PartnerBriefsPage from "@/pages/partner-briefs";
 import PresentationPage from "@/pages/presentation";
+import EmploymentLetterPage from "@/pages/employment-letter";
 
 function Router() {
   return (
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/terms" component={TermsPage} />
       <Route path="/partner-briefs" component={PartnerBriefsPage} />
       <Route path="/presentation" component={PresentationPage} />
+      <Route path="/employment-letter" component={EmploymentLetterPage} />
       <Route path="/onboarding" component={OnboardingPage} />
       <Route path="/assessment" component={AssessmentPage} />
       <Route path="/career-map" component={CareerMapPage} />
