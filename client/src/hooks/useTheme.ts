@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     // Check localStorage first
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    const initialTheme = savedTheme || "dark";
+    const initialTheme = savedTheme || "light";
     
     setTheme(initialTheme);
     applyTheme(initialTheme);
