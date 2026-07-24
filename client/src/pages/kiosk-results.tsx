@@ -116,6 +116,15 @@ export default function KioskResultsPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
+    // Fire GA conversion event
+    if (typeof window !== "undefined" && (window as any).gtag) {
+      (window as any).gtag("event", "kiosk_completed", {
+        event_category: "Kiosk",
+        event_label: "Student completed full kiosk flow",
+      });
+    }
+
     // Try to get school from URL parameters
     const params = new URLSearchParams(window.location.search);
     const locationParam = params.get('location');

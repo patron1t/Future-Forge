@@ -16,6 +16,33 @@
     <meta name="twitter:description" content="Creating the billionaires of tomorrow through personalized career guidance." />
     <meta name="twitter:image" content="/attached_assets/ChatGPT_Image_May_9__2025__08_47_46_PM-removebg-preview-1_1766990799947.png" />
 
+    <!-- Suppress Termly banner on kiosk routes -->
+    <script>
+      (function () {
+        function isKiosk() {
+          return window.location.pathname.startsWith('/kiosk');
+        }
+        function hidTermly() {
+          if (!isKiosk()) return;
+          document.querySelectorAll(
+            '#termly-code-snippet-support, [id^="termly-"], .termly-styles, iframe[src*="termly"]'
+          ).forEach(function (el) {
+            el.style.display = 'none';
+          });
+        }
+        // Watch for Termly injecting its elements
+        var observer = new MutationObserver(hidTermly);
+        observer.observe(document.documentElement, { childList: true, subtree: true });
+        // Also re-check on SPA navigation
+        var _pushState = history.pushState;
+        history.pushState = function () {
+          _pushState.apply(history, arguments);
+          hidTermly();
+        };
+        window.addEventListener('popstate', hidTermly);
+      })();
+    </script>
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-0C27NS1Q2K"></script>
     <script>
