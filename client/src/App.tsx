@@ -38,6 +38,7 @@ import ResourcesPage from "@/pages/resources";
 import PartnerBriefsPage from "@/pages/partner-briefs";
 import PresentationPage from "@/pages/presentation";
 import EmploymentLetterPage from "@/pages/employment-letter";
+import CookieBanner from "@/components/common/CookieBanner";
 
 function Router() {
   return (
@@ -88,6 +89,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <CookieBanner />
       </TooltipProvider>
     </QueryClientProvider>
   );
