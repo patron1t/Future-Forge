@@ -73,6 +73,8 @@ export function Footer() {
             <div onClick={handlePrivacyClick} className="hover:text-primary cursor-pointer">Privacy Policy</div>
             <span>•</span>
             <div onClick={handleTermsClick} className="hover:text-primary cursor-pointer">Terms of Service</div>
+            <span>•</span>
+            <a href="#" className="termly-display-preferences hover:text-primary">Consent Preferences</a>
           </div>
           <div className="text-center text-xs text-muted-foreground">&copy; {new Date().getFullYear()} Career Plug AI (Pty) Ltd. All rights reserved.</div>
         </div>
